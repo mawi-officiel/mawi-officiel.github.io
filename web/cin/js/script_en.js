@@ -120,19 +120,19 @@
                             <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4">Key Features</h2>
                             <ul class="space-y-3 text-gray-700">
                                 <li class="flex items-start">
-                                    <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                                    <i class="fas fa-check text-green-500 mr-3 ml-3 mt-1"></i>
                                     <span>Modular architecture for maximum flexibility</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                                    <i class="fas fa-check text-green-500 mr-3 ml-3 mt-1"></i>
                                     <span>Built-in state management and routing</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                                    <i class="fas fa-check text-green-500 mr-3 ml-3 mt-1"></i>
                                     <span>Comprehensive testing utilities</span>
                                 </li>
                                 <li class="flex items-start">
-                                    <i class="fas fa-check text-green-500 mr-3 mt-1"></i>
+                                    <i class="fas fa-check text-green-500 mr-3 ml-3 mt-1"></i>
                                     <span>TypeScript support out of the box</span>
                                 </li>
                             </ul>
@@ -335,7 +335,7 @@
                             <div class="flex items-center">
                                 <div class="flex-shrink-0 flex items-center">
                                     <a href="#home" class="flex items-center hover:opacity-80 transition-opacity">
-                                        <i class="fas fa-code text-primary text-2xl mr-3"></i>
+                                        <i class="fas fa-code text-primary text-2xl mr-3 ml-3"></i>
                                         <h1 class="text-xl font-bold text-gray-900">${SITE_DATA.config.siteName}</h1>
                                         <span class="ml-2 px-2 py-1 text-xs bg-primary text-white rounded-full">${SITE_DATA.config.version}</span>
                                     </a>
@@ -360,7 +360,7 @@
                         <div class="p-4">
                             <div class="mb-6" >
                                 <a href="#home" class="nav-item block p-3 text-gray-700 hover:text-primary rounded-lg transition-colors font-medium" style="margin-left: 50px;margin-right: 50px;">
-                                    <i class="fas fa-home mr-3"></i>
+                                    <i class="fas fa-home mr-3 ml-3"></i>
                                     Home
                                 </a>
                             </div>
@@ -379,7 +379,7 @@
                                     aria-controls="${itemsId}"
                                     id="${categoryId}">
                                 <div class="flex items-center">
-                                    <i class="${category.icon} text-primary mr-3"></i>
+                                    <i class="${category.icon} text-primary mr-3 ml-3"></i>
                                     <span>${category.title}</span>
                                 </div>
                                 <i class="fas fa-chevron-down text-gray-400 chevron-icon ${isExpanded ? 'rotated' : ''}"></i>
@@ -584,7 +584,7 @@
                         <div class="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8">
                             <div class="col-span-1 md:col-span-2">
                                 <div class="flex items-center mb-4">
-                                    <i class="fas fa-code text-primary text-xl md:text-2xl mr-3"></i>
+                                    <i class="fas fa-code text-primary text-xl md:text-2xl mr-3 ml-3"></i>
                                     <h3 class="text-lg md:text-xl font-bold">${SITE_DATA.config.siteName}</h3>
                                 </div>
                                 <p class="text-gray-400 mb-4 text-sm md:text-base">${SITE_DATA.config.description}</p>
