@@ -20,7 +20,7 @@
                     icon: "fas fa-rocket",
                     items: [
                         { id: "soon", title: "soon", icon: "fa-solid fa-timer"}
-                        { id: "introduction", title: "Introduction", icon: "fas fa-book-open" },
+                        //{ id: "introduction", title: "Introduction", icon: "fas fa-book-open" },
                         //{ id: "installation", title: "Installation", icon: "fas fa-download" },
                         //{ id: "quick-start", title: "Quick Start", icon: "fas fa-play" },
                         //{ id: "configuration", title: "Configuration", icon: "fas fa-cog" }
