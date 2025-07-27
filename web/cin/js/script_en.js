@@ -465,18 +465,17 @@ class CINDocsApp {
                                 <h2 class="text-3xl font-bold text-center mb-12 md:mb-16 text-gray-900">Why Choose CIN Framework?</h2>
                                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                                     ${homeData.features.map(feature => `
-                                        <div class="moroccan-card p-6 md:p-8 rounded-xl feature-card">
+                                        <div class="moroccan-card p-6 md:p-8 rounded-xl feature-card flex flex-col items-center">
                                             <div class="text-primary text-3xl md:text-4xl mb-4">
                                                 <i class="${feature.icon}"></i>
                                             </div>
-                                            <h3 class="text-lg md:text-xl font-semibold mb-4 text-gray-900">${feature.title}</h3>
-                                            <p class="text-gray-600 text-sm md:text-base">${feature.description}</p>
+                                            <img src="https://github.com/mawi-officiel/cin-framework/raw/main/cin.png" alt="CIN Logo" class="w-20 h-20 object-contain mb-2">
                                         </div>
                                     `).join('')}
                                 </div>
                             </div>
                         </section>
-                        
+
                         <!-- Version Info Section -->
                         <section class="bg-gray-100 py-12 md:py-16">
                             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
