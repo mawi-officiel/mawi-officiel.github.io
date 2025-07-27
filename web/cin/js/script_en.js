@@ -59,7 +59,7 @@
                         //{ id: "contributing", title: "Contributing", icon: "fas fa-hands-helping" }
             //        ]
             //    }
-            //],
+            ],
             
             // Content Pages
             content: {
