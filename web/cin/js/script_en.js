@@ -25,40 +25,40 @@ const SITE_DATA = {
                 //{ id: "quick-start", title: "Quick Start", icon: "fas fa-play" },
                 //{ id: "configuration", title: "Configuration", icon: "fas fa-cog" }
             ]
-        },
-        {
-            id: "core-concepts",
-            title: "Core Concepts",
-            icon: "fas fa-brain",
-            items: [
-                //{ id: "architecture", title: "Architecture", icon: "fas fa-sitemap" },
-                //{ id: "components", title: "Components", icon: "fas fa-puzzle-piece" },
-                //{ id: "routing", title: "Routing", icon: "fas fa-route" },
-                //{ id: "state-management", title: "State Management", icon: "fas fa-database" }
-            ]
-        },
-        {
-            id: "tutorials",
-            title: "Tutorials",
-            icon: "fas fa-graduation-cap",
-            items: [
-                //{ id: "first-app", title: "Building Your First App", icon: "fas fa-mobile-alt" },
-                //{ id: "advanced-patterns", title: "Advanced Patterns", icon: "fas fa-chess" },
-                //{ id: "performance", title: "Performance Optimization", icon: "fas fa-tachometer-alt" },
-                //{ id: "testing", title: "Testing Guide", icon: "fas fa-vial" }
-            ]
-        },
-        {
-            id: "help",
-            title: "Help & Support",
-            icon: "fas fa-life-ring",
-            items: [
-                //{ id: "faq", title: "FAQ", icon: "fas fa-question-circle" },
-                //{ id: "troubleshooting", title: "Troubleshooting", icon: "fas fa-wrench" },
-                //{ id: "community", title: "Community", icon: "fas fa-users" },
-                //{ id: "contributing", title: "Contributing", icon: "fas fa-hands-helping" }
-            ]
         }
+        //{
+        //    id: "core-concepts",
+        //    title: "Core Concepts",
+        //    icon: "fas fa-brain",
+        //    items: [
+        //        //{ id: "architecture", title: "Architecture", icon: "fas fa-sitemap" },
+        //        //{ id: "components", title: "Components", icon: "fas fa-puzzle-piece" },
+        //        //{ id: "routing", title: "Routing", icon: "fas fa-route" },
+        //        //{ id: "state-management", title: "State Management", icon: "fas fa-database" }
+        //    ]
+        //},
+        //{
+        //    id: "tutorials",
+        //    title: "Tutorials",
+        //    icon: "fas fa-graduation-cap",
+        //    items: [
+        //        //{ id: "first-app", title: "Building Your First App", icon: "fas fa-mobile-alt" },
+        //        //{ id: "advanced-patterns", title: "Advanced Patterns", icon: "fas fa-chess" },
+        //        //{ id: "performance", title: "Performance Optimization", icon: "fas fa-tachometer-alt" },
+        //        //{ id: "testing", title: "Testing Guide", icon: "fas fa-vial" }
+        //    ]
+        //},
+        //{
+        //    id: "help",
+        //    title: "Help & Support",
+        //    icon: "fas fa-life-ring",
+        //    items: [
+        //        //{ id: "faq", title: "FAQ", icon: "fas fa-question-circle" },
+        //        //{ id: "troubleshooting", title: "Troubleshooting", icon: "fas fa-wrench" },
+        //        //{ id: "community", title: "Community", icon: "fas fa-users" },
+        //        //{ id: "contributing", title: "Contributing", icon: "fas fa-hands-helping" }
+        //    ]
+        //}
     ],
 
     // Content Pages
