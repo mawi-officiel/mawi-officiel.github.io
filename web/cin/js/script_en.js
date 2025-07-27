@@ -4,7 +4,8 @@
 const SITE_DATA = {
     // Site Configuration
     config: {
-        siteName: "CIN Framework Soon",
+        siteName: "CIN Framework",
+        nameversion: "Soon",
         version: "0.0.0",
         releaseDate: "2025-00-00",
         githubUrl: "https://github.com/mawi-officiel/cin-framework",
@@ -359,7 +360,7 @@ class CINDocsApp {
                                 <div class="flex-shrink-0 flex items-center">
                                     <a href="#home" class="flex items-center hover:opacity-80 transition-opacity">
                                         <i class="fas fa-code text-primary text-2xl mr-3 ml-3"></i>
-                                        <h1 class="text-xl font-bold text-gray-900">${SITE_DATA.config.siteName}</h1>
+                                        <h1 class="text-xl font-bold text-gray-900">${SITE_DATA.config.siteName}${SITE_DATA.config.nameversion}</h1>
                                         <span class="ml-2 mr-2 px-2 py-1 text-xs bg-primary text-white rounded-full">${SITE_DATA.config.version}</span>
                                     </a>
                                 </div>
