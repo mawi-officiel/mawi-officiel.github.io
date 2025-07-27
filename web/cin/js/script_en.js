@@ -5,11 +5,11 @@
         const SITE_DATA = {
             // Site Configuration
             config: {
-                siteName: "CIN Framework Beta",
-                version: "1.0.0",
-                releaseDate: "2025-04-26",
+                siteName: "CIN Framework Soon",
+                version: "0.0.0",
+                releaseDate: "2025-00-00",
                 githubUrl: "https://github.com/mawi-officiel/cin-framework",
-                description: "A powerful, modern framework for building scalable applications"
+                description: "The first version of CIN will be released soon."
             },
             
             // Navigation Categories
@@ -74,30 +74,52 @@
             // Content Pages
             content: {
                 home: {
-                    title: "CIN is Not Just a Framework",
-                    subtitle: "It's a self-evolving web dominator that builds itself and commands your code",
+                    home: {
+                    title: "CIN Framework",
+                    subtitle: "CIN is like creating a superhero with the click of a button.",
                     features: [
                         {
-                            title: "Self-Bootstrapping Core",
-                            description: "Just drop the CIN folder and run — it constructs your full web app skeleton instantly.",
-                            icon: "fas fa-bolt"
+                            title: "Self-Bootstrapping CLI Engine",
+                            description: "With a single command — `./cin framework:install` — CIN generates a fully structured, production-ready application architecture in seconds. No scaffolding. No guesswork. Just execution.",
+                            icon: "fas fa-terminal"
                         },
                         {
-                            title: "Unlimited Extensibility",
-                            description: "CIN adapts to your will — customize every layer and structure without limitations.",
-                            icon: "fas fa-heart"
+                            title: "CIN Box: Aggressive Security Layering",
+                            description: "CIN isolates all vulnerabilities in a virtualized internal layer known as the CIN Box. This rogue-mode containment ensures system integrity even in the presence of exploitable code in your app.",
+                            icon: "fas fa-shield-alt"
                         },
                         {
-                            title: "The Built-in LIB Arsenal",
-                            description: "Access powerful, pre-integrated CIN-only libraries for AI, utilities, and rapid development.",
-                            icon: "fas fa-expand-arrows-alt"
+                            title: "CIN Fast™ Runtime Engine",
+                            description: "CIN reorders execution logic to ensure optimized rendering, minimal server load, ultra-fast response times, and even includes offline browsing support. Your site behaves like a native app — but better.",
+                            icon: "fas fa-tachometer-alt"
                         },
                         {
-                            title: "Aggressive Security Model",
-                            description: "CIN isolates system vulnerabilities through a rogue-layered architecture — secure even with developer flaws.",
-                            icon: "fas fa-cube"
+                            title: "CIN LIB: Integrated Developer Arsenal",
+                            description: "Access a powerful collection of CIN-native libraries: from AI model generators to real-time behavioral analyzers, everything is pre-integrated and ready for instant use.",
+                            icon: "fas fa-brain"
+                        },
+                        {
+                            title: "CIN Config: Full Structural Override",
+                            description: "Reconfigure CIN’s internal behavior without ever touching the core. With CIN Config, you gain surgical control over every layer — from routing to logic injection.",
+                            icon: "fas fa-sliders-h"
+                        },
+                        {
+                            title: "CIN SEO Booster",
+                            description: "CIN is engineered to dominate search engine rankings — even without content. Its semantic structure and routing logic are SEO-optimized by default for instant discoverability.",
+                            icon: "fas fa-search"
+                        },
+                        {
+                            title: "CIN UI: Dynamic Interface Injection",
+                            description: "Easily embed prebuilt or custom UI components anywhere in your app with full support for scoped JS/CSS, template isolation, and DOM-safe runtime binding.",
+                            icon: "fas fa-palette"
+                        },
+                        {
+                            title: "CIN UX: Seamless Reactive Experience",
+                            description: "CIN employs a custom async refresh engine that updates content in the background without reloading the page — providing a buttery-smooth user experience with no compromise on speed.",
+                            icon: "fas fa-sync-alt"
                         }
                     ],
+
                     changelog: [
                         {
                             version: "1.0.0",
