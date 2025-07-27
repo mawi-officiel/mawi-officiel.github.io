@@ -359,8 +359,7 @@
                     <div class="h-full overflow-y-auto">
                         <div class="p-4">
                             <div class="mb-6" >
-                                <button id="langToggleBtn" class="bg-primary text-white px-4 py-2 rounded-lg ml-4" style="margin-left: 50px; margin-right: 38px;">{{tr=nav.long}}</button>
-                                <a href="#home" class="nav-item block p-3 text-gray-700 hover:text-primary rounded-lg transition-colors font-medium" style="margin-top: 30px">
+                                <a href="#home" class="nav-item block p-3 text-gray-700 hover:text-primary rounded-lg transition-colors font-medium" style="margin-top: 30px" style="margin-left: 50px; margin-right: 38px;">
                                     <i class="fas fa-home mr-3"></i>
                                     Home
                                 </a>
