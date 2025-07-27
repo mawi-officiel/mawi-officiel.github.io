@@ -451,7 +451,7 @@ class CINDocsApp {
                                 
                                 <!-- CIN Logo Centered -->
                                 <div class="flex justify-center">
-                                    <img src="https://github.com/mawi-officiel/cin-framework/raw/main/cin.png" alt="CIN Framework Logo" class="w-48 md:w-64 lg:w-72 rounded shadow-lg border-4 border-white/20">
+                                    <img src="https://github.com/mawi-officiel/cin-framework/raw/main/cin.png" alt="CIN Framework Logo" class="w-48 md:w-64 lg:w-72 rounded shadow-lg border-white/20">
                                 </div>
                             </div>
                         </section>
