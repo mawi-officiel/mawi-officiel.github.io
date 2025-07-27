@@ -19,7 +19,7 @@
                     title: "Getting Started",
                     icon: "fas fa-rocket",
                     items: [
-                        { id: "soon", title: "soon", icon: "fa-solid fa-timer"}
+                        { id: "soon", title: "soon", icon: "fas fa-timer"}
                         //{ id: "introduction", title: "Introduction", icon: "fas fa-book-open" },
                         //{ id: "installation", title: "Installation", icon: "fas fa-download" },
                         //{ id: "quick-start", title: "Quick Start", icon: "fas fa-play" },
