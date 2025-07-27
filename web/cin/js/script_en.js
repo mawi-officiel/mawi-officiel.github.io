@@ -632,7 +632,7 @@
                             <div>
                                 <h4 class="text-lg font-semibold mb-4">Documentation</h4>
                                 <ul class="space-y-2">
-                                    <li><a href="#introduction" class="text-gray-400 hover:text-white transition-colors text-sm md:text-base focus-visible">Getting Started</a></li>
+                                    <li><a href="#soon" class="text-gray-400 hover:text-white transition-colors text-sm md:text-base focus-visible">Getting Started</a></li>
                                     <li><a href="#core-api" class="text-gray-400 hover:text-white transition-colors text-sm md:text-base focus-visible">API Reference</a></li>
                                     <li><a href="#first-app" class="text-gray-400 hover:text-white transition-colors text-sm md:text-base focus-visible">Tutorials</a></li>
                                     <li><a href="#configuration" class="text-gray-400 hover:text-white transition-colors text-sm md:text-base focus-visible">Configuration</a></li>
