@@ -1,7 +1,1 @@
-const translations = {
-    nav: {
-        long: "عربي"
-    },
-};
-
-export default translations;
+// tr for translate.google.com
