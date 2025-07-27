@@ -19,7 +19,7 @@
                     title: "Getting Started",
                     icon: "fas fa-rocket",
                     items: [
-                        { id: "soon", title: "soon", icon: "fas fa-timer"}
+                        { id: "coming-soon", title: "coming soon", icon: "fas fa-timer"},
                         //{ id: "introduction", title: "Introduction", icon: "fas fa-book-open" },
                         //{ id: "installation", title: "Installation", icon: "fas fa-download" },
                         //{ id: "quick-start", title: "Quick Start", icon: "fas fa-play" },
@@ -120,7 +120,7 @@
                     ]
                 },
 
-                 soon: {
+                 "coming-soon": {
                     title: "Coming soon CIN Framework",
                     content: `
                         <div class="space-y-6">
