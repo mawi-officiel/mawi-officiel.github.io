@@ -74,7 +74,6 @@
             // Content Pages
             content: {
                 home: {
-                    home: {
                     title: "CIN Framework",
                     subtitle: "CIN is like creating a superhero with the click of a button.",
                     features: [
