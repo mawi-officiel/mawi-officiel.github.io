@@ -111,8 +111,8 @@ const SITE_DATA = {
 
             changelog: [
                 {
-                    version: "1.0.0",
-                    date: "2025-07-26",
+                    version: "0.0.0",
+                    date: "2025-00-00",
                     changes: [
                         "The developer is still thinking about publishing"
                     ]
@@ -582,7 +582,7 @@ class CINDocsApp {
                             <div>
                                 <h4 class="text-lg font-semibold mb-4">Documentation</h4>
                                 <ul class="space-y-2">
-                                    <li><a href="#soon" class="text-gray-400 hover:text-white transition-colors text-sm md:text-base focus-visible">Getting Started</a></li>
+                                    <li><a href="#coming-soon" class="text-gray-400 hover:text-white transition-colors text-sm md:text-base focus-visible">Getting Started</a></li>
                                 </ul>
                             </div>
                             
