@@ -1,127 +1,127 @@
-        // EMBEDDED DATA - All Content and Configuration
-        // ==================================================
-        
-        const SITE_DATA = {
-            // Site Configuration
-            config: {
-                siteName: "CIN Framework Soon",
-                version: "0.0.0",
-                releaseDate: "2025-00-00",
-                githubUrl: "https://github.com/mawi-officiel/cin-framework",
-                description: "The first version of CIN will be released soon."
-            },
-            
-            // Navigation Categories
-            categories: [
+// EMBEDDED DATA - All Content and Configuration
+// ==================================================
+
+const SITE_DATA = {
+    // Site Configuration
+    config: {
+        siteName: "CIN Framework Soon",
+        version: "0.0.0",
+        releaseDate: "2025-00-00",
+        githubUrl: "https://github.com/mawi-officiel/cin-framework",
+        description: "The first version of CIN will be released soon."
+    },
+
+    // Navigation Categories
+    categories: [
+        {
+            id: "getting-started",
+            title: "Getting Started",
+            icon: "fas fa-rocket",
+            items: [
+                { id: "coming-soon", title: "coming soon", icon: "fas fa-timer" },
+                //{ id: "introduction", title: "Introduction", icon: "fas fa-book-open" },
+                //{ id: "installation", title: "Installation", icon: "fas fa-download" },
+                //{ id: "quick-start", title: "Quick Start", icon: "fas fa-play" },
+                //{ id: "configuration", title: "Configuration", icon: "fas fa-cog" }
+            ]
+        },
+        {
+            id: "core-concepts",
+            title: "Core Concepts",
+            icon: "fas fa-brain",
+            items: [
+                //{ id: "architecture", title: "Architecture", icon: "fas fa-sitemap" },
+                //{ id: "components", title: "Components", icon: "fas fa-puzzle-piece" },
+                //{ id: "routing", title: "Routing", icon: "fas fa-route" },
+                //{ id: "state-management", title: "State Management", icon: "fas fa-database" }
+            ]
+        },
+        {
+            id: "tutorials",
+            title: "Tutorials",
+            icon: "fas fa-graduation-cap",
+            items: [
+                //{ id: "first-app", title: "Building Your First App", icon: "fas fa-mobile-alt" },
+                //{ id: "advanced-patterns", title: "Advanced Patterns", icon: "fas fa-chess" },
+                //{ id: "performance", title: "Performance Optimization", icon: "fas fa-tachometer-alt" },
+                //{ id: "testing", title: "Testing Guide", icon: "fas fa-vial" }
+            ]
+        },
+        {
+            id: "help",
+            title: "Help & Support",
+            icon: "fas fa-life-ring",
+            items: [
+                //{ id: "faq", title: "FAQ", icon: "fas fa-question-circle" },
+                //{ id: "troubleshooting", title: "Troubleshooting", icon: "fas fa-wrench" },
+                //{ id: "community", title: "Community", icon: "fas fa-users" },
+                //{ id: "contributing", title: "Contributing", icon: "fas fa-hands-helping" }
+            ]
+        }
+    ],
+
+    // Content Pages
+    content: {
+        home: {
+            title: "CIN Framework",
+            subtitle: "CIN is like creating a superhero with the click of a button.",
+            features: [
                 {
-                    id: "getting-started",
-                    title: "Getting Started",
-                    icon: "fas fa-rocket",
-                    items: [
-                        { id: "coming-soon", title: "coming soon", icon: "fas fa-timer"},
-                        //{ id: "introduction", title: "Introduction", icon: "fas fa-book-open" },
-                        //{ id: "installation", title: "Installation", icon: "fas fa-download" },
-                        //{ id: "quick-start", title: "Quick Start", icon: "fas fa-play" },
-                        //{ id: "configuration", title: "Configuration", icon: "fas fa-cog" }
-                    ]
+                    title: "Self-Bootstrapping CLI Engine",
+                    description: "With a single command — `./cin framework:install` — CIN generates a fully structured, production-ready application architecture in seconds. No scaffolding. No guesswork. Just execution.",
+                    icon: "fas fa-terminal"
                 },
                 {
-                    id: "core-concepts",
-                    title: "Core Concepts",
-                    icon: "fas fa-brain",
-                    items: [
-                        //{ id: "architecture", title: "Architecture", icon: "fas fa-sitemap" },
-                        //{ id: "components", title: "Components", icon: "fas fa-puzzle-piece" },
-                        //{ id: "routing", title: "Routing", icon: "fas fa-route" },
-                        //{ id: "state-management", title: "State Management", icon: "fas fa-database" }
-                    ]
+                    title: "CIN Box: Aggressive Security Layering",
+                    description: "CIN isolates all vulnerabilities in a virtualized internal layer known as the CIN Box. This rogue-mode containment ensures system integrity even in the presence of exploitable code in your app.",
+                    icon: "fas fa-shield-alt"
                 },
                 {
-                    id: "tutorials",
-                    title: "Tutorials",
-                    icon: "fas fa-graduation-cap",
-                    items: [
-                        //{ id: "first-app", title: "Building Your First App", icon: "fas fa-mobile-alt" },
-                        //{ id: "advanced-patterns", title: "Advanced Patterns", icon: "fas fa-chess" },
-                        //{ id: "performance", title: "Performance Optimization", icon: "fas fa-tachometer-alt" },
-                        //{ id: "testing", title: "Testing Guide", icon: "fas fa-vial" }
-                    ]
+                    title: "CIN Fast™ Runtime Engine",
+                    description: "CIN reorders execution logic to ensure optimized rendering, minimal server load, ultra-fast response times, and even includes offline browsing support. Your site behaves like a native app — but better.",
+                    icon: "fas fa-tachometer-alt"
                 },
                 {
-                    id: "help",
-                    title: "Help & Support",
-                    icon: "fas fa-life-ring",
-                    items: [
-                        //{ id: "faq", title: "FAQ", icon: "fas fa-question-circle" },
-                        //{ id: "troubleshooting", title: "Troubleshooting", icon: "fas fa-wrench" },
-                        //{ id: "community", title: "Community", icon: "fas fa-users" },
-                        //{ id: "contributing", title: "Contributing", icon: "fas fa-hands-helping" }
-                    ]
+                    title: "CIN LIB: Integrated Developer Arsenal",
+                    description: "Access a powerful collection of CIN-native libraries: from AI model generators to real-time behavioral analyzers, everything is pre-integrated and ready for instant use.",
+                    icon: "fas fa-brain"
+                },
+                {
+                    title: "CIN Config: Full Structural Override",
+                    description: "Reconfigure CIN’s internal behavior without ever touching the core. With CIN Config, you gain surgical control over every layer — from routing to logic injection.",
+                    icon: "fas fa-sliders-h"
+                },
+                {
+                    title: "CIN SEO Booster",
+                    description: "CIN is engineered to dominate search engine rankings — even without content. Its semantic structure and routing logic are SEO-optimized by default for instant discoverability.",
+                    icon: "fas fa-search"
+                },
+                {
+                    title: "CIN UI: Dynamic Interface Injection",
+                    description: "Easily embed prebuilt or custom UI components anywhere in your app with full support for scoped JS/CSS, template isolation, and DOM-safe runtime binding.",
+                    icon: "fas fa-palette"
+                },
+                {
+                    title: "CIN UX: Seamless Reactive Experience",
+                    description: "CIN employs a custom async refresh engine that updates content in the background without reloading the page — providing a buttery-smooth user experience with no compromise on speed.",
+                    icon: "fas fa-sync-alt"
                 }
             ],
-            
-            // Content Pages
-            content: {
-                home: {
-                    title: "CIN Framework",
-                    subtitle: "CIN is like creating a superhero with the click of a button.",
-                    features: [
-                        {
-                            title: "Self-Bootstrapping CLI Engine",
-                            description: "With a single command — `./cin framework:install` — CIN generates a fully structured, production-ready application architecture in seconds. No scaffolding. No guesswork. Just execution.",
-                            icon: "fas fa-terminal"
-                        },
-                        {
-                            title: "CIN Box: Aggressive Security Layering",
-                            description: "CIN isolates all vulnerabilities in a virtualized internal layer known as the CIN Box. This rogue-mode containment ensures system integrity even in the presence of exploitable code in your app.",
-                            icon: "fas fa-shield-alt"
-                        },
-                        {
-                            title: "CIN Fast™ Runtime Engine",
-                            description: "CIN reorders execution logic to ensure optimized rendering, minimal server load, ultra-fast response times, and even includes offline browsing support. Your site behaves like a native app — but better.",
-                            icon: "fas fa-tachometer-alt"
-                        },
-                        {
-                            title: "CIN LIB: Integrated Developer Arsenal",
-                            description: "Access a powerful collection of CIN-native libraries: from AI model generators to real-time behavioral analyzers, everything is pre-integrated and ready for instant use.",
-                            icon: "fas fa-brain"
-                        },
-                        {
-                            title: "CIN Config: Full Structural Override",
-                            description: "Reconfigure CIN’s internal behavior without ever touching the core. With CIN Config, you gain surgical control over every layer — from routing to logic injection.",
-                            icon: "fas fa-sliders-h"
-                        },
-                        {
-                            title: "CIN SEO Booster",
-                            description: "CIN is engineered to dominate search engine rankings — even without content. Its semantic structure and routing logic are SEO-optimized by default for instant discoverability.",
-                            icon: "fas fa-search"
-                        },
-                        {
-                            title: "CIN UI: Dynamic Interface Injection",
-                            description: "Easily embed prebuilt or custom UI components anywhere in your app with full support for scoped JS/CSS, template isolation, and DOM-safe runtime binding.",
-                            icon: "fas fa-palette"
-                        },
-                        {
-                            title: "CIN UX: Seamless Reactive Experience",
-                            description: "CIN employs a custom async refresh engine that updates content in the background without reloading the page — providing a buttery-smooth user experience with no compromise on speed.",
-                            icon: "fas fa-sync-alt"
-                        }
-                    ],
 
-                    changelog: [
-                        {
-                            version: "1.0.0",
-                            date: "2025-07-26",
-                            changes: [
-                                "The developer is still thinking about publishing"
-                            ]
-                        }
+            changelog: [
+                {
+                    version: "1.0.0",
+                    date: "2025-07-26",
+                    changes: [
+                        "The developer is still thinking about publishing"
                     ]
-                },
+                }
+            ]
+        },
 
-                 "coming-soon": {
-                    title: "Coming soon CIN Framework",
-                    content: `
+        "coming-soon": {
+            title: "Coming soon CIN Framework",
+            content: `
                         <div class="space-y-6">
                             <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4">Getting Started Soon</h2>
                             <p class="text-gray-700 leading-relaxed">
@@ -130,11 +130,11 @@
                             </p>
                         </div>
                     `
-                },
-                    
-                introduction: {
-                    title: "Introduction to CIN Framework",
-                    content: `
+        },
+
+        introduction: {
+            title: "Introduction to CIN Framework",
+            content: `
                         <div class="space-y-6">
                             <p class="text-lg text-gray-700 leading-relaxed">
                                 CIN Framework is a cutting-edge development framework designed to streamline the creation of modern, scalable applications. Built with performance and developer experience in mind, it provides a comprehensive toolkit for building everything from simple prototypes to complex enterprise applications.
@@ -166,11 +166,11 @@
                             </p>
                         </div>
                     `
-                },
-                
-                installation: {
-                    title: "Installation Guide",
-                    content: `
+        },
+
+        installation: {
+            title: "Installation Guide",
+            content: `
                         <div class="space-y-6">
                             <p class="text-lg text-gray-700 leading-relaxed">
                                 Getting started with CIN Framework is simple. You can install it via npm, yarn, or download the standalone version. This guide will walk you through all installation methods and initial setup.
@@ -194,11 +194,11 @@
                             </ul>
                         </div>
                     `
-                },
-                
-                "quick-start": {
-                    title: "Quick Start Guide",
-                    content: `
+        },
+
+        "quick-start": {
+            title: "Quick Start Guide",
+            content: `
                         <div class="space-y-6">
                             <p class="text-lg text-gray-700 leading-relaxed">
                                 This quick start guide will have you up and running with CIN Framework in just a few minutes. We'll create a simple application to demonstrate the core concepts.
@@ -228,11 +228,11 @@
                             </div>
                         </div>
                     `
-                },
-                
-                configuration: {
-                    title: "Configuration",
-                    content: `
+        },
+
+        configuration: {
+            title: "Configuration",
+            content: `
                         <div class="space-y-6">
                             <p class="text-lg text-gray-700 leading-relaxed">
                                 CIN Framework provides flexible configuration options to customize your application's behavior. This guide covers all available configuration options and best practices.
@@ -256,103 +256,103 @@
                             </div>
                         </div>
                     `
-                }
+        }
+    }
+};
+
+// ==================================================
+// ENHANCED NAVIGATION SYSTEM WITH URL HASH SUPPORT
+// ==================================================
+
+class CINDocsApp {
+    constructor() {
+        this.currentPage = 'home';
+        this.sidebarExpanded = new Set();
+        this.mobileMenuOpen = false;
+        this.isInitialized = false;
+
+        // Bind methods to ensure correct context
+        this.handleHashChange = this.handleHashChange.bind(this);
+        this.handleResize = this.handleResize.bind(this);
+        this.handleKeydown = this.handleKeydown.bind(this);
+
+        this.init();
+    }
+
+    async init() {
+        try {
+            this.setupEventListeners();
+            this.renderTopNav();
+            this.renderSidebar();
+            this.renderFooter();
+            this.setupMobileMenu();
+
+            // Handle initial URL hash
+            this.handleHashChange();
+
+            // Set up hash change listener
+            window.addEventListener('hashchange', this.handleHashChange);
+            window.addEventListener('resize', this.handleResize);
+            window.addEventListener('keydown', this.handleKeydown);
+
+            this.isInitialized = true;
+            console.log('CIN Framework Documentation initialized successfully');
+        } catch (error) {
+            console.error('Error initializing CIN Framework Documentation:', error);
+        }
+    }
+
+    handleHashChange() {
+        const hash = window.location.hash.slice(1) || 'home';
+        this.currentPage = hash;
+        this.updateUI();
+    }
+
+    updateUI() {
+        this.renderSidebar();
+        this.renderMainContent();
+        this.updateActiveStates();
+
+        // Scroll to top of main content
+        document.getElementById('mainContent').scrollTop = 0;
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    updateActiveStates() {
+        // Update sidebar active states
+        const navItems = document.querySelectorAll('.nav-item');
+        navItems.forEach(item => {
+            if (item.dataset.page === this.currentPage) {
+                item.classList.add('active');
+                item.setAttribute('aria-current', 'page');
+            } else {
+                item.classList.remove('active');
+                item.removeAttribute('aria-current');
             }
-        };
-        
-        // ==================================================
-        // ENHANCED NAVIGATION SYSTEM WITH URL HASH SUPPORT
-        // ==================================================
-        
-        class CINDocsApp {
-            constructor() {
-                this.currentPage = 'home';
-                this.sidebarExpanded = new Set();
-                this.mobileMenuOpen = false;
-                this.isInitialized = false;
-                
-                // Bind methods to ensure correct context
-                this.handleHashChange = this.handleHashChange.bind(this);
-                this.handleResize = this.handleResize.bind(this);
-                this.handleKeydown = this.handleKeydown.bind(this);
-                
-                this.init();
+        });
+
+        // Update category toggle states
+        const categoryToggles = document.querySelectorAll('.category-toggle');
+        categoryToggles.forEach(toggle => {
+            const categoryId = toggle.dataset.category;
+            const chevron = toggle.querySelector('.chevron-icon');
+            const isExpanded = this.sidebarExpanded.has(categoryId);
+
+            if (isExpanded) {
+                toggle.classList.add('active');
+                toggle.setAttribute('aria-expanded', 'true');
+                if (chevron) chevron.classList.add('rotated');
+            } else {
+                toggle.classList.remove('active');
+                toggle.setAttribute('aria-expanded', 'false');
+                if (chevron) chevron.classList.remove('rotated');
             }
-            
-            async init() {
-                try {
-                    this.setupEventListeners();
-                    this.renderTopNav();
-                    this.renderSidebar();
-                    this.renderFooter();
-                    this.setupMobileMenu();
-                    
-                    // Handle initial URL hash
-                    this.handleHashChange();
-                    
-                    // Set up hash change listener
-                    window.addEventListener('hashchange', this.handleHashChange);
-                    window.addEventListener('resize', this.handleResize);
-                    window.addEventListener('keydown', this.handleKeydown);
-                    
-                    this.isInitialized = true;
-                    console.log('CIN Framework Documentation initialized successfully');
-                } catch (error) {
-                    console.error('Error initializing CIN Framework Documentation:', error);
-                }
-            }
-            
-            handleHashChange() {
-                const hash = window.location.hash.slice(1) || 'home';
-                this.currentPage = hash;
-                this.updateUI();
-            }
-            
-            updateUI() {
-                this.renderSidebar();
-                this.renderMainContent();
-                this.updateActiveStates();
-                
-                // Scroll to top of main content
-                document.getElementById('mainContent').scrollTop = 0;
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }
-            
-            updateActiveStates() {
-                // Update sidebar active states
-                const navItems = document.querySelectorAll('.nav-item');
-                navItems.forEach(item => {
-                    if (item.dataset.page === this.currentPage) {
-                        item.classList.add('active');
-                        item.setAttribute('aria-current', 'page');
-                    } else {
-                        item.classList.remove('active');
-                        item.removeAttribute('aria-current');
-                    }
-                });
-                
-                // Update category toggle states
-                const categoryToggles = document.querySelectorAll('.category-toggle');
-                categoryToggles.forEach(toggle => {
-                    const categoryId = toggle.dataset.category;
-                    const chevron = toggle.querySelector('.chevron-icon');
-                    const isExpanded = this.sidebarExpanded.has(categoryId);
-                    
-                    if (isExpanded) {
-                        toggle.classList.add('active');
-                        toggle.setAttribute('aria-expanded', 'true');
-                        if (chevron) chevron.classList.add('rotated');
-                    } else {
-                        toggle.classList.remove('active');
-                        toggle.setAttribute('aria-expanded', 'false');
-                        if (chevron) chevron.classList.remove('rotated');
-                    }
-                });
-            }
-            
-            renderTopNav() {
-                const nav = document.getElementById('topNav');
-                nav.innerHTML = `
+        });
+    }
+
+    renderTopNav() {
+        const nav = document.getElementById('topNav');
+        nav.innerHTML = `
                     <div class="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
                         <div class="flex justify-between h-16">
                             <div class="flex items-center">
@@ -374,11 +374,11 @@
                         </div>
                     </div>
                 `;
-            }
-            
-            renderSidebar() {
-                const sidebar = document.getElementById('sidebar');
-                let sidebarHTML = `
+    }
+
+    renderSidebar() {
+        const sidebar = document.getElementById('sidebar');
+        let sidebarHTML = `
                     <div class="h-full overflow-y-auto">
                         <div class="p-4">
                             <div class="mb-6" >
@@ -388,13 +388,13 @@
                                 </a>
                             </div>
                 `;
-                
-                SITE_DATA.categories.forEach(category => {
-                    const isExpanded = this.sidebarExpanded.has(category.id);
-                    const categoryId = `category-${category.id}`;
-                    const itemsId = `items-${category.id}`;
-                    
-                    sidebarHTML += `
+
+        SITE_DATA.categories.forEach(category => {
+            const isExpanded = this.sidebarExpanded.has(category.id);
+            const categoryId = `category-${category.id}`;
+            const itemsId = `items-${category.id}`;
+
+            sidebarHTML += `
                         <div class="mb-4">
                             <button class="category-toggle w-full flex items-center justify-between p-3 text-left hover:bg-gray-100 rounded-lg transition-colors font-semibold text-gray-800 focus-visible" 
                                     data-category="${category.id}"
@@ -412,10 +412,10 @@
                                  role="region" 
                                  aria-labelledby="${categoryId}">
                     `;
-                    
-                    category.items.forEach(item => {
-                        const isActive = this.currentPage === item.id;
-                        sidebarHTML += `
+
+            category.items.forEach(item => {
+                const isActive = this.currentPage === item.id;
+                sidebarHTML += `
                             <a href="#${item.id}" class="nav-item block p-2 text-gray-600 hover:text-primary rounded transition-colors ${isActive ? 'active' : ''}" 
                                data-page="${item.id}"
                                ${isActive ? 'aria-current="page"' : ''}>
@@ -423,31 +423,31 @@
                                 ${item.title}
                             </a>
                         `;
-                    });
-                    
-                    sidebarHTML += '</div></div>';
-                });
-                
-                sidebarHTML += '</div></div>';
-                sidebar.innerHTML = sidebarHTML;
-                
-                // Update active states after rendering
-                setTimeout(() => this.updateActiveStates(), 0);
-            }
-            
-            renderMainContent() {
-                const mainContent = document.getElementById('mainContent');
-                
-                if (this.currentPage === 'home') {
-                    this.renderHomePage(mainContent);
-                } else {
-                    this.renderContentPage(mainContent);
-                }
-            }
-            
-            renderHomePage(container) {
-                const homeData = SITE_DATA.content.home;
-                container.innerHTML = `
+            });
+
+            sidebarHTML += '</div></div>';
+        });
+
+        sidebarHTML += '</div></div>';
+        sidebar.innerHTML = sidebarHTML;
+
+        // Update active states after rendering
+        setTimeout(() => this.updateActiveStates(), 0);
+    }
+
+    renderMainContent() {
+        const mainContent = document.getElementById('mainContent');
+
+        if (this.currentPage === 'home') {
+            this.renderHomePage(mainContent);
+        } else {
+            this.renderContentPage(mainContent);
+        }
+    }
+
+    renderHomePage(container) {
+        const homeData = SITE_DATA.content.home;
+        container.innerHTML = `
                     <div class="content-fade">
                         <!-- Hero Section -->
                         <section class="moroccan-gradient text-white py-20">
@@ -523,49 +523,14 @@
                                 </div>
                             </div>
                         </section>
-                        
-                        <!-- Quick Links Section -->
-                        <section class="py-16 md:py-20">
-                            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                                <h2 class="text-2xl md:text-3xl font-bold text-center mb-12 md:mb-16 text-gray-900">Quick Links</h2>
-                                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-                                    <div class="moroccan-card p-6 md:p-8 rounded-xl text-center feature-card">
-                                        <i class="fas fa-book-open text-3xl md:text-4xl text-primary mb-4"></i>
-                                        <h3 class="text-lg md:text-xl font-semibold mb-4">Documentation</h3>
-                                        <p class="text-gray-600 mb-6 text-sm md:text-base">Comprehensive guides and API references</p>
-                                        <a href="#introduction" class="inline-block bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary-dark transition-colors focus-visible">
-                                            Read Docs
-                                        </a>
-                                    </div>
-                                    
-                                    <div class="moroccan-card p-6 md:p-8 rounded-xl text-center feature-card">
-                                        <i class="fas fa-graduation-cap text-3xl md:text-4xl text-primary mb-4"></i>
-                                        <h3 class="text-lg md:text-xl font-semibold mb-4">Tutorials</h3>
-                                        <p class="text-gray-600 mb-6 text-sm md:text-base">Step-by-step guides to get you started</p>
-                                        <a href="#first-app" class="inline-block bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary-dark transition-colors focus-visible">
-                                            Start Learning
-                                        </a>
-                                    </div>
-                                    
-                                    <div class="moroccan-card p-6 md:p-8 rounded-xl text-center feature-card">
-                                        <i class="fas fa-users text-3xl md:text-4xl text-primary mb-4"></i>
-                                        <h3 class="text-lg md:text-xl font-semibold mb-4">Community</h3>
-                                        <p class="text-gray-600 mb-6 text-sm md:text-base">Join our vibrant developer community</p>
-                                        <a href="#community" class="inline-block bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary-dark transition-colors focus-visible">
-                                            Join Us
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
                     </div>
                 `;
-            }
-            
-            renderContentPage(container) {
-                const content = SITE_DATA.content[this.currentPage];
-                if (!content) {
-                    container.innerHTML = `
+    }
+
+    renderContentPage(container) {
+        const content = SITE_DATA.content[this.currentPage];
+        if (!content) {
+            container.innerHTML = `
                         <div class="content-fade p-4 md:p-8">
                             <div class="max-w-4xl mx-auto">
                                 <div class="moroccan-card p-6 md:p-8 rounded-xl text-center">
@@ -580,10 +545,10 @@
                             </div>
                         </div>
                     `;
-                    return;
-                }
-                
-                container.innerHTML = `
+            return;
+        }
+
+        container.innerHTML = `
                     <div class="content-fade p-4 md:p-8">
                         <div class="max-w-4xl mx-auto">
                             <header class="mb-8">
@@ -598,11 +563,11 @@
                         </div>
                     </div>
                 `;
-            }
-            
-            renderFooter() {
-                const footer = document.getElementById('footer');
-                footer.innerHTML = `
+    }
+
+    renderFooter() {
+        const footer = document.getElementById('footer');
+        footer.innerHTML = `
                     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12">
                         <div class="grid grid-cols-1 md:grid-cols-4 gap-6 md:gap-8">
                             <div class="col-span-1 md:col-span-2">
@@ -654,179 +619,179 @@
                         </div>
                     </div>
                 `;
-            }
-            
-            setupEventListeners() {
-                // Use event delegation for dynamic content
-                document.addEventListener('click', this.handleClick.bind(this));
-                document.addEventListener('keydown', this.handleKeydown.bind(this));
-            }
-            
-            handleClick(e) {
-                const categoryToggle = e.target.closest('.category-toggle');
-                if (categoryToggle) {
-                    e.preventDefault();
-                    const categoryId = categoryToggle.dataset.category;
-                    this.toggleCategory(categoryId);
-                    return;
-                }
-                
-                const navItem = e.target.closest('.nav-item, a[href^="#"]');
-                if (navItem) {
-                    if (navItem.getAttribute('href')) {
-                        if (this.mobileMenuOpen) {
-                            this.closeMobileMenu();
-                        }
-                    } else {
-                        e.preventDefault();
-                        const categoryId = navItem.closest('.category-toggle')?.dataset.category;
-                        if (categoryId) {
-                            this.toggleCategory(categoryId);
-                        }
-                    }
-                    return;
-                }
-            }
-            
-            handleKeydown(e) {
-                // Handle Escape key to close mobile menu
-                if (e.key === 'Escape' && this.mobileMenuOpen) {
-                    this.closeMobileMenu();
-                    return;
-                }
-                
-                // Handle Enter/Space on category toggles
-                if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('category-toggle')) {
-                    e.preventDefault();
-                    const categoryId = e.target.dataset.category;
-                    this.toggleCategory(categoryId);
-                    return;
-                }
-            }
-            
-            handleResize() {
-                // Auto-close mobile menu on large screens
-                if (window.innerWidth >= 1024 && this.mobileMenuOpen) {
-                    this.closeMobileMenu();
-                }
-            }
-            
-            setupMobileMenu() {
-                const mobileBtn = document.getElementById('mobileMenuBtn');
-                const sidebar = document.getElementById('sidebar');
-                const overlay = document.getElementById('sidebarOverlay');
-                
-                if (!mobileBtn || !sidebar || !overlay) return;
-                
-                mobileBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    this.toggleMobileMenu();
-                });
-                
-                // Close on overlay click
-                overlay.addEventListener('click', () => {
-                    if (this.mobileMenuOpen) {
-                        this.closeMobileMenu();
-                    }
-                });
-                
-                // Prevent sidebar clicks from closing menu
-                sidebar.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                });
-            }
-            
-            toggleMobileMenu() {
+    }
+
+    setupEventListeners() {
+        // Use event delegation for dynamic content
+        document.addEventListener('click', this.handleClick.bind(this));
+        document.addEventListener('keydown', this.handleKeydown.bind(this));
+    }
+
+    handleClick(e) {
+        const categoryToggle = e.target.closest('.category-toggle');
+        if (categoryToggle) {
+            e.preventDefault();
+            const categoryId = categoryToggle.dataset.category;
+            this.toggleCategory(categoryId);
+            return;
+        }
+
+        const navItem = e.target.closest('.nav-item, a[href^="#"]');
+        if (navItem) {
+            if (navItem.getAttribute('href')) {
                 if (this.mobileMenuOpen) {
                     this.closeMobileMenu();
-                } else {
-                    this.openMobileMenu();
+                }
+            } else {
+                e.preventDefault();
+                const categoryId = navItem.closest('.category-toggle')?.dataset.category;
+                if (categoryId) {
+                    this.toggleCategory(categoryId);
                 }
             }
-            
-            openMobileMenu() {
-                const sidebar = document.getElementById('sidebar');
-                const overlay = document.getElementById('sidebarOverlay');
-                const mobileBtn = document.getElementById('mobileMenuBtn');
-                
-                this.mobileMenuOpen = true;
-                sidebar.classList.remove('closed');
-                sidebar.classList.add('open');
-                overlay.classList.remove('opacity-0', 'pointer-events-none');
-                overlay.classList.add('opacity-100');
-                mobileBtn.innerHTML = '<i class="fas fa-times"></i>';
-                mobileBtn.setAttribute('aria-label', 'Close navigation menu');
-                
-                // Prevent body scroll
-                document.body.style.overflow = 'hidden';
-            }
-            
-            closeMobileMenu() {
-                const sidebar = document.getElementById('sidebar');
-                const overlay = document.getElementById('sidebarOverlay');
-                const mobileBtn = document.getElementById('mobileMenuBtn');
-                
-                this.mobileMenuOpen = false;
-                sidebar.classList.remove('open');
-                sidebar.classList.add('closed');
-                overlay.classList.remove('opacity-100');
-                overlay.classList.add('opacity-0', 'pointer-events-none');
-                mobileBtn.innerHTML = '<i class="fas fa-bars"></i>';
-                mobileBtn.setAttribute('aria-label', 'Open navigation menu');
-                
-                // Restore body scroll
-                document.body.style.overflow = '';
-            }
-            
-            toggleCategory(categoryId) {
-                if (this.sidebarExpanded.has(categoryId)) {
-                    this.sidebarExpanded.delete(categoryId);
-                } else {
-                    this.sidebarExpanded.add(categoryId);
-                }
-                this.updateCategoryUI(categoryId);
-            }
-            
-            updateCategoryUI(categoryId) {
-                const toggle = document.querySelector(`[data-category="${categoryId}"]`);
-                const items = document.getElementById(`items-${categoryId}`);
-                const chevron = toggle?.querySelector('.chevron-icon');
-                if (!toggle || !items) return;
-                const isExpanded = this.sidebarExpanded.has(categoryId);
-                if (isExpanded) {
-                    toggle.classList.add('active');
-                    toggle.setAttribute('aria-expanded', 'true');
-                    if (chevron) chevron.classList.add('rotated');
-                    items.classList.remove('collapsed');
-                    items.classList.add('expanded');
-                } else {
-                    toggle.classList.remove('active');
-                    toggle.setAttribute('aria-expanded', 'false');
-                    if (chevron) chevron.classList.remove('rotated');
-                    items.classList.remove('expanded');
-                    items.classList.add('collapsed');
-                }
-            }
-            
-            // Public method to navigate programmatically
-            navigateTo(pageId) {
-                window.location.hash = pageId;
-            }
+            return;
         }
-        
-        // Initialize the application when DOM is loaded
-        document.addEventListener('DOMContentLoaded', () => {
-            try {
-                window.cinDocsApp = new CINDocsApp();
-            } catch (error) {
-                console.error('Failed to initialize CIN Framework Documentation:', error);
+    }
+
+    handleKeydown(e) {
+        // Handle Escape key to close mobile menu
+        if (e.key === 'Escape' && this.mobileMenuOpen) {
+            this.closeMobileMenu();
+            return;
+        }
+
+        // Handle Enter/Space on category toggles
+        if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('category-toggle')) {
+            e.preventDefault();
+            const categoryId = e.target.dataset.category;
+            this.toggleCategory(categoryId);
+            return;
+        }
+    }
+
+    handleResize() {
+        // Auto-close mobile menu on large screens
+        if (window.innerWidth >= 1024 && this.mobileMenuOpen) {
+            this.closeMobileMenu();
+        }
+    }
+
+    setupMobileMenu() {
+        const mobileBtn = document.getElementById('mobileMenuBtn');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+
+        if (!mobileBtn || !sidebar || !overlay) return;
+
+        mobileBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.toggleMobileMenu();
+        });
+
+        // Close on overlay click
+        overlay.addEventListener('click', () => {
+            if (this.mobileMenuOpen) {
+                this.closeMobileMenu();
             }
         });
-        
-        // Handle page visibility changes
-        document.addEventListener('visibilitychange', () => {
-            if (!document.hidden && window.cinDocsApp) {
-                // Refresh state when page becomes visible
-                window.cinDocsApp.updateActiveStates();
-            }
+
+        // Prevent sidebar clicks from closing menu
+        sidebar.addEventListener('click', (e) => {
+            e.stopPropagation();
         });
+    }
+
+    toggleMobileMenu() {
+        if (this.mobileMenuOpen) {
+            this.closeMobileMenu();
+        } else {
+            this.openMobileMenu();
+        }
+    }
+
+    openMobileMenu() {
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+        const mobileBtn = document.getElementById('mobileMenuBtn');
+
+        this.mobileMenuOpen = true;
+        sidebar.classList.remove('closed');
+        sidebar.classList.add('open');
+        overlay.classList.remove('opacity-0', 'pointer-events-none');
+        overlay.classList.add('opacity-100');
+        mobileBtn.innerHTML = '<i class="fas fa-times"></i>';
+        mobileBtn.setAttribute('aria-label', 'Close navigation menu');
+
+        // Prevent body scroll
+        document.body.style.overflow = 'hidden';
+    }
+
+    closeMobileMenu() {
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebarOverlay');
+        const mobileBtn = document.getElementById('mobileMenuBtn');
+
+        this.mobileMenuOpen = false;
+        sidebar.classList.remove('open');
+        sidebar.classList.add('closed');
+        overlay.classList.remove('opacity-100');
+        overlay.classList.add('opacity-0', 'pointer-events-none');
+        mobileBtn.innerHTML = '<i class="fas fa-bars"></i>';
+        mobileBtn.setAttribute('aria-label', 'Open navigation menu');
+
+        // Restore body scroll
+        document.body.style.overflow = '';
+    }
+
+    toggleCategory(categoryId) {
+        if (this.sidebarExpanded.has(categoryId)) {
+            this.sidebarExpanded.delete(categoryId);
+        } else {
+            this.sidebarExpanded.add(categoryId);
+        }
+        this.updateCategoryUI(categoryId);
+    }
+
+    updateCategoryUI(categoryId) {
+        const toggle = document.querySelector(`[data-category="${categoryId}"]`);
+        const items = document.getElementById(`items-${categoryId}`);
+        const chevron = toggle?.querySelector('.chevron-icon');
+        if (!toggle || !items) return;
+        const isExpanded = this.sidebarExpanded.has(categoryId);
+        if (isExpanded) {
+            toggle.classList.add('active');
+            toggle.setAttribute('aria-expanded', 'true');
+            if (chevron) chevron.classList.add('rotated');
+            items.classList.remove('collapsed');
+            items.classList.add('expanded');
+        } else {
+            toggle.classList.remove('active');
+            toggle.setAttribute('aria-expanded', 'false');
+            if (chevron) chevron.classList.remove('rotated');
+            items.classList.remove('expanded');
+            items.classList.add('collapsed');
+        }
+    }
+
+    // Public method to navigate programmatically
+    navigateTo(pageId) {
+        window.location.hash = pageId;
+    }
+}
+
+// Initialize the application when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    try {
+        window.cinDocsApp = new CINDocsApp();
+    } catch (error) {
+        console.error('Failed to initialize CIN Framework Documentation:', error);
+    }
+});
+
+// Handle page visibility changes
+document.addEventListener('visibilitychange', () => {
+    if (!document.hidden && window.cinDocsApp) {
+        // Refresh state when page becomes visible
+        window.cinDocsApp.updateActiveStates();
+    }
+});
