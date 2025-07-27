@@ -448,13 +448,10 @@ class CINDocsApp {
                             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
                                 <h1 class="text-4xl md:text-5xl font-bold mb-6">${homeData.title}</h1>
                                 <p class="text-lg md:text-xl mb-8 max-w-3xl mx-auto">${homeData.subtitle}</p>
-                                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                                    <a href="#quick-start" class="bg-white text-primary px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors focus-visible" style="font-weight: 800;font-size: 30px;">
-                                        CIN
-                                    </a>
-                                    <a href="#introduction" class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-primary transition-colors focus-visible" style="font-size: 30px;">
-                                        FRAMEWORK
-                                    </a>
+                                
+                                <!-- CIN Logo Centered -->
+                                <div class="flex justify-center">
+                                    <img src="https://github.com/mawi-officiel/cin-framework/raw/main/cin.png" alt="CIN Framework Logo" class="w-48 md:w-64 lg:w-72 rounded shadow-lg border-4 border-white/20">
                                 </div>
                             </div>
                         </section>
@@ -465,17 +462,18 @@ class CINDocsApp {
                                 <h2 class="text-3xl font-bold text-center mb-12 md:mb-16 text-gray-900">Why Choose CIN Framework?</h2>
                                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                                     ${homeData.features.map(feature => `
-                                        <div class="moroccan-card p-6 md:p-8 rounded-xl feature-card flex flex-col items-center">
+                                        <div class="moroccan-card p-6 md:p-8 rounded-xl feature-card">
                                             <div class="text-primary text-3xl md:text-4xl mb-4">
                                                 <i class="${feature.icon}"></i>
                                             </div>
-                                            <img src="https://github.com/mawi-officiel/cin-framework/raw/main/cin.png" alt="CIN Logo" class="w-20 h-20 object-contain mb-2">
+                                            <h3 class="text-lg md:text-xl font-semibold mb-4 text-gray-900">${feature.title}</h3>
+                                            <p class="text-gray-600 text-sm md:text-base">${feature.description}</p>
                                         </div>
                                     `).join('')}
                                 </div>
                             </div>
                         </section>
-
+                        
                         <!-- Version Info Section -->
                         <section class="bg-gray-100 py-12 md:py-16">
                             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
