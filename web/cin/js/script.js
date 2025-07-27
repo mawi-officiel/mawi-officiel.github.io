@@ -30,13 +30,31 @@ document.head.appendChild(style);
 loadingScreen.appendChild(spinner);
 document.body.appendChild(loadingScreen);
 
+// تتبع حالة تحميل السكريبت
+let currentScript = null;
+let isScriptLoaded = false;
+
 // دالة لتحميل ملف السكريبت
 function loadScript(src) {
     return new Promise((resolve, reject) => {
+        // إزالة السكريبت القديم إذا وجد
+        if (currentScript) {
+            currentScript.remove();
+            isScriptLoaded = false;
+        }
+
         const script = document.createElement('script');
         script.src = src;
-        script.onload = resolve;
-        script.onerror = reject;
+        currentScript = script;
+
+        script.onload = () => {
+            isScriptLoaded = true;
+            resolve();
+        };
+        script.onerror = () => {
+            isScriptLoaded = false;
+            reject(new Error(`فشل تحميل السكريبت: ${src}`));
+        };
         document.head.appendChild(script);
     });
 }
@@ -55,18 +73,25 @@ function getCookie(name) {
     return null;
 }
 
-// تحديد اللغة المطلوبة
-const urlLang = getUrlParam('lang');
-const cookieLang = getCookie('language');
-const lang = urlLang || cookieLang || 'en';
+// دالة للتحقق من حالة تحميل السكريبت
+function checkScriptStatus() {
+    if (!isScriptLoaded) {
+        console.warn('السكريبت غير محمل، جاري إعادة التحميل...');
+        loadLanguageScript();
+    }
+}
 
-// حفظ اللغة في الكوكيز
-document.cookie = `language=${lang};path=/;max-age=${60*60*24*365}`;
+// دالة لتحميل ملف اللغة
+async function loadLanguageScript() {
+    const urlLang = getUrlParam('lang');
+    const cookieLang = getCookie('language');
+    const lang = urlLang || cookieLang || 'en';
 
-// تحميل ملف اللغة المناسب
-loadScript(`https://mawi-officiel.github.io/web/cin/js/script_${lang}.js`)
-    .then(() => {
-        // إخفاء شاشة التحميل بعد اكتمال التحميل
+    // حفظ اللغة في الكوكيز
+    document.cookie = `language=${lang};path=/;max-age=${60*60*24*365}`;
+
+    try {
+        await loadScript(`https://mawi-officiel.github.io/web/cin/js/script_${lang}.js`);
         loadingScreen.style.display = 'none';
         
         // تحديث أيقونة اللغة
@@ -84,11 +109,17 @@ loadScript(`https://mawi-officiel.github.io/web/cin/js/script_${lang}.js`)
                 document.documentElement.dir = 'ltr';
             }
         }
-    })
-    .catch(error => {
-        console.error('Error loading language script:', error);
+    } catch (error) {
+        console.error('خطأ في تحميل ملف اللغة:', error);
         loadingScreen.style.display = 'none';
-    });
+    }
+}
+
+// تحميل ملف اللغة عند بدء التشغيل
+loadLanguageScript();
+
+// التحقق من حالة السكريبت كل 5 ثواني
+setInterval(checkScriptStatus, 5000);
 
 // دالة تبديل اللغة
 window.toggleLanguage = function() {
