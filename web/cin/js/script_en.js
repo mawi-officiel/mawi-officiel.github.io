@@ -337,7 +337,7 @@
                                     <a href="#home" class="flex items-center hover:opacity-80 transition-opacity">
                                         <i class="fas fa-code text-primary text-2xl mr-3 ml-3"></i>
                                         <h1 class="text-xl font-bold text-gray-900">${SITE_DATA.config.siteName}</h1>
-                                        <span class="ml-2 px-2 py-1 text-xs bg-primary text-white rounded-full">${SITE_DATA.config.version}</span>
+                                        <span class="ml-2 mr-2 px-2 py-1 text-xs bg-primary text-white rounded-full">${SITE_DATA.config.version}</span>
                                     </a>
                                 </div>
                             </div>
