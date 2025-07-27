@@ -4,13 +4,13 @@
         
         const SITE_DATA = {
             // Site Configuration
-            //config: {
-            //    siteName: "CIN Framework Soon",
-            //    version: "0.0.0",
-            //    releaseDate: "2025-00-00",
-            //    githubUrl: "https://github.com/mawi-officiel/cin-framework",
-            //    description: "The first version of CIN will be released soon."
-            //},
+            config: {
+                siteName: "CIN Framework Soon",
+                version: "0.0.0",
+                releaseDate: "2025-00-00",
+                githubUrl: "https://github.com/mawi-officiel/cin-framework",
+                description: "The first version of CIN will be released soon."
+            },
             
             // Navigation Categories
             categories: [
