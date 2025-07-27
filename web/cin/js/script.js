@@ -1,76 +1,102 @@
-// وظائف إدارة الكوكيز
-function setCookie(name, value, days) {
-    const expires = new Date();
-    expires.setTime(expires.getTime() + (days * 24 * 60 * 60 * 1000));
-    document.cookie = name + '=' + value + ';expires=' + expires.toUTCString() + ';path=/';
+// إنشاء عنصر شاشة التحميل
+const loadingScreen = document.createElement('div');
+loadingScreen.style.cssText = `
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.9);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+`;
+
+const spinner = document.createElement('div');
+spinner.style.cssText = `
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #1f6fd0;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+`;
+
+const style = document.createElement('style');
+style.textContent = '@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }';
+document.head.appendChild(style);
+
+loadingScreen.appendChild(spinner);
+document.body.appendChild(loadingScreen);
+
+// دالة لتحميل ملف السكريبت
+function loadScript(src) {
+    return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = src;
+        script.onload = resolve;
+        script.onerror = reject;
+        document.head.appendChild(script);
+    });
 }
 
+// دالة للحصول على معلمة URL
+function getUrlParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+}
+
+// دالة للحصول على اللغة المحفوظة في الكوكيز
 function getCookie(name) {
-    const nameEQ = name + '=';
-    const ca = document.cookie.split(';');
-    for(let i = 0; i < ca.length; i++) {
-        let c = ca[i];
-        while (c.charAt(0) === ' ') c = c.substring(1, c.length);
-        if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
-    }
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
     return null;
 }
 
-function toggleLanguage() {
-    const currentUrl = new URL(window.location.href);
-    const langParam = currentUrl.searchParams.get('lang');
-    const langIcon = document.getElementById('langIcon');
-    
-    if (!langParam || langParam === 'en') {
-        currentUrl.searchParams.set('lang', 'ar');
-        langIcon.src = 'https://flagcdn.com/w40/ma.png';
-        langIcon.alt = 'MA';
-        langIcon.title = 'Switch to English';
-        setCookie('preferred_lang', 'ar', 365);
-    } else {
-        currentUrl.searchParams.set('lang', 'en');
-        langIcon.src = 'https://flagcdn.com/w40/us.png';
-        langIcon.alt = 'EN';
-        langIcon.title = 'Switch to Arabic';
-        setCookie('preferred_lang', 'en', 365);
-    }
-    
-    window.location.href = currentUrl.toString();
-}
+// تحديد اللغة المطلوبة
+const urlLang = getUrlParam('lang');
+const cookieLang = getCookie('language');
+const lang = urlLang || cookieLang || 'en';
 
-window.addEventListener('load', function() {
-    const urlParams = new URLSearchParams(window.location.search);
-    let lang = urlParams.get('lang');
-    
-    if (!lang) {
-        const savedLang = getCookie('preferred_lang');
-        if (savedLang) {
-            const currentUrl = new URL(window.location.href);
-            currentUrl.searchParams.set('lang', savedLang);
-            window.location.href = currentUrl.toString();
-            return;
+// حفظ اللغة في الكوكيز
+document.cookie = `language=${lang};path=/;max-age=${60*60*24*365}`;
+
+// تحميل ملف اللغة المناسب
+loadScript(`https://mawi-officiel.github.io/web/cin/js/script_${lang}.js`)
+    .then(() => {
+        // إخفاء شاشة التحميل بعد اكتمال التحميل
+        loadingScreen.style.display = 'none';
+        
+        // تحديث أيقونة اللغة
+        const langIcon = document.getElementById('langIcon');
+        if (langIcon) {
+            if (lang === 'ar') {
+                langIcon.src = 'https://flagcdn.com/w40/ma.png';
+                langIcon.alt = 'MA';
+                langIcon.title = 'Switch to English';
+                document.documentElement.dir = 'rtl';
+            } else {
+                langIcon.src = 'https://flagcdn.com/w40/us.png';
+                langIcon.alt = 'EN';
+                langIcon.title = 'Switch to Arabic';
+                document.documentElement.dir = 'ltr';
+            }
         }
-    }
+    })
+    .catch(error => {
+        console.error('Error loading language script:', error);
+        loadingScreen.style.display = 'none';
+    });
+
+// دالة تبديل اللغة
+window.toggleLanguage = function() {
+    const currentLang = getUrlParam('lang') || getCookie('language') || 'en';
+    const newLang = currentLang === 'ar' ? 'en' : 'ar';
     
-    const langIcon = document.getElementById('langIcon');
-    if (lang === 'ar') {
-        langIcon.src = 'https://flagcdn.com/w40/ma.png';
-        langIcon.alt = 'MA';
-        langIcon.title = 'Switch to English';
-    }
-});
-
-function loadLanguageScript() {
-    const existingScripts = document.querySelectorAll('script[data-lang]');
-    existingScripts.forEach(script => script.remove());
-
-    const urlParams = new URLSearchParams(window.location.search);
-    let lang = urlParams.get('lang') || getCookie('preferred_lang') || 'en';
-
-    const script = document.createElement('script');
-    script.src = `https://mawi-officiel.github.io/web/cin/js/script_${lang}.js`;
-    script.setAttribute('data-lang', lang);
-    document.body.appendChild(script);
-}
-
-loadLanguageScript();
+    // تحديث URL وإعادة تحميل الصفحة
+    const url = new URL(window.location.href);
+    url.searchParams.set('lang', newLang);
+    window.location.href = url.toString();
+};
