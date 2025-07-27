@@ -569,7 +569,6 @@ class CINDocsApp {
                                     <i class="fas fa-code text-primary text-xl md:text-2xl mr-3 ml-3"></i>
                                     <h3 class="text-lg md:text-xl font-bold">${SITE_DATA.config.siteName}</h3>
                                 </div>
-                                <p class="text-gray-400 mb-4 text-sm md:text-base">${SITE_DATA.config.description}</p>
                                 <div class="flex space-x-4">
                                     <a href="${SITE_DATA.config.githubUrl}" target="_blank" rel="noopener noreferrer" 
                                        class="text-gray-400 hover:text-white transition-colors focus-visible" 
