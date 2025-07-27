@@ -39,21 +39,6 @@ loadingScreen.appendChild(spinner);
 document.body.appendChild(loadingScreen);
 
 /**
- * دالة لتحميل ملف سكريبت بشكل ديناميكي.
- * @param {string} src - مسار ملف السكريبت المراد تحميله.
- * @returns {Promise<void>} - وعد يحل عند تحميل السكريبت أو يرفض عند حدوث خطأ.
- */
-function loadScript(src) {
-    return new Promise((resolve, reject) => {
-        const script = document.createElement('script');
-        script.src = src;
-        script.onload = resolve; // حل الوعد عند تحميل السكريبت بنجاح
-        script.onerror = reject; // رفض الوعد عند حدوث خطأ في التحميل
-        document.head.appendChild(script); // إضافة السكريبت إلى رأس المستند
-    });
-}
-
-/**
  * دالة للحصول على قيمة معلمة URL من عنوان الصفحة.
  * @param {string} param - اسم المعلمة المراد البحث عنها.
  * @returns {string|null} - قيمة المعلمة أو null إذا لم يتم العثور عليها.
@@ -86,37 +71,64 @@ const lang = urlLang || cookieLang || 'en';
 // حفظ اللغة المحددة في الكوكيز لمدة عام واحد
 document.cookie = `language=${lang};path=/;max-age=${60*60*24*365}`;
 
-// تحميل ملف اللغة المناسب بناءً على اللغة المحددة
-loadScript(`https://mawi-officiel.github.io/web/cin/js/script_${lang}.js`)
-    .then(() => {
-        // يتم تنفيذ هذا الكود بعد تحميل سكريبت اللغة بنجاح
-        const langIcon = document.getElementById('langIcon'); // الحصول على عنصر أيقونة اللغة
-        if (langIcon) {
-            // تحديث مصدر الصورة والنص البديل والعنوان بناءً على اللغة
-            if (lang === 'ar') {
-                langIcon.src = 'https://flagcdn.com/w40/ma.png'; // علم المغرب للعربية
-                langIcon.alt = 'MA';
-                langIcon.title = 'التبديل إلى الإنجليزية';
-                document.documentElement.dir = 'rtl'; // تعيين اتجاه المستند من اليمين إلى اليسار
-            } else {
-                langIcon.src = 'https://flagcdn.com/w40/us.png'; // علم الولايات المتحدة للإنجليزية
-                langIcon.alt = 'EN';
-                langIcon.title = 'التبديل إلى العربية';
-                document.documentElement.dir = 'ltr'; // تعيين اتجاه المستند من اليسار إلى اليمين
-            }
-        }
+// الحصول على عنصر السكريبت Placeholder من HTML (الذي يجب أن يكون موجودًا في ملف HTML الخاص بك)
+const existingScriptPlaceholder = document.getElementById('languageLoaderScriptPlaceholder');
 
-        // إخفاء شاشة التحميل فقط بعد تحميل الصفحة بالكامل (بما في ذلك الصور والموارد الأخرى)
-        window.onload = () => {
-            loadingScreen.style.display = 'none';
-        };
-    })
-    .catch(error => {
-        // في حالة حدوث خطأ أثناء تحميل سكريبت اللغة
-        console.error('حدث خطأ أثناء تحميل سكريبت اللغة:', error);
-        // إخفاء شاشة التحميل للسماح بعرض أي محتوى موجود حتى لو كان هناك خطأ
+// إذا كان العنصر موجودًا، قم بإزالته لضمان إعادة تحميل السكريبت بشكل صحيح
+// هذا ضروري لضمان أن المتصفح يقوم بتنفيذ السكريبت الجديد باللغة الصحيحة
+if (existingScriptPlaceholder) {
+    existingScriptPlaceholder.remove();
+}
+
+// إنشاء عنصر سكريبت جديد بالمسار الصحيح للغة المحددة
+const languageScript = document.createElement('script');
+languageScript.src = `https://mawi-officiel.github.io/web/cin/js/script_${lang}.js`;
+languageScript.id = 'languageLoaderScriptPlaceholder'; // إعادة تعيين الـ ID لنفس العنصر الجديد
+
+// إضافة مستمع لحدث 'load' على عنصر السكريبت الجديد للتأكد من تحميله
+languageScript.onload = () => {
+    // يتم تنفيذ هذا الكود بعد تحميل سكريبت اللغة بنجاح
+    const langIcon = document.getElementById('langIcon'); // الحصول على عنصر أيقونة اللغة
+    if (langIcon) {
+        // تحديث مصدر الصورة والنص البديل والعنوان بناءً على اللغة
+        if (lang === 'ar') {
+            langIcon.src = 'https://flagcdn.com/w40/ma.png'; // علم المغرب للعربية
+            langIcon.alt = 'MA';
+            langIcon.title = 'التبديل إلى الإنجليزية';
+            document.documentElement.dir = 'rtl'; // تعيين اتجاه المستند من اليمين إلى اليسار
+        } else {
+            langIcon.src = 'https://flagcdn.com/w40/us.png'; // علم الولايات المتحدة للإنجليزية
+            langIcon.alt = 'EN';
+            langIcon.title = 'التبديل إلى العربية';
+            document.documentElement.dir = 'ltr'; // تعيين اتجاه المستند من اليسار إلى اليمين
+        }
+    }
+
+    // إخفاء شاشة التحميل فقط بعد تحميل الصفحة بالكامل (بما في ذلك الصور والموارد الأخرى)
+    // و بعد تحميل سكريبت اللغة وتحديث الأيقونات.
+    // نستخدم Promise لضمان انتظار تحميل جميع موارد الصفحة.
+    Promise.all([
+        new Promise(resolve => {
+            if (document.readyState === 'complete') {
+                resolve();
+            } else {
+                window.addEventListener('load', resolve);
+            }
+        })
+    ]).then(() => {
         loadingScreen.style.display = 'none';
     });
+};
+
+// إضافة مستمع لحدث 'error' في حالة فشل تحميل السكريبت
+languageScript.onerror = (error) => {
+    console.error('حدث خطأ أثناء تحميل سكريبت اللغة:', error);
+    // إخفاء شاشة التحميل للسماح بعرض أي محتوى موجود حتى لو كان هناك خطأ
+    loadingScreen.style.display = 'none';
+};
+
+// إضافة السكريبت الجديد إلى رأس المستند لبدء التحميل
+document.head.appendChild(languageScript);
 
 /**
  * دالة لتبديل اللغة بين العربية والإنجليزية وإعادة تحميل الصفحة.
