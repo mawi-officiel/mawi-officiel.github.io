@@ -359,7 +359,7 @@
                     <div class="h-full overflow-y-auto">
                         <div class="p-4">
                             <div class="mb-6" >
-                                <a href="#home" class="nav-item block p-3 text-gray-700 hover:text-primary rounded-lg transition-colors font-medium" style="margin-top: 30px" style="margin-left: 50px; margin-right: 38px;">
+                                <a href="#home" class="nav-item block p-3 text-gray-700 hover:text-primary rounded-lg transition-colors font-medium" style="margin-top: 0px;margin-left: 50px;margin-right: 50px;">
                                     <i class="fas fa-home mr-3"></i>
                                     Home
                                 </a>
