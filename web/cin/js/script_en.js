@@ -272,7 +272,6 @@ class CINDocsApp {
         this.mobileMenuOpen = false;
         this.isInitialized = false;
 
-        // Bind methods to ensure correct context
         this.handleHashChange = this.handleHashChange.bind(this);
         this.handleResize = this.handleResize.bind(this);
         this.handleKeydown = this.handleKeydown.bind(this);
@@ -288,10 +287,8 @@ class CINDocsApp {
             this.renderFooter();
             this.setupMobileMenu();
 
-            // Handle initial URL hash
             this.handleHashChange();
 
-            // Set up hash change listener
             window.addEventListener('hashchange', this.handleHashChange);
             window.addEventListener('resize', this.handleResize);
             window.addEventListener('keydown', this.handleKeydown);
@@ -314,13 +311,11 @@ class CINDocsApp {
         this.renderMainContent();
         this.updateActiveStates();
 
-        // Scroll to top of main content
         document.getElementById('mainContent').scrollTop = 0;
         window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
     updateActiveStates() {
-        // Update sidebar active states
         const navItems = document.querySelectorAll('.nav-item');
         navItems.forEach(item => {
             if (item.dataset.page === this.currentPage) {
@@ -332,7 +327,6 @@ class CINDocsApp {
             }
         });
 
-        // Update category toggle states
         const categoryToggles = document.querySelectorAll('.category-toggle');
         categoryToggles.forEach(toggle => {
             const categoryId = toggle.dataset.category;
@@ -360,7 +354,7 @@ class CINDocsApp {
                                 <div class="flex-shrink-0 flex items-center">
                                     <a href="#home" class="flex items-center hover:opacity-80 transition-opacity">
                                         <i class="fas fa-code text-primary text-2xl mr-3 ml-3"></i>
-                                        <h1 class="text-xl font-bold text-gray-900">${SITE_DATA.config.siteName}${SITE_DATA.config.nameversion}</h1>
+                                        <h1 class="text-xl font-bold text-gray-900">${SITE_DATA.config.siteName} ${SITE_DATA.config.nameversion}</h1>
                                         <span class="ml-2 mr-2 px-2 py-1 text-xs bg-primary text-white rounded-full">${SITE_DATA.config.version}</span>
                                     </a>
                                 </div>
@@ -432,7 +426,6 @@ class CINDocsApp {
         sidebarHTML += '</div></div>';
         sidebar.innerHTML = sidebarHTML;
 
-        // Update active states after rendering
         setTimeout(() => this.updateActiveStates(), 0);
     }
 
@@ -583,14 +576,6 @@ class CINDocsApp {
                                        aria-label="GitHub">
                                         <i class="fab fa-github text-lg md:text-xl"></i>
                                     </a>
-                                    <a href="#" class="text-gray-400 hover:text-white transition-colors focus-visible" 
-                                       aria-label="Twitter">
-                                        <i class="fab fa-twitter text-lg md:text-xl"></i>
-                                    </a>
-                                    <a href="#community" class="text-gray-400 hover:text-white transition-colors focus-visible" 
-                                       aria-label="Discord Community">
-                                        <i class="fab fa-discord text-lg md:text-xl"></i>
-                                    </a>
                                 </div>
                             </div>
                             
@@ -598,9 +583,6 @@ class CINDocsApp {
                                 <h4 class="text-lg font-semibold mb-4">Documentation</h4>
                                 <ul class="space-y-2">
                                     <li><a href="#soon" class="text-gray-400 hover:text-white transition-colors text-sm md:text-base focus-visible">Getting Started</a></li>
-                                    <li><a href="#core-api" class="text-gray-400 hover:text-white transition-colors text-sm md:text-base focus-visible">API Reference</a></li>
-                                    <li><a href="#first-app" class="text-gray-400 hover:text-white transition-colors text-sm md:text-base focus-visible">Tutorials</a></li>
-                                    <li><a href="#configuration" class="text-gray-400 hover:text-white transition-colors text-sm md:text-base focus-visible">Configuration</a></li>
                                 </ul>
                             </div>
                             
@@ -608,9 +590,6 @@ class CINDocsApp {
                                 <h4 class="text-lg font-semibold mb-4">Community</h4>
                                 <ul class="space-y-2">
                                     <li><a href="${SITE_DATA.config.githubUrl}" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors text-sm md:text-base focus-visible">GitHub</a></li>
-                                    <li><a href="#community" class="text-gray-400 hover:text-white transition-colors text-sm md:text-base focus-visible">Discord</a></li>
-                                    <li><a href="#faq" class="text-gray-400 hover:text-white transition-colors text-sm md:text-base focus-visible">FAQ</a></li>
-                                    <li><a href="#contributing" class="text-gray-400 hover:text-white transition-colors text-sm md:text-base focus-visible">Contributing</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -623,7 +602,6 @@ class CINDocsApp {
     }
 
     setupEventListeners() {
-        // Use event delegation for dynamic content
         document.addEventListener('click', this.handleClick.bind(this));
         document.addEventListener('keydown', this.handleKeydown.bind(this));
     }
@@ -655,13 +633,11 @@ class CINDocsApp {
     }
 
     handleKeydown(e) {
-        // Handle Escape key to close mobile menu
         if (e.key === 'Escape' && this.mobileMenuOpen) {
             this.closeMobileMenu();
             return;
         }
 
-        // Handle Enter/Space on category toggles
         if ((e.key === 'Enter' || e.key === ' ') && e.target.classList.contains('category-toggle')) {
             e.preventDefault();
             const categoryId = e.target.dataset.category;
@@ -671,7 +647,6 @@ class CINDocsApp {
     }
 
     handleResize() {
-        // Auto-close mobile menu on large screens
         if (window.innerWidth >= 1024 && this.mobileMenuOpen) {
             this.closeMobileMenu();
         }
@@ -689,14 +664,12 @@ class CINDocsApp {
             this.toggleMobileMenu();
         });
 
-        // Close on overlay click
         overlay.addEventListener('click', () => {
             if (this.mobileMenuOpen) {
                 this.closeMobileMenu();
             }
         });
 
-        // Prevent sidebar clicks from closing menu
         sidebar.addEventListener('click', (e) => {
             e.stopPropagation();
         });
@@ -723,7 +696,6 @@ class CINDocsApp {
         mobileBtn.innerHTML = '<i class="fas fa-times"></i>';
         mobileBtn.setAttribute('aria-label', 'Close navigation menu');
 
-        // Prevent body scroll
         document.body.style.overflow = 'hidden';
     }
 
@@ -740,7 +712,6 @@ class CINDocsApp {
         mobileBtn.innerHTML = '<i class="fas fa-bars"></i>';
         mobileBtn.setAttribute('aria-label', 'Open navigation menu');
 
-        // Restore body scroll
         document.body.style.overflow = '';
     }
 
@@ -774,13 +745,11 @@ class CINDocsApp {
         }
     }
 
-    // Public method to navigate programmatically
     navigateTo(pageId) {
         window.location.hash = pageId;
     }
 }
 
-// Initialize the application when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     try {
         window.cinDocsApp = new CINDocsApp();
@@ -788,11 +757,8 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error('Failed to initialize CIN Framework Documentation:', error);
     }
 });
-
-// Handle page visibility changes
 document.addEventListener('visibilitychange', () => {
     if (!document.hidden && window.cinDocsApp) {
-        // Refresh state when page becomes visible
         window.cinDocsApp.updateActiveStates();
     }
 });
