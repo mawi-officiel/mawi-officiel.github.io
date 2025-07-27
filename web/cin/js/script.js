@@ -57,11 +57,13 @@ const scriptEn = document.getElementById('langScriptEn');
 
 if (lang === 'ar') {
     if (scriptEn) {
-        scriptEn.remove();
+        scriptEn.src = ''; // إفراغ مسار السكريبت الإنجليزي لمنع تنفيذه
+        scriptEn.remove(); // ثم إزالته من DOM
     }
-} else {
+} else { // lang === 'en'
     if (scriptAr) {
-        scriptAr.remove();
+        scriptAr.src = ''; // إفراغ مسار السكريبت العربي لمنع تنفيذه
+        scriptAr.remove(); // ثم إزالته من DOM
     }
 }
 
