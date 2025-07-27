@@ -4,13 +4,13 @@
         
         const SITE_DATA = {
             // Site Configuration
-            config: {
-                siteName: "CIN Framework Soon",
-                version: "0.0.0",
-                releaseDate: "2025-00-00",
-                githubUrl: "https://github.com/mawi-officiel/cin-framework",
-                description: "The first version of CIN will be released soon."
-            },
+            //config: {
+            //    siteName: "CIN Framework Soon",
+            //    version: "0.0.0",
+            //    releaseDate: "2025-00-00",
+            //    githubUrl: "https://github.com/mawi-officiel/cin-framework",
+            //    description: "The first version of CIN will be released soon."
+            //},
             
             // Navigation Categories
             categories: [
@@ -19,6 +19,7 @@
                     title: "Getting Started",
                     icon: "fas fa-rocket",
                     items: [
+                        { id: "soon", title: "soon", icon: "fa-solid fa-timer"}
                         { id: "introduction", title: "Introduction", icon: "fas fa-book-open" },
                         //{ id: "installation", title: "Installation", icon: "fas fa-download" },
                         //{ id: "quick-start", title: "Quick Start", icon: "fas fa-play" },
@@ -118,7 +119,20 @@
                         }
                     ]
                 },
-                
+
+                 soon: {
+                    title: "Coming soon CIN Framework",
+                    content: `
+                        <div class="space-y-6">
+                            <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4">Getting Started Soon</h2>
+                            <p class="text-gray-700 leading-relaxed">
+                                CIN is currently under active development.  
+                                No documentation or guides are available until a stable production-ready release is confirmed.
+                            </p>
+                        </div>
+                    `
+                },
+                    
                 introduction: {
                     title: "Introduction to CIN Framework",
                     content: `
