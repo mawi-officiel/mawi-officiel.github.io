@@ -1,0 +1,226 @@
+<svg viewBox="0 0 1920 1080" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- خلفية الفضاء المتدرجة -->
+    <radialGradient id="spaceGradient" cx="50%" cy="50%" r="100%">
+      <stop offset="0%" stop-color="#0a0a2e"/>
+      <stop offset="30%" stop-color="#16213e"/>
+      <stop offset="60%" stop-color="#0f0f23"/>
+      <stop offset="100%" stop-color="#000000"/>
+    </radialGradient>
+    
+    <!-- تدرج النجوم -->
+    <radialGradient id="starGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="70%" stop-color="#b8c5ff" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#4a5568" stop-opacity="0"/>
+    </radialGradient>
+    
+    <!-- تدرج الشبكة العصبية -->
+    <linearGradient id="neuralGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00d4ff" stop-opacity="0.8"/>
+      <stop offset="50%" stop-color="#0099cc" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#004466" stop-opacity="0.4"/>
+    </linearGradient>
+    
+    <!-- تدرج الإشارات التقنية -->
+    <linearGradient id="techSignal" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff6b35" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#ff6b35" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#ff6b35" stop-opacity="0"/>
+    </linearGradient>
+    
+    <!-- فلتر الضوء الناعم -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- فلتر النبضات -->
+    <filter id="pulse" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- خلفية الفضاء الأساسية -->
+  <rect width="100%" height="100%" fill="url(#spaceGradient)"/>
+  
+  <!-- النجوم المتلألئة -->
+  <g class="stars">
+    <!-- نجوم كبيرة -->
+    <circle cx="150" cy="200" r="2" fill="url(#starGlow)" opacity="0.9">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="300" cy="150" r="1.5" fill="url(#starGlow)" opacity="0.8">
+      <animate attributeName="opacity" values="0.5;1;0.5" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="800" cy="300" r="2.5" fill="url(#starGlow)" opacity="0.9">
+      <animate attributeName="opacity" values="0.2;1;0.2" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="1200" cy="180" r="1.8" fill="url(#starGlow)" opacity="0.8">
+      <animate attributeName="opacity" values="0.4;1;0.4" dur="3.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="1500" cy="400" r="2.2" fill="url(#starGlow)" opacity="0.9">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="2.8s" repeatCount="indefinite"/>
+    </circle>
+    
+    <!-- نجوم متوسطة -->
+    <circle cx="450" cy="350" r="1" fill="#ffffff" opacity="0.7">
+      <animate attributeName="opacity" values="0.3;0.9;0.3" dur="4.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="650" cy="500" r="1.2" fill="#b8c5ff" opacity="0.8">
+      <animate attributeName="opacity" values="0.4;1;0.4" dur="3.2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="950" cy="600" r="0.8" fill="#ffffff" opacity="0.6">
+      <animate attributeName="opacity" values="0.2;0.8;0.2" dur="5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="1350" cy="700" r="1.3" fill="#d4e6ff" opacity="0.7">
+      <animate attributeName="opacity" values="0.3;0.9;0.3" dur="3.8s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="1700" cy="600" r="1.1" fill="#ffffff" opacity="0.8">
+      <animate attributeName="opacity" values="0.5;1;0.5" dur="2.9s" repeatCount="indefinite"/>
+    </circle>
+    
+    <!-- نجوم صغيرة -->
+    <circle cx="200" cy="450" r="0.5" fill="#ffffff" opacity="0.5"/>
+    <circle cx="380" cy="520" r="0.6" fill="#b8c5ff" opacity="0.6"/>
+    <circle cx="580" cy="750" r="0.4" fill="#ffffff" opacity="0.4"/>
+    <circle cx="750" cy="850" r="0.7" fill="#d4e6ff" opacity="0.5"/>
+    <circle cx="1100" cy="900" r="0.5" fill="#ffffff" opacity="0.6"/>
+    <circle cx="1400" cy="950" r="0.6" fill="#b8c5ff" opacity="0.4"/>
+    <circle cx="1650" cy="800" r="0.5" fill="#ffffff" opacity="0.5"/>
+  </g>
+  
+  <!-- السديم البعيد -->
+  <ellipse cx="400" cy="200" rx="120" ry="60" fill="#1a1a4e" opacity="0.3" transform="rotate(45 400 200)">
+    <animateTransform attributeName="transform" type="rotate" values="45 400 200;50 400 200;45 400 200" dur="20s" repeatCount="indefinite"/>
+  </ellipse>
+  <ellipse cx="1300" cy="800" rx="150" ry="80" fill="#2d1a4e" opacity="0.2" transform="rotate(-30 1300 800)">
+    <animateTransform attributeName="transform" type="rotate" values="-30 1300 800;-25 1300 800;-30 1300 800" dur="25s" repeatCount="indefinite"/>
+  </ellipse>
+  
+  <!-- الشبكة العصبية المتحركة -->
+  <g class="neural-network" filter="url(#glow)">
+    <!-- العقد العصبية -->
+    <circle cx="300" cy="300" r="4" fill="#00d4ff" opacity="0.8">
+      <animate attributeName="r" values="4;6;4" dur="2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.8;1;0.8" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="500" cy="280" r="3" fill="#0099cc" opacity="0.7">
+      <animate attributeName="r" values="3;5;3" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="700" cy="320" r="5" fill="#00d4ff" opacity="0.9">
+      <animate attributeName="r" values="5;7;5" dur="1.8s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="900" cy="290" r="3.5" fill="#0099cc" opacity="0.8">
+      <animate attributeName="r" values="3.5;5.5;3.5" dur="2.2s" repeatCount="indefinite"/>
+    </circle>
+    
+    <!-- الاتصالات العصبية -->
+    <line x1="300" y1="300" x2="500" y2="280" stroke="url(#neuralGlow)" stroke-width="1" opacity="0.6">
+      <animate attributeName="opacity" values="0.6;1;0.6" dur="3s" repeatCount="indefinite"/>
+    </line>
+    <line x1="500" y1="280" x2="700" y2="320" stroke="url(#neuralGlow)" stroke-width="1.5" opacity="0.7">
+      <animate attributeName="opacity" values="0.7;1;0.7" dur="2.5s" repeatCount="indefinite"/>
+    </line>
+    <line x1="700" y1="320" x2="900" y2="290" stroke="url(#neuralGlow)" stroke-width="1" opacity="0.8">
+      <animate attributeName="opacity" values="0.8;1;0.8" dur="2s" repeatCount="indefinite"/>
+    </line>
+    
+    <!-- طبقة ثانية من الشبكة -->
+    <circle cx="400" cy="500" r="3.5" fill="#00d4ff" opacity="0.7">
+      <animate attributeName="r" values="3.5;5.5;3.5" dur="2.3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="600" cy="480" r="4" fill="#0099cc" opacity="0.8">
+      <animate attributeName="r" values="4;6;4" dur="2.8s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="800" cy="520" r="3" fill="#00d4ff" opacity="0.6">
+      <animate attributeName="r" values="3;5;3" dur="2.1s" repeatCount="indefinite"/>
+    </circle>
+    
+    <line x1="400" y1="500" x2="600" y2="480" stroke="url(#neuralGlow)" stroke-width="1.2" opacity="0.6">
+      <animate attributeName="opacity" values="0.6;1;0.6" dur="2.8s" repeatCount="indefinite"/>
+    </line>
+    <line x1="600" y1="480" x2="800" y2="520" stroke="url(#neuralGlow)" stroke-width="1" opacity="0.7">
+      <animate attributeName="opacity" values="0.7;1;0.7" dur="2.3s" repeatCount="indefinite"/>
+    </line>
+    
+    <!-- اتصالات متقاطعة -->
+    <line x1="300" y1="300" x2="400" y2="500" stroke="url(#neuralGlow)" stroke-width="0.8" opacity="0.4">
+      <animate attributeName="opacity" values="0.4;0.8;0.4" dur="4s" repeatCount="indefinite"/>
+    </line>
+    <line x1="700" y1="320" x2="600" y2="480" stroke="url(#neuralGlow)" stroke-width="0.8" opacity="0.5">
+      <animate attributeName="opacity" values="0.5;0.9;0.5" dur="3.5s" repeatCount="indefinite"/>
+    </line>
+  </g>
+  
+  <!-- الإشارات التقنية المتحركة -->
+  <g class="tech-signals">
+    <!-- إشارات أفقية -->
+    <rect x="100" y="600" width="200" height="2" fill="url(#techSignal)" opacity="0.8">
+      <animate attributeName="x" values="100;1920;100" dur="8s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;0.8;0" dur="8s" repeatCount="indefinite"/>
+    </rect>
+    <rect x="1400" y="750" width="150" height="1.5" fill="url(#techSignal)" opacity="0.7">
+      <animate attributeName="x" values="1400;-150;1400" dur="10s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0;0.7;0" dur="10s" repeatCount="indefinite"/>
+    </rect>
+    
+    <!-- نبضات دائرية -->
+    <circle cx="1600" cy="200" r="20" fill="none" stroke="#ff6b35" stroke-width="1" opacity="0.8">
+      <animate attributeName="r" values="20;80;20" dur="4s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.8;0;0.8" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="200" cy="800" r="15" fill="none" stroke="#00d4ff" stroke-width="1.5" opacity="0.6">
+      <animate attributeName="r" values="15;60;15" dur="5s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.6;0;0.6" dur="5s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  
+  <!-- شبكة البيانات المتحركة -->
+  <g class="data-grid" opacity="0.3">
+    <defs>
+      <pattern id="grid" width="100" height="100" patternUnits="userSpaceOnUse">
+        <path d="M 100 0 L 0 0 0 100" fill="none" stroke="#00d4ff" stroke-width="0.5" opacity="0.3"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#grid)">
+      <animateTransform attributeName="transform" type="translate" values="0,0;50,50;0,0" dur="20s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+  
+  <!-- جسيمات الضوء المتطايرة -->
+  <g class="particles" filter="url(#pulse)">
+    <circle cx="400" cy="100" r="1" fill="#ffffff" opacity="0.8">
+      <animateMotion dur="15s" repeatCount="indefinite">
+        <path d="M400,100 Q800,300 1200,200 T1600,400"/>
+      </animateMotion>
+      <animate attributeName="opacity" values="0.8;0.3;0.8" dur="3s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="800" cy="900" r="1.5" fill="#00d4ff" opacity="0.6">
+      <animateMotion dur="20s" repeatCount="indefinite">
+        <path d="M800,900 Q400,600 100,700 T500,300"/>
+      </animateMotion>
+      <animate attributeName="opacity" values="0.6;1;0.6" dur="4s" repeatCount="indefinite"/>
+    </circle>
+    <circle cx="1400" cy="500" r="1.2" fill="#ff6b35" opacity="0.7">
+      <animateMotion dur="12s" repeatCount="indefinite">
+        <path d="M1400,500 Q1000,200 600,400 T200,600"/>
+      </animateMotion>
+      <animate attributeName="opacity" values="0.7;0.2;0.7" dur="2.5s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  
+  <!-- هالة ضوئية مركزية -->
+  <ellipse cx="960" cy="540" rx="300" ry="150" fill="url(#spaceGradient)" opacity="0.1">
+    <animate attributeName="rx" values="300;350;300" dur="8s" repeatCount="indefinite"/>
+    <animate attributeName="ry" values="150;200;150" dur="8s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.1;0.3;0.1" dur="8s" repeatCount="indefinite"/>
+  </ellipse>
+</svg>
