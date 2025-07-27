@@ -396,7 +396,7 @@
                             <a href="#${item.id}" class="nav-item block p-2 text-gray-600 hover:text-primary rounded transition-colors ${isActive ? 'active' : ''}" 
                                data-page="${item.id}"
                                ${isActive ? 'aria-current="page"' : ''}>
-                                <i class="${item.icon} mr-2"></i>
+                                <i class="${item.icon} mr-2 ml-2"></i>
                                 ${item.title}
                             </a>
                         `;
