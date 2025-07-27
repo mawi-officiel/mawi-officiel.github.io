@@ -1,4 +1,4 @@
-// ==================================================
+/ ==================================================
         // EMBEDDED DATA - All Content and Configuration
         // ==================================================
         
@@ -47,7 +47,7 @@
                         //{ id: "performance", title: "Performance Optimization", icon: "fas fa-tachometer-alt" },
                         //{ id: "testing", title: "Testing Guide", icon: "fas fa-vial" }
                     ]
-                /},
+                },
                 {
                     id: "help",
                     title: "Help & Support",
@@ -69,7 +69,7 @@
                     features: [
                         {
                             title: "Self-Bootstrapping CLI Engine",
-                            description: "With a single command `cin ` — CIN generates a fully structured, production-ready application architecture in seconds. No scaffolding. No guesswork. Just execution.",
+                            description: "With a single command — `./cin framework:install` — CIN generates a fully structured, production-ready application architecture in seconds. No scaffolding. No guesswork. Just execution.",
                             icon: "fas fa-terminal"
                         },
                         {
@@ -111,8 +111,8 @@
 
                     changelog: [
                         {
-                            version: "0.0.0",
-                            date: "2000-00-00",
+                            version: "1.0.0",
+                            date: "2025-07-26",
                             changes: [
                                 "The developer is still thinking about publishing"
                             ]
@@ -633,6 +633,9 @@
                                 <h4 class="text-lg font-semibold mb-4">Documentation</h4>
                                 <ul class="space-y-2">
                                     <li><a href="#soon" class="text-gray-400 hover:text-white transition-colors text-sm md:text-base focus-visible">Getting Started</a></li>
+                                    <li><a href="#core-api" class="text-gray-400 hover:text-white transition-colors text-sm md:text-base focus-visible">API Reference</a></li>
+                                    <li><a href="#first-app" class="text-gray-400 hover:text-white transition-colors text-sm md:text-base focus-visible">Tutorials</a></li>
+                                    <li><a href="#configuration" class="text-gray-400 hover:text-white transition-colors text-sm md:text-base focus-visible">Configuration</a></li>
                                 </ul>
                             </div>
                             
@@ -640,12 +643,15 @@
                                 <h4 class="text-lg font-semibold mb-4">Community</h4>
                                 <ul class="space-y-2">
                                     <li><a href="${SITE_DATA.config.githubUrl}" target="_blank" rel="noopener noreferrer" class="text-gray-400 hover:text-white transition-colors text-sm md:text-base focus-visible">GitHub</a></li>
+                                    <li><a href="#community" class="text-gray-400 hover:text-white transition-colors text-sm md:text-base focus-visible">Discord</a></li>
+                                    <li><a href="#faq" class="text-gray-400 hover:text-white transition-colors text-sm md:text-base focus-visible">FAQ</a></li>
+                                    <li><a href="#contributing" class="text-gray-400 hover:text-white transition-colors text-sm md:text-base focus-visible">Contributing</a></li>
                                 </ul>
                             </div>
                         </div>
                         
                         <div class="border-t border-gray-700 mt-6 md:mt-8 pt-6 md:pt-8 text-center">
-                            <p class="text-gray-400 text-sm md:text-base">© 2025 CIN Framework. All rights reserved.</p>
+                            <p class="text-gray-400 text-sm md:text-base">© 2025 ${SITE_DATA.config.siteName}. All rights reserved.</p>
                         </div>
                     </div>
                 `;
