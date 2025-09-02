@@ -922,21 +922,29 @@ window.onload = function() {
             };
 
             function updateSurfaceButtonIcon() {
+                const spaceBtn = document.getElementById('spaceBtn');
                 const surfaceBtn = document.getElementById('surfaceBtn');
-                const iconElement = surfaceBtn.querySelector('.material-symbols-rounded');
+                const diveBtn = document.getElementById('diveBtn');
                 
-                if (camera.position.y >= 10) {
-                    iconElement.textContent = 'keyboard_double_arrow_down';
-                    surfaceBtn.title = 'Dive into the depths';
+                // Update button visibility and states based on camera position
+                if (camera.position.y > 50) {
+                    // In space
+                    spaceBtn.style.opacity = '0.5';
+                    surfaceBtn.style.opacity = '1';
+                    diveBtn.style.opacity = '1';
+                    cameraLevel = 3;
+                } else if (camera.position.y >= -5) {
+                    // At surface
+                    spaceBtn.style.opacity = '1';
+                    surfaceBtn.style.opacity = '0.5';
+                    diveBtn.style.opacity = '1';
                     cameraLevel = 2;
-                } else if (camera.position.y > -40) {
-                    iconElement.textContent = 'keyboard_double_arrow_up';
-                    surfaceBtn.title = 'Back to the surface';
-                    cameraLevel = 1;
                 } else {
-                    iconElement.textContent = 'keyboard_double_arrow_up';
-                    surfaceBtn.title = 'Back to the surface';
-                    cameraLevel = 0;
+                    // Underwater
+                    spaceBtn.style.opacity = '1';
+                    surfaceBtn.style.opacity = '1';
+                    diveBtn.style.opacity = '0.5';
+                    cameraLevel = 1;
                 }
             }
 
@@ -1080,25 +1088,35 @@ window.onload = function() {
             
             updateSurfaceButtonIcon();
             
+            // Space Button - Launch to space
+            document.getElementById('spaceBtn').addEventListener('click', function() {
+                const contentWrapper = document.getElementById('content-wrapper');
+                const targetY = 200; // Space altitude
+                contentWrapper.style.display = 'none';
+                animateCamera(targetY);
+            });
+            
+            // Surface Button - Return to surface
             document.getElementById('surfaceBtn').addEventListener('click', function() {
                 const contentWrapper = document.getElementById('content-wrapper');
-                let targetY;
-                
-                if (camera.position.y >= 10) {
-                    // From surface: dive to underwater
-                    targetY = -30;
-                } else if (camera.position.y > -40) {
-                    // From underwater: go back to surface
-                    targetY = 10;
-                    contentWrapper.style.display = 'none';
-                } else {
-                    // From deep underwater: go to shallow underwater
-                    targetY = -30;
-                }
-                
-                const animationDuration = 2000;
+                const targetY = 10; // Surface level
+                contentWrapper.style.display = 'none';
+                animateCamera(targetY);
+            });
+            
+            // Dive Button - Dive underwater
+            document.getElementById('diveBtn').addEventListener('click', function() {
+                const contentWrapper = document.getElementById('content-wrapper');
+                const targetY = -30; // Underwater depth
+                animateCamera(targetY);
+            });
+            
+            // Animation function for camera movement with smooth environment transitions
+            function animateCamera(targetY) {
+                const animationDuration = 3000;
                 const startY = camera.position.y;
                 const startTime = Date.now();
+                const contentWrapper = document.getElementById('content-wrapper');
                 
                 const cameraAnimation = () => {
                     const elapsed = Date.now() - startTime;
@@ -1107,52 +1125,115 @@ window.onload = function() {
                     const easeProgress = 1 - Math.pow(1 - progress, 3);
                     
                     camera.position.y = startY + (targetY - startY) * easeProgress;
+                    const currentY = camera.position.y;
                     
+                    // Smooth environment transitions based on current camera position
+                    updateEnvironmentSmooth(currentY);
                     updateSurfaceButtonIcon();
                     
-                    const belowWater = camera.position.y < -5;
-                    if (belowWater !== isUnderwater) {
-                        isUnderwater = belowWater;
-                        if (isUnderwater) {
-                            scene.background.set(0x000005);
-                            scene.fog.color.set(0x000005);
-                            ambientLight.intensity = 0.5;
-                            water.material.uniforms.distortionScale.value = 8;
-                            sun.visible = false;
-                            moon.visible = false;
-                            sunLight.intensity = 0;
-                            sunGlowLight.intensity = 0;
-                            moonLight.intensity = 0;
-                            if (mainTextMesh) mainTextMesh.visible = false;
-                        } else {
-                            const dayColor = new THREE.Color(0x4682b4);
-                            const nightColor = new THREE.Color(0x000c1c);
-                            const lerpedColor = new THREE.Color();
-                            const dayFactor = Math.max(0, sun.position.y / 400);
-                            lerpedColor.copy(nightColor).lerp(dayColor, dayFactor);
-                            
-                            scene.background.set(lerpedColor);
-                            scene.fog.color.set(lerpedColor);
-                            ambientLight.intensity = 5;
-                            water.material.uniforms.distortionScale.value = 3.7;
-                            sun.visible = true;
-                            moon.visible = true;
-                            sunLight.intensity = dayFactor * 20;
-                            sunGlowLight.intensity = dayFactor * 5000;
-                            moonLight.intensity = (1 - dayFactor) * 0.5;
-                            if (mainTextMesh) mainTextMesh.visible = true;
-                        }
+                    // Show content when underwater
+                    if (currentY < -10 && !contentWrapper.style.display.includes('flex')) {
+                        contentWrapper.style.display = 'flex';
+                    } else if (currentY >= -5 && contentWrapper.style.display.includes('flex')) {
+                        contentWrapper.style.display = 'none';
                     }
                     
                     if (progress < 1) {
                         requestAnimationFrame(cameraAnimation);
-                    } else {
-                        if (camera.position.y < 5) {
-                            contentWrapper.style.display = 'flex';
-                        }
                     }
                 };
                 
                 cameraAnimation();
-            });
+            }
+            
+            // Smooth environment update based on camera position
+            function updateEnvironmentSmooth(cameraY) {
+                const dayColor = new THREE.Color(0x4682b4);
+                const nightColor = new THREE.Color(0x000c1c);
+                const spaceColor = new THREE.Color(0x000000);
+                const underwaterColor = new THREE.Color(0x000005);
+                const lerpedColor = new THREE.Color();
+                
+                // Calculate environment factors based on camera position
+                let spaceProgress = Math.max(0, Math.min(1, (cameraY - 50) / 150)); // 0 at y=50, 1 at y=200
+                let surfaceProgress = Math.max(0, Math.min(1, (cameraY + 5) / 15)); // 0 at y=-5, 1 at y=10
+                let underwaterProgress = Math.max(0, Math.min(1, (-5 - cameraY) / 25)); // 0 at y=-5, 1 at y=-30
+                
+                // Update water visibility and distortion smoothly
+                if (cameraY > 100) {
+                    // In space - gradually hide water
+                    water.material.opacity = Math.max(0, 1 - spaceProgress);
+                    water.material.transparent = true;
+                } else {
+                    water.material.opacity = 1;
+                    water.material.transparent = false;
+                }
+                
+                // Smooth background color transitions
+                if (cameraY > 50) {
+                    // Space transition
+                    lerpedColor.copy(nightColor).lerp(spaceColor, spaceProgress);
+                } else if (cameraY >= -5) {
+                    // Surface area
+                    const dayFactor = Math.max(0, sun.position.y / 400);
+                    const surfaceColor = new THREE.Color().copy(nightColor).lerp(dayColor, dayFactor);
+                    lerpedColor.copy(surfaceColor);
+                } else {
+                    // Underwater transition
+                    const surfaceColor = new THREE.Color().copy(nightColor).lerp(dayColor, Math.max(0, sun.position.y / 400));
+                    lerpedColor.copy(surfaceColor).lerp(underwaterColor, underwaterProgress);
+                }
+                
+                scene.background.set(lerpedColor);
+                scene.fog.color.set(lerpedColor);
+                
+                // Smooth lighting transitions
+                if (cameraY > 50) {
+                    // Space lighting
+                    ambientLight.intensity = 0.2 + spaceProgress * 0.3;
+                    sunLight.intensity = 20 + spaceProgress * 10;
+                    sunGlowLight.intensity = 5000 + spaceProgress * 3000;
+                    moonLight.intensity = 0.5 + spaceProgress * 0.5;
+                } else if (cameraY >= -5) {
+                    // Surface lighting
+                    const dayFactor = Math.max(0, sun.position.y / 400);
+                    ambientLight.intensity = 5;
+                    sunLight.intensity = dayFactor * 20;
+                    sunGlowLight.intensity = dayFactor * 5000;
+                    moonLight.intensity = (1 - dayFactor) * 0.5;
+                } else {
+                    // Underwater lighting
+                    const surfaceAmbient = 5;
+                    const underwaterAmbient = 0.5;
+                    ambientLight.intensity = surfaceAmbient - (surfaceAmbient - underwaterAmbient) * underwaterProgress;
+                    sunLight.intensity = Math.max(0, 20 * (1 - underwaterProgress));
+                    sunGlowLight.intensity = Math.max(0, 5000 * (1 - underwaterProgress));
+                    moonLight.intensity = Math.max(0, 0.5 * (1 - underwaterProgress));
+                }
+                
+                // Water distortion based on depth
+                if (cameraY < -5) {
+                    const distortionValue = 3.7 + (8 - 3.7) * underwaterProgress;
+                    water.material.uniforms.distortionScale.value = distortionValue;
+                } else {
+                    water.material.uniforms.distortionScale.value = 3.7;
+                }
+                
+                // Update underwater state
+                isUnderwater = cameraY < -5;
+                
+                // Keep elements visible but adjust their appearance
+                sun.visible = true;
+                moon.visible = true;
+                if (mainTextMesh) {
+                    mainTextMesh.visible = cameraY > -20; // Hide text only when very deep
+                    if (cameraY < -5) {
+                        mainTextMesh.material.opacity = Math.max(0.1, 1 - underwaterProgress * 0.9);
+                        mainTextMesh.material.transparent = true;
+                    } else {
+                        mainTextMesh.material.opacity = 1;
+                        mainTextMesh.material.transparent = false;
+                    }
+                }
+            }
         };

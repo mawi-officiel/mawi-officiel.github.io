@@ -881,8 +881,8 @@ body{
     position:fixed;
     bottom:var(--mawi-space-8);
     right:var(--mawi-space-8);
-    width:56px;
-    height:56px;
+    width:40px;
+    height:40px;
     border-radius:var(--mawi-radius-full);
     background:var(--mawi-primary);
     color:white;
