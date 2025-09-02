@@ -1,4 +1,4 @@
-# Workflow to deploy CIN Framework site from /web folder to GitHub Pages
+# Workflow to deploy MAWI MAN site from /web folder to GitHub Pages
 name: Deploy MAWI MAN Website
 
 on:
