@@ -1,0 +1,64 @@
+# MAWI MAN - Robots.txt
+# Official Website: https://www.mawiman.com
+# Optimized for search engine crawling
+
+User-agent: *
+
+# Allow crawling of main content
+Allow: /
+Allow: /index.html
+Allow: /assets/css/
+Allow: /assets/js/
+Allow: /assets/img/
+
+# Block sensitive or unnecessary directories
+Disallow: /assets/temp/
+Disallow: /assets/cache/
+Disallow: /assets/logs/
+
+# Block common bot traps and admin areas
+Disallow: /admin/
+Disallow: /private/
+Disallow: /temp/
+Disallow: /cache/
+Disallow: /logs/
+Disallow: /backup/
+Disallow: /config/
+
+# Block file extensions that shouldn't be indexed
+Disallow: *.log
+Disallow: *.tmp
+Disallow: *.bak
+Disallow: *.old
+Disallow: *.swp
+
+# Specific bot configurations
+User-agent: Googlebot
+Allow: /
+Allow: /web/sitemap.xml
+Crawl-delay: 1
+
+User-agent: Bingbot
+Allow: /
+Allow: /sitemap.xml
+Crawl-delay: 1
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 2
+
+# Block aggressive crawlers
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+# Sitemap location
+Sitemap: https://www.mawiman.com/sitemap.xml
+
+# Host preference (canonical domain)
+Host: www.mawiman.com
