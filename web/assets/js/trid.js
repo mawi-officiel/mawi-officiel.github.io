@@ -464,8 +464,8 @@ window.onload = function() {
             let mainTextMesh;
             
             const textureLoader = new THREE.TextureLoader();
-            textureLoader.load('https://www.mawiman.com/assets/img/mawiman/MAWI-LOGO.svg', function(texture) {
-                const geometry = new THREE.PlaneGeometry(101, 40);
+            textureLoader.load('https://www.mawiman.com/assets/img/mawiman/Icon-1.png', function(texture) {
+                const geometry = new THREE.PlaneGeometry(60, 60);
                 const material = new THREE.MeshBasicMaterial({
                     map: texture,
                     transparent: true,
