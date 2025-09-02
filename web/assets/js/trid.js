@@ -38,7 +38,7 @@ window.onload = function() {
             const moonLight = new THREE.PointLight(0xf0f0ff, 0.5, 300);
             scene.add(moonLight);
             const moonTextureLoader = new THREE.TextureLoader();
-            const moonTexture = moonTextureLoader.load('https://www.mawiman.com/assets/img/3D/moon_1024.png');
+            const moonTexture = moonTextureLoader.load('https://www.mawiman.com/assets/img/3D/moon_1024.jpg');
             const moon = new THREE.Mesh(
                 new THREE.SphereGeometry(10, 32, 32),
                 new THREE.MeshStandardMaterial({
