@@ -1,3 +1,10 @@
+/**
+ * MAWI MAN 3D Component
+ * @package MAWI MAN
+ * @author Mawi Man
+ * @license Proprietary - All rights reserved to Ayoub Alarjani
+ */
+
 window.onload = function() {
             const scene = new THREE.Scene();
             const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 4000);
@@ -31,7 +38,7 @@ window.onload = function() {
             const moonLight = new THREE.PointLight(0xf0f0ff, 0.5, 300);
             scene.add(moonLight);
             const moonTextureLoader = new THREE.TextureLoader();
-            const moonTexture = moonTextureLoader.load('./assets/img/3D/moon_1024.png');
+            const moonTexture = moonTextureLoader.load('https://www.mawiman.com/assets/img/3D/moon_1024.png');
             const moon = new THREE.Mesh(
                 new THREE.SphereGeometry(10, 32, 32),
                 new THREE.MeshStandardMaterial({
@@ -49,7 +56,7 @@ window.onload = function() {
                 {
                     textureWidth: 1024,
                     textureHeight: 1024,
-                    waterNormals: new THREE.TextureLoader().load('./assets/img/3D/waternormals.jpg', function(texture) {
+                    waterNormals: new THREE.TextureLoader().load('https://www.mawiman.com/assets/img/3D/waternormals.jpg', function(texture) {
                         texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
                         texture.repeat.set(10, 10);
                     }),
@@ -456,9 +463,8 @@ window.onload = function() {
 
             let mainTextMesh;
             
-            // Create SVG logo as a static image
             const textureLoader = new THREE.TextureLoader();
-            textureLoader.load('./assets/img/mawiman/MAWI-LOGO.svg', function(texture) {
+            textureLoader.load('https://www.mawiman.com/assets/img/mawiman/MAWI-LOGO.svg', function(texture) {
                 const geometry = new THREE.PlaneGeometry(101, 40);
                 const material = new THREE.MeshBasicMaterial({
                     map: texture,
@@ -477,8 +483,6 @@ window.onload = function() {
             const animate = function(time) {
                 requestAnimationFrame(animate);
                 const globalTime = Date.now() * 0.001;
-
-                // SVG logo remains static - no animation needed
                 
                 const orbitRadius = 400;
                 const orbitSpeed = 0.1;
@@ -917,25 +921,21 @@ window.onload = function() {
                 renderer.render(scene, camera);
             };
 
-            // وظيفة لتحديث أيقونة الزر بناءً على موقع الكاميرا
             function updateSurfaceButtonIcon() {
                 const surfaceBtn = document.getElementById('surfaceBtn');
                 const iconElement = surfaceBtn.querySelector('.material-symbols-rounded');
                 
                 if (camera.position.y > 5) {
-                    // فوق سطح الماء - يشير للأسفل للغوص
                     iconElement.textContent = 'keyboard_double_arrow_down';
-                    surfaceBtn.title = 'الغوص في الأعماق';
+                    surfaceBtn.title = 'Dive into the depths';
                     cameraLevel = 2;
                 } else if (camera.position.y > -40) {
-                    // عمق متوسط - يشير للأعلى للصعود
                     iconElement.textContent = 'keyboard_double_arrow_up';
-                    surfaceBtn.title = 'الصعود للسطح';
+                    surfaceBtn.title = 'Climbing to the roof';
                     cameraLevel = 1;
                 } else {
-                    // أعماق البحر - يشير للأعلى للصعود
                     iconElement.textContent = 'keyboard_double_arrow_up';
-                    surfaceBtn.title = 'العودة للعمق المتوسط';
+                    surfaceBtn.title = 'Back to the Middle East';
                     cameraLevel = 0;
                 }
             }
@@ -948,7 +948,6 @@ window.onload = function() {
                 const belowWater = camera.position.y < -5;
                 const divingProgress = Math.max(0, Math.min(1, (-camera.position.y + 5) / 10));
                 
-                // تحديث أيقونة الزر تلقائياً عند التحرك
                 updateSurfaceButtonIcon();
                 
                 if (belowWater !== isUnderwater) {
@@ -1078,28 +1077,20 @@ window.onload = function() {
 
             animate(performance.now());
             
-            // متغير لتتبع حالة الكاميرا (0: قعر البحر، 1: عمق متوسط، 2: سطح الماء)
             let cameraLevel = 1;
             
-            // تحديث أيقونة الزر عند بدء التشغيل
             updateSurfaceButtonIcon();
             
-            // إضافة وظيفة زر التنقل بين المستويات
             document.getElementById('surfaceBtn').addEventListener('click', function() {
                 const contentWrapper = document.getElementById('content-wrapper');
                 let targetY;
                 
-                // تحديد الهدف بناءً على الموقع الحالي للكاميرا (ديناميكي)
                 if (camera.position.y > 5) {
-                    // من السطح إلى العمق المتوسط
                     targetY = -30;
                 } else if (camera.position.y > -40) {
-                    // من العمق المتوسط إلى السطح
                     targetY = 10;
-                    // إخفاء المحتوى عند الصعود للسطح
                     contentWrapper.style.display = 'none';
                 } else {
-                    // من قعر البحر إلى العمق المتوسط
                     targetY = -30;
                 }
                 
@@ -1111,15 +1102,12 @@ window.onload = function() {
                     const elapsed = Date.now() - startTime;
                     const progress = Math.min(elapsed / animationDuration, 1);
                     
-                    // استخدام easing function للحركة السلسة
                     const easeProgress = 1 - Math.pow(1 - progress, 3);
                     
                     camera.position.y = startY + (targetY - startY) * easeProgress;
                     
-                    // تحديث الأيقونة تلقائياً أثناء الحركة
                     updateSurfaceButtonIcon();
                     
-                    // تحديث حالة isUnderwater أثناء الحركة
                     const belowWater = camera.position.y < -5;
                     if (belowWater !== isUnderwater) {
                         isUnderwater = belowWater;
@@ -1157,7 +1145,6 @@ window.onload = function() {
                     if (progress < 1) {
                         requestAnimationFrame(cameraAnimation);
                     } else {
-                        // إظهار المحتوى عند الوصول للأعماق
                         if (camera.position.y < 5) {
                             contentWrapper.style.display = 'flex';
                         }
@@ -1167,24 +1154,3 @@ window.onload = function() {
                 cameraAnimation();
             });
         };
-
-        function handleEmailSubmit(event) {
-            event.preventDefault();
-            const email = event.target.querySelector('input[type="email"]').value;
-            const messageBox = document.getElementById('subscriptionMessage');
-            
-            if (email && email.includes('@')) {
-                messageBox.innerHTML = '<strong>شكراً لك!</strong> تم تسجيل بريدك الإلكتروني بنجاح. سنتواصل معك عند إطلاق mawi Framework.';
-                messageBox.className = 'mawi-alert mawi-alert-success';
-                messageBox.style.display = 'block';
-                event.target.reset();
-            } else {
-                messageBox.innerHTML = '<strong>خطأ:</strong> يرجى إدخال بريد إلكتروني صحيح.';
-                messageBox.className = 'mawi-alert mawi-alert-error';
-                messageBox.style.display = 'block';
-            }
-            
-            setTimeout(() => {
-                messageBox.style.display = 'none';
-            }, 5000);
-        }

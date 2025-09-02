@@ -2202,6 +2202,13 @@ body{
             text-align: center;
             scrollbar-width: thin;
             scrollbar-color: none;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .content-inner > * {
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .content-inner::-webkit-scrollbar {
