@@ -82,9 +82,11 @@ body{
     line-height:1.6;
     color:var(--mawi-text-primary);
     background:var(--mawi-bg-primary);
-
     transition:var(--mawi-transition);
-    overflow-x:hidden
+    overflow:hidden;
+    height:100vh;
+    position:fixed;
+    width:100%
 }
 [dir="rtl"] body{
     font-family:'Segoe UI',Tahoma,Arial,sans-serif
@@ -2200,7 +2202,7 @@ body{
             align-items: center;
             text-align: center;
             scrollbar-width: thin;
-            scrollbar-color: none;
+            scrollbar-color: var(--mawi-secondary) transparent;
             max-width: 800px;
             margin: 0 auto;
         }
@@ -2215,17 +2217,18 @@ body{
          }
          
          .content-inner::-webkit-scrollbar-track {
-             background: none;
+             background: rgba(var(--mawi-secondary-dark-rbg), 0.1);
              border-radius: 10px;
          }
          
          .content-inner::-webkit-scrollbar-thumb {
-             background: none;
+             background: rgba(var(--mawi-secondary-dark-rbg), 0.6);
              border-radius: 10px;
+             transition: background 0.3s ease;
          }
          
          .content-inner::-webkit-scrollbar-thumb:hover {
-             background: none;
+             background: rgba(var(--mawi-secondary-dark-rbg), 0.8);
              border-radius: 10px;
          }
 

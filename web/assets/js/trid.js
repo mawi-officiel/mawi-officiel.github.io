@@ -15,7 +15,7 @@ window.onload = function() {
             document.body.appendChild(renderer.domElement);
 
             camera.position.z = 130;
-            camera.position.y = 5;
+            camera.position.y = 10;
 
             scene.background = new THREE.Color(0x000c1c);
             scene.fog = new THREE.Fog(0x000c1c, 100, 800);
@@ -925,17 +925,17 @@ window.onload = function() {
                 const surfaceBtn = document.getElementById('surfaceBtn');
                 const iconElement = surfaceBtn.querySelector('.material-symbols-rounded');
                 
-                if (camera.position.y > 5) {
+                if (camera.position.y >= 10) {
                     iconElement.textContent = 'keyboard_double_arrow_down';
                     surfaceBtn.title = 'Dive into the depths';
                     cameraLevel = 2;
                 } else if (camera.position.y > -40) {
                     iconElement.textContent = 'keyboard_double_arrow_up';
-                    surfaceBtn.title = 'Climbing to the roof';
+                    surfaceBtn.title = 'Back to the surface';
                     cameraLevel = 1;
                 } else {
                     iconElement.textContent = 'keyboard_double_arrow_up';
-                    surfaceBtn.title = 'Back to the Middle East';
+                    surfaceBtn.title = 'Back to the surface';
                     cameraLevel = 0;
                 }
             }
@@ -1004,22 +1004,9 @@ window.onload = function() {
                 }
             }
 
-            window.addEventListener('wheel', (event) => {
-                handleScroll(event.deltaY);
-            });
-            
-            let startY = 0;
-
-            window.addEventListener('touchstart', (event) => {
-                startY = event.touches[0].clientY;
-            });
-
-            window.addEventListener('touchmove', (event) => {
-                event.preventDefault();
-                const deltaY = startY - event.touches[0].clientY;
-                handleScroll(deltaY);
-                startY = event.touches[0].clientY;
-            }, { passive: false });
+            // Disable global scroll and touch events for diving/surfacing
+            // Only the surface button can control diving/surfacing now
+            // Scroll only works inside content area when underwater
             
             let touchStartY = 0;
             let lastTouchY = 0;
@@ -1027,20 +1014,30 @@ window.onload = function() {
             let isScrolling = false;
             let animationId = null;
             
+            // Add scroll functionality only for content area when underwater
+            contentWrapper.addEventListener('wheel', (event) => {
+                if (isUnderwater) {
+                    // Allow normal scrolling within content area when underwater
+                    event.stopPropagation();
+                }
+            }, { passive: true });
+            
             contentInner.addEventListener('touchstart', (event) => {
-                touchStartY = event.touches[0].clientY;
-                lastTouchY = touchStartY;
-                touchVelocity = 0;
-                isScrolling = true;
-                
-                if (animationId) {
-                    cancelAnimationFrame(animationId);
-                    animationId = null;
+                if (isUnderwater) {
+                    touchStartY = event.touches[0].clientY;
+                    lastTouchY = touchStartY;
+                    touchVelocity = 0;
+                    isScrolling = true;
+                    
+                    if (animationId) {
+                        cancelAnimationFrame(animationId);
+                        animationId = null;
+                    }
                 }
             }, { passive: true });
             
             contentInner.addEventListener('touchmove', (event) => {
-                if (isScrolling) {
+                if (isUnderwater && isScrolling) {
                     const touchCurrentY = event.touches[0].clientY;
                     const deltaY = lastTouchY - touchCurrentY;
                     
@@ -1052,20 +1049,22 @@ window.onload = function() {
             }, { passive: true });
             
             contentInner.addEventListener('touchend', () => {
-                isScrolling = false;
-                
-                if (Math.abs(touchVelocity) > 5) {
-                    const momentum = () => {
-                        touchVelocity *= 0.95;
-                        contentInner.scrollTop += touchVelocity;
-                        
-                        if (Math.abs(touchVelocity) > 1) {
-                            animationId = requestAnimationFrame(momentum);
-                        } else {
-                            animationId = null;
-                        }
-                    };
-                    animationId = requestAnimationFrame(momentum);
+                if (isUnderwater) {
+                    isScrolling = false;
+                    
+                    if (Math.abs(touchVelocity) > 5) {
+                        const momentum = () => {
+                            touchVelocity *= 0.95;
+                            contentInner.scrollTop += touchVelocity;
+                            
+                            if (Math.abs(touchVelocity) > 1) {
+                                animationId = requestAnimationFrame(momentum);
+                            } else {
+                                animationId = null;
+                            }
+                        };
+                        animationId = requestAnimationFrame(momentum);
+                    }
                 }
             }, { passive: true });
             
@@ -1085,12 +1084,15 @@ window.onload = function() {
                 const contentWrapper = document.getElementById('content-wrapper');
                 let targetY;
                 
-                if (camera.position.y > 5) {
+                if (camera.position.y >= 10) {
+                    // From surface: dive to underwater
                     targetY = -30;
                 } else if (camera.position.y > -40) {
+                    // From underwater: go back to surface
                     targetY = 10;
                     contentWrapper.style.display = 'none';
                 } else {
+                    // From deep underwater: go to shallow underwater
                     targetY = -30;
                 }
                 
