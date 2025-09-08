@@ -11,5 +11,12 @@
       <changefreq>weekly</changefreq>
       <priority>1.0</priority>
    </url>
+   <!-- wifi_pass -->
+   <url>
+      <loc>https://www.mawiman.com/wifi_pass</loc>
+      <lastmod>2025-09-08</lastmod>
+      <changefreq>monthly</changefreq>
+      <priority>0.8</priority>
+   </url>
    
 </urlset>
