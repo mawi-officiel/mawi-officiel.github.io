@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+    
+    <!-- Brand Assets -->
+    <url>
+        <loc>https://mawiman.com/</loc>
+        <image:image>
+            <image:loc>https://mawiman.com/assets/img/logo.svg</image:loc>
+            <image:caption>Mawi Man Logo</image:caption>
+            <image:title>Mawi Man - Professional Logo</image:title>
+        </image:image>
+        <image:image>
+            <image:loc>https://mawiman.com/assets/img/mawiman/MAWI-LOGO.png</image:loc>
+            <image:caption>Mawi Man PNG Logo</image:caption>
+            <image:title>Mawi Man Brand Logo PNG Format</image:title>
+        </image:image>
+        <image:image>
+            <image:loc>https://mawiman.com/assets/img/mawiman/MAWI-BANR.png</image:loc>
+            <image:caption>Mawi Man Banner PNG</image:caption>
+            <image:title>Mawi Man Professional Banner PNG</image:title>
+        </image:image>
+    </url>
+
+    <!-- Social Media Icons -->
+    <url>
+        <loc>https://mawiman.com/</loc>
+        <image:image>
+            <image:loc>https://mawiman.com/assets/img/3D/youtube.png</image:loc>
+            <image:caption>YouTube Social Icon</image:caption>
+            <image:title>YouTube 3D Social Media Icon</image:title>
+        </image:image>
+        <image:image>
+            <image:loc>https://mawiman.com/assets/img/3D/github.png</image:loc>
+            <image:caption>GitHub Social Icon</image:caption>
+            <image:title>GitHub 3D Social Media Icon</image:title>
+        </image:image>
+        <image:image>
+            <image:loc>https://mawiman.com/assets/img/3D/whatsapp.png</image:loc>
+            <image:caption>WhatsApp Social Icon</image:caption>
+            <image:title>WhatsApp 3D Social Media Icon</image:title>
+        </image:image>
+        <image:image>
+            <image:loc>https://mawiman.com/assets/img/3D/linkedin.png</image:loc>
+            <image:caption>LinkedIn Social Icon</image:caption>
+            <image:title>LinkedIn 3D Social Media Icon</image:title>
+        </image:image>
+        <image:image>
+            <image:loc>https://mawiman.com/assets/img/3D/telegram.png</image:loc>
+            <image:caption>Telegram Social Icon</image:caption>
+            <image:title>Telegram 3D Social Media Icon</image:title>
+        </image:image>
+        <image:image>
+            <image:loc>https://mawiman.com/assets/img/3D/discord.png</image:loc>
+            <image:caption>Discord Social Icon</image:caption>
+            <image:title>Discord 3D Social Media Icon</image:title>
+        </image:image>
+        <image:image>
+            <image:loc>https://mawiman.com/assets/img/3D/reddit.png</image:loc>
+            <image:caption>Reddit Social Icon</image:caption>
+            <image:title>Reddit 3D Social Media Icon</image:title>
+        </image:image>
+        <image:image>
+            <image:loc>https://mawiman.com/assets/img/3D/instagram.png</image:loc>
+            <image:caption>Instagram Social Icon</image:caption>
+            <image:title>Instagram 3D Social Media Icon</image:title>
+        </image:image>
+        <image:image>
+            <image:loc>https://mawiman.com/assets/img/3D/tik-tok.png</image:loc>
+            <image:caption>TikTok Social Icon</image:caption>
+            <image:title>TikTok 3D Social Media Icon</image:title>
+        </image:image>
+        <image:image>
+            <image:loc>https://mawiman.com/assets/img/3D/facebook.png</image:loc>
+            <image:caption>Facebook Social Icon</image:caption>
+            <image:title>Facebook 3D Social Media Icon</image:title>
+        </image:image>
+        <image:image>
+            <image:loc>https://mawiman.com/assets/img/3D/x.png</image:loc>
+            <image:caption>X (Twitter) Social Icon</image:caption>
+            <image:title>X (Twitter) 3D Social Media Icon</image:title>
+        </image:image>
+    </url>
+
+    <!-- Hello Image -->
+    <url>
+        <loc>https://mawiman.com/</loc>
+        <image:image>
+            <image:loc>https://mawiman.com/assets/img/hello.png</image:loc>
+            <image:caption>Hello Greeting Image</image:caption>
+            <image:title>Welcome Hello Greeting Illustration</image:title>
+        </image:image>
+    </url>
+
+</urlset>
