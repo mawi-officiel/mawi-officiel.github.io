@@ -107,7 +107,7 @@
         <lastmod>2024-12-28</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
-        <xhtml:link rel="alternate" hreflang="en" href="https://mawiman.com/services.html?id=ads-manager&tr=en"/>
-        <xhtml:link rel="alternate" hreflang="ar" href="https://mawiman.com/services.html?id=ads-manager&tr=ar"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://mawiman.com/services.html?id=ads-manager"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://mawiman.com/services.html?id=ads-manager"/>
     </url>
 </urlset>
