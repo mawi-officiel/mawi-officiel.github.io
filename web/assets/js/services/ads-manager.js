@@ -1,5 +1,5 @@
 
-        (function() {
+(function() {
             const operations = [
                 { question: '5 + 3?', answer: 8 },
                 { question: '10 - 4?', answer: 6 },
@@ -84,6 +84,8 @@
             const goal = document.getElementById('goal');
             const goalOther = document.getElementById('goalOther');
             const launchEl = document.getElementById('launch');
+            const adsFormEl = document.getElementById('ads-form');
+            if (!adsFormEl) { return; }
             const isRTL = document.documentElement.getAttribute('dir') === 'rtl' || getComputedStyle(document.documentElement).direction === 'rtl';
             function toLatinDigits(str) { return String(str || ''); }
             function parseCleanNumber(str) {
@@ -158,12 +160,12 @@
                 launchEl.value = `${y}-${m}-${d}T${h}:${mm}`;
             })();
             ['input'].forEach(evt => {
-                budgetEl.addEventListener(evt, () => { enforceConstraints(); updateCalc(); });
-                durationEl.addEventListener(evt, () => { enforceConstraints(); updateCalc(); });
+                if (budgetEl) budgetEl.addEventListener(evt, () => { enforceConstraints(); updateCalc(); });
+                if (durationEl) durationEl.addEventListener(evt, () => { enforceConstraints(); updateCalc(); });
             });
             ['blur'].forEach(evt => {
-                budgetEl.addEventListener(evt, () => { clampOnBlur(); updateCalc(); });
-                durationEl.addEventListener(evt, () => { clampOnBlur(); updateCalc(); });
+                if (budgetEl) budgetEl.addEventListener(evt, () => { clampOnBlur(); updateCalc(); });
+                if (durationEl) durationEl.addEventListener(evt, () => { clampOnBlur(); updateCalc(); });
             });
             function showStatus(message, type) {
                 const statusMessage = document.getElementById('statusMessage');
