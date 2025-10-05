@@ -9,6 +9,7 @@ class CustomHTMX {
     constructor() {
         this.templateFolder = this.getTemplateFolder();
         this.cache = new Map(); // Cache for loaded templates
+        this.pendingScripts = []; // Collect scripts from templates to insert programmatically
         this.init();
     }
 
@@ -212,8 +213,23 @@ class CustomHTMX {
             if (doc.body) {
                 // Mark all body scripts so executeScripts can scope correctly
                 doc.body.querySelectorAll('script').forEach(s => s.setAttribute('data-htmx-template', 'true'));
+                // Collect body scripts and exclude them from the fragment to insert later programmatically
+                this.pendingScripts = [];
                 const frag = document.createDocumentFragment();
                 Array.from(doc.body.childNodes).forEach(node => {
+                    if (node.nodeName && node.nodeName.toLowerCase() === 'script') {
+                        const attrs = {};
+                        Array.from(node.attributes || []).forEach(attr => {
+                            attrs[attr.name] = attr.value;
+                        });
+                        if (node.getAttribute && node.getAttribute('src')) {
+                            this.pendingScripts.push({ type: 'external', src: node.getAttribute('src'), attrs });
+                        } else {
+                            this.pendingScripts.push({ type: 'inline', content: node.textContent || '', attrs });
+                        }
+                        // Skip adding script node to fragment
+                        return;
+                    }
                     frag.appendChild(node.cloneNode(true));
                 });
                 return frag;
@@ -330,12 +346,38 @@ class CustomHTMX {
                     exists = Array.from(document.head.querySelectorAll('script')).find(el => (el.getAttribute('src') || '') === srcAttr);
                 }
                 if (!exists) {
-                    // Append the external script tag unchanged to document.head
-                    document.head.appendChild(script.cloneNode(true));
+                    // Create new external script programmatically (remove async/defer)
+                    const s = document.createElement('script');
+                    s.src = srcAttr;
+                    Array.from(script.attributes).forEach(attr => {
+                        const name = attr.name;
+                        if (name === 'async' || name === 'defer' || name === 'src') return;
+                        s.setAttribute(name, attr.value);
+                    });
+                    s.removeAttribute('async');
+                    s.removeAttribute('defer');
+                    s.setAttribute('data-htmx-head', 'true');
+                    s.setAttribute('data-htmx-template', 'true');
+                    s.setAttribute('data-htmx-executed', 'true');
++                   s.setAttribute('data-cfasync', 'false');
+                    document.head.appendChild(s);
                 }
             } else {
-                // Inline script in head: append as-is
-                document.head.appendChild(script.cloneNode(true));
+                // Inline script in head: create programmatically
+                const s = document.createElement('script');
+                s.textContent = script.textContent || '';
+                Array.from(script.attributes).forEach(attr => {
+                    const name = attr.name;
+                    if (name === 'async' || name === 'defer') return;
+                    s.setAttribute(name, attr.value);
+                });
+                s.removeAttribute('async');
+                s.removeAttribute('defer');
+                s.setAttribute('data-htmx-head', 'true');
+                s.setAttribute('data-htmx-template', 'true');
+                s.setAttribute('data-htmx-executed', 'true');
++               s.setAttribute('data-cfasync', 'false');
+                document.head.appendChild(s);
             }
         });
         // Apply Arabic translation for head if translation manager is active
@@ -489,6 +531,52 @@ class CustomHTMX {
                 element.replaceWith(contentToInsert);
             } else {
                 element.outerHTML = contentToInsert;
+            }
+
+            // Programmatically insert template body scripts to avoid comment sanitization
+            if (Array.isArray(this.pendingScripts) && this.pendingScripts.length) {
+                this.pendingScripts.forEach(desc => {
+                    try {
+                        if (desc.type === 'external' && desc.src) {
+                            // Avoid duplicates
+                            let exists = null;
+                            try {
+                                exists = document.querySelector(`script[src="${CSS.escape(desc.src)}"]`);
+                            } catch (_) {
+                                exists = Array.from(document.querySelectorAll('script[src]')).find(el => (el.getAttribute('src') || '') === desc.src);
+                            }
+                            if (exists) return;
+                            const s = document.createElement('script');
+                            s.src = desc.src;
+                            Object.entries(desc.attrs || {}).forEach(([name, value]) => {
+                                if (name === 'async' || name === 'defer' || name === 'src') return;
+                                s.setAttribute(name, value);
+                            });
+                            s.removeAttribute('async');
+                            s.removeAttribute('defer');
+                            s.setAttribute('data-htmx-template', 'true');
+                            s.setAttribute('data-htmx-executed', 'true');
++                           s.setAttribute('data-cfasync', 'false');
+                            document.body.appendChild(s);
+                        } else if (desc.type === 'inline') {
+                            const s = document.createElement('script');
+                            s.textContent = desc.content || '';
+                            Object.entries(desc.attrs || {}).forEach(([name, value]) => {
+                                if (name === 'async' || name === 'defer') return;
+                                s.setAttribute(name, value);
+                            });
+                            s.removeAttribute('async');
+                            s.removeAttribute('defer');
+                            s.setAttribute('data-htmx-template', 'true');
+                            s.setAttribute('data-htmx-executed', 'true');
++                           s.setAttribute('data-cfasync', 'false');
+                            document.body.appendChild(s);
+                        }
+                    } catch (e) {
+                        console.warn('HTMX: Failed to insert template script:', e);
+                    }
+                });
+                this.pendingScripts = [];
             }
             
             // Execute any scripts in the loaded content
