@@ -336,6 +336,7 @@ class CustomHTMX {
             }
         });
         // Scripts in head: add external and inline scripts if not already present
+        const rocketActive = this.isRocketLoaderActive();
         headEl.querySelectorAll('script').forEach(script => {
             const srcAttr = script.getAttribute('src');
             if (srcAttr) {
@@ -345,7 +346,32 @@ class CustomHTMX {
                 } catch (_) {
                     exists = Array.from(document.head.querySelectorAll('script')).find(el => (el.getAttribute('src') || '') === srcAttr);
                 }
-                if (!exists) {
+                if (exists) return;
+                if (rocketActive) {
+                    // Avoid Rocket Loader by fetching and evaluating script content
+                    fetch(srcAttr)
+                        .then(res => (res.ok ? res.text() : Promise.reject(new Error(`HTTP ${res.status}`))))
+                        .then(code => {
+                            try { new Function(code)(); } catch (e) { console.warn('HTMX: Failed to eval head script:', e); }
+                        })
+                        .catch(err => {
+                            // Fallback to appending a normal script tag
+                            const s = document.createElement('script');
+                            s.src = srcAttr;
+                            Array.from(script.attributes).forEach(attr => {
+                                const name = attr.name;
+                                if (name === 'async' || name === 'defer' || name === 'src') return;
+                                s.setAttribute(name, attr.value);
+                            });
+                            s.removeAttribute('async');
+                            s.removeAttribute('defer');
+                            s.setAttribute('data-htmx-head', 'true');
+                            s.setAttribute('data-htmx-template', 'true');
+                            s.setAttribute('data-htmx-executed', 'true');
+                            s.setAttribute('data-cfasync', 'false');
+                            document.head.appendChild(s);
+                        });
+                } else {
                     // Create new external script programmatically (remove async/defer)
                     const s = document.createElement('script');
                     s.src = srcAttr;
@@ -359,25 +385,30 @@ class CustomHTMX {
                     s.setAttribute('data-htmx-head', 'true');
                     s.setAttribute('data-htmx-template', 'true');
                     s.setAttribute('data-htmx-executed', 'true');
-+                   s.setAttribute('data-cfasync', 'false');
+                    s.setAttribute('data-cfasync', 'false');
                     document.head.appendChild(s);
                 }
             } else {
-                // Inline script in head: create programmatically
-                const s = document.createElement('script');
-                s.textContent = script.textContent || '';
-                Array.from(script.attributes).forEach(attr => {
-                    const name = attr.name;
-                    if (name === 'async' || name === 'defer') return;
-                    s.setAttribute(name, attr.value);
-                });
-                s.removeAttribute('async');
-                s.removeAttribute('defer');
-                s.setAttribute('data-htmx-head', 'true');
-                s.setAttribute('data-htmx-template', 'true');
-                s.setAttribute('data-htmx-executed', 'true');
-+               s.setAttribute('data-cfasync', 'false');
-                document.head.appendChild(s);
+                if (rocketActive) {
+                    // Inline script in head: evaluate directly to bypass Rocket Loader
+                    try { new Function(script.textContent || '')(); } catch (e) { console.warn('HTMX: Failed to eval inline head script:', e); }
+                } else {
+                    // Inline script in head: create programmatically
+                    const s = document.createElement('script');
+                    s.textContent = (script.textContent || '');
+                    Array.from(script.attributes).forEach(attr => {
+                        const name = attr.name;
+                        if (name === 'async' || name === 'defer') return;
+                        s.setAttribute(name, attr.value);
+                    });
+                    s.removeAttribute('async');
+                    s.removeAttribute('defer');
+                    s.setAttribute('data-htmx-head', 'true');
+                    s.setAttribute('data-htmx-template', 'true');
+                    s.setAttribute('data-htmx-executed', 'true');
+                    s.setAttribute('data-cfasync', 'false');
+                    document.head.appendChild(s);
+                }
             }
         });
         // Apply Arabic translation for head if translation manager is active
@@ -535,7 +566,8 @@ class CustomHTMX {
 
             // Programmatically insert template body scripts to avoid comment sanitization
             if (Array.isArray(this.pendingScripts) && this.pendingScripts.length) {
-                this.pendingScripts.forEach(desc => {
+                const rocketActive = this.isRocketLoaderActive();
+                for (const desc of this.pendingScripts) {
                     try {
                         if (desc.type === 'external' && desc.src) {
                             // Avoid duplicates
@@ -545,37 +577,65 @@ class CustomHTMX {
                             } catch (_) {
                                 exists = Array.from(document.querySelectorAll('script[src]')).find(el => (el.getAttribute('src') || '') === desc.src);
                             }
-                            if (exists) return;
-                            const s = document.createElement('script');
-                            s.src = desc.src;
-                            Object.entries(desc.attrs || {}).forEach(([name, value]) => {
-                                if (name === 'async' || name === 'defer' || name === 'src') return;
-                                s.setAttribute(name, value);
-                            });
-                            s.removeAttribute('async');
-                            s.removeAttribute('defer');
-                            s.setAttribute('data-htmx-template', 'true');
-                            s.setAttribute('data-htmx-executed', 'true');
-+                           s.setAttribute('data-cfasync', 'false');
-                            document.body.appendChild(s);
+                            if (exists) continue;
+
+                            if (rocketActive) {
+                                // Fetch and evaluate to bypass Rocket Loader
+                                const res = await fetch(desc.src);
+                                if (res.ok) {
+                                    const code = await res.text();
+                                    try { new Function(code)(); } catch (e) { console.warn('HTMX: Failed to eval body script:', e); }
+                                } else {
+                                    // Fallback to appending a normal script tag
+                                    const s = document.createElement('script');
+                                    s.src = desc.src;
+                                    Object.entries(desc.attrs || {}).forEach(([name, value]) => {
+                                        if (name === 'async' || name === 'defer' || name === 'src') return;
+                                        s.setAttribute(name, value);
+                                    });
+                                    s.removeAttribute('async');
+                                    s.removeAttribute('defer');
+                                    s.setAttribute('data-htmx-template', 'true');
+                                    s.setAttribute('data-htmx-executed', 'true');
+                                    s.setAttribute('data-cfasync', 'false');
+                                    document.body.appendChild(s);
+                                }
+                            } else {
+                                const s = document.createElement('script');
+                                s.src = desc.src;
+                                Object.entries(desc.attrs || {}).forEach(([name, value]) => {
+                                    if (name === 'async' || name === 'defer' || name === 'src') return;
+                                    s.setAttribute(name, value);
+                                });
+                                s.removeAttribute('async');
+                                s.removeAttribute('defer');
+                                s.setAttribute('data-htmx-template', 'true');
+                                s.setAttribute('data-htmx-executed', 'true');
+                                s.setAttribute('data-cfasync', 'false');
+                                document.body.appendChild(s);
+                            }
                         } else if (desc.type === 'inline') {
-                            const s = document.createElement('script');
-                            s.textContent = desc.content || '';
-                            Object.entries(desc.attrs || {}).forEach(([name, value]) => {
-                                if (name === 'async' || name === 'defer') return;
-                                s.setAttribute(name, value);
-                            });
-                            s.removeAttribute('async');
-                            s.removeAttribute('defer');
-                            s.setAttribute('data-htmx-template', 'true');
-                            s.setAttribute('data-htmx-executed', 'true');
-+                           s.setAttribute('data-cfasync', 'false');
-                            document.body.appendChild(s);
+                            if (rocketActive) {
+                                try { new Function(desc.content || '')(); } catch (e) { console.warn('HTMX: Failed to eval inline body script:', e); }
+                            } else {
+                                const s = document.createElement('script');
+                                s.textContent = desc.content || '';
+                                Object.entries(desc.attrs || {}).forEach(([name, value]) => {
+                                    if (name === 'async' || name === 'defer') return;
+                                    s.setAttribute(name, value);
+                                });
+                                s.removeAttribute('async');
+                                s.removeAttribute('defer');
+                                s.setAttribute('data-htmx-template', 'true');
+                                s.setAttribute('data-htmx-executed', 'true');
+                                s.setAttribute('data-cfasync', 'false');
+                                document.body.appendChild(s);
+                            }
                         }
                     } catch (e) {
-                        console.warn('HTMX: Failed to insert template script:', e);
+                        console.warn('HTMX: Failed to insert/eval template script:', e);
                     }
-                });
+                }
                 this.pendingScripts = [];
             }
             
@@ -676,6 +736,17 @@ class CustomHTMX {
             size: this.cache.size,
             templates: Array.from(this.cache.keys())
         };
+    }
+
+    /**
+     * Detect if Cloudflare Rocket Loader is active on the page
+     */
+    isRocketLoaderActive() {
+        try {
+            return !!(window.RLQ || window.CloudflareRocketLoader || document.querySelector('script[src*="rocket-loader"]'));
+        } catch (_) {
+            return !!(window.RLQ || window.CloudflareRocketLoader);
+        }
     }
 }
 
