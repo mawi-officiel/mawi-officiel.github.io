@@ -107,8 +107,8 @@
         <lastmod>2025-10-16</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
-        <xhtml:link rel="alternate" hreflang="en" href="https://mawiman.com/services.html?id=ads-manager&tr=en"/>
-        <xhtml:link rel="alternate" hreflang="ar" href="https://mawiman.com/services.html?id=ads-manager&tr=ar"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://mawiman.com/services.html?id=ads-manager"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://mawiman.com/services.html?id=ads-manager"/>
     </url>
 
     <url>
@@ -116,8 +116,8 @@
         <lastmod>2025-10-16</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
-        <xhtml:link rel="alternate" hreflang="en" href="https://mawiman.com/services.html?id=codemini&tr=en"/>
-        <xhtml:link rel="alternate" hreflang="ar" href="https://mawiman.com/services.html?id=codemini&tr=ar"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://mawiman.com/services.html?id=codemini"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://mawiman.com/services.html?id=codemini"/>
     </url>
 
     <url>
@@ -125,7 +125,7 @@
         <lastmod>2025-10-16</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
-        <xhtml:link rel="alternate" hreflang="en" href="https://mawiman.com/services.html?id=qr-code&tr=en"/>
-        <xhtml:link rel="alternate" hreflang="ar" href="https://mawiman.com/services.html?id=qr-code&tr=ar"/>
+        <xhtml:link rel="alternate" hreflang="en" href="https://mawiman.com/services.html?id=qr-code"/>
+        <xhtml:link rel="alternate" hreflang="ar" href="https://mawiman.com/services.html?id=qr-code"/>
     </url>
 </urlset>

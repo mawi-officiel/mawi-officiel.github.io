@@ -1,0 +1,714 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Eco Pixel Simulator</title><script src="https://cdn.tailwindcss.com"></script><style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+body {
+font-family: 'Inter', sans-serif;
+background-color: #f7f7f7;
+color: #333;
+}
+canvas {
+image-rendering: crisp-edges;
+image-rendering: pixelated;
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.control-panel {
+min-width: 300px;
+max-width: 350px;
+background-color: #ffffff;
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+.stat-card {
+background-color: #f3f4f6;
+}
+/* Custom scrollbar for controls */
+.overflow-y-auto::-webkit-scrollbar {
+width: 6px;
+}
+.overflow-y-auto::-webkit-scrollbar-thumb {
+background-color: #d1d5db;
+border-radius: 3px;
+}
+.overflow-y-auto::-webkit-scrollbar-track {
+background-color: #f9fafb;
+}
+</style></head><body class="p-4 md:p-8 min-h-screen"><div id="app" class="flex flex-col lg:flex-row gap-8 max-w-7xl mx-auto"><div class="control-panel p-6 rounded-xl space-y-6 flex-shrink-0 order-2 lg:order-1"><h1 class="text-3xl font-bold text-gray-800 mb-4">Pixel Life</h1><div id="stats" class="space-y-3"><div class="stat-card p-3 rounded-lg flex justify-between items-center"><span class="text-sm font-medium text-gray-600">Season</span><span id="stat-season" class="text-lg font-semibold text-blue-600">Spring</span></div><div class="stat-card p-3 rounded-lg flex justify-between items-center"><span class="text-sm font-medium text-gray-600">Temp / Humidity</span><span id="stat-env" class="text-lg font-semibold text-gray-800">20°C / 50%</span></div><div class="stat-card p-3 rounded-lg flex justify-between items-center"><span class="text-sm font-medium text-gray-600">Population (🐇 / 🌿)</span><span id="stat-population" class="text-lg font-semibold text-green-600">0 / 0</span></div><p id="error-message" class="text-red-500 text-xs"></p></div><div class="space-y-4 pt-4 border-t"><h2 class="text-xl font-semibold text-gray-700">Environment Controls</h2><div><label for="temp-slider" class="block text-sm font-medium text-gray-700">Temperature (C): <span id="temp-display">20</span>°C</label><input type="range" id="temp-slider" min="-10" max="40" value="20" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"></div><div><label for="humidity-slider" class="block text-sm font-medium text-gray-700">Humidity (%): <span id="humidity-display">50</span>%</label><input type="range" id="humidity-slider" min="0" max="100" value="50" class="w-full h-2 bg-blue-200 rounded-lg appearance-none cursor-pointer"></div><div><label for="season-mode" class="block text-sm font-medium text-gray-700">Season Mode</label><select id="season-mode" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"><option value="auto">Automatic (Cycle)</option><option value="manual">Manual</option></select></div><div id="manual-season-control" class="flex gap-2 hidden"><button data-season="Spring" class="flex-1 px-3 py-1 text-sm rounded-md bg-pink-200 hover:bg-pink-300">Spring</button><button data-season="Summer" class="flex-1 px-3 py-1 text-sm rounded-md bg-yellow-200 hover:bg-yellow-300">Summer</button><button data-season="Autumn" class="flex-1 px-3 py-1 text-sm rounded-md bg-orange-200 hover:bg-orange-300">Autumn</button><button data-season="Winter" class="flex-1 px-3 py-1 text-sm rounded-md bg-blue-200 hover:bg-blue-300">Winter</button></div><div><label for="speed-selector" class="block text-sm font-medium text-gray-700">Simulation Speed</label><select id="speed-selector" class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm rounded-md"><option value="1">1x (Default)</option><option value="2">2x</option><option value="5">5x</option><option value="10">10x</option><option value="20">20x (Fastest)</option></select></div></div><div class="space-y-4 pt-4 border-t"><h2 class="text-xl font-semibold text-gray-700">Actions</h2><div class="flex gap-2"><button id="pause-play" class="flex-1 p-3 bg-indigo-600 text-white rounded-lg font-semibold hover:bg-indigo-700 transition duration-150">⏸️ Pause</button><button id="reset-world" class="flex-1 p-3 bg-red-500 text-white rounded-lg font-semibold hover:bg-red-600 transition duration-150">🔄 Reset</button></div><div class="grid grid-cols-2 gap-2"><button id="add-water" class="p-3 bg-blue-500 text-white rounded-lg font-semibold hover:bg-blue-600 transition duration-150">💧 Add Water</button><button id="add-grass" class="p-3 bg-green-500 text-white rounded-lg font-semibold hover:bg-green-600 transition duration-150">🌿 Add Grass</button><button id="add-animal" class="p-3 bg-yellow-500 text-gray-800 rounded-lg font-semibold hover:bg-yellow-600 transition duration-150">🐇 Add Animal</button><button id="add-rock" class="p-3 bg-gray-500 text-white rounded-lg font-semibold hover:bg-gray-600 transition duration-150">🪨 Add Rock</button></div><p class="text-sm text-gray-500 pt-2">Click on the grid after selecting an action above to place the element.</p></div></div><div class="flex-1 flex flex-col items-center justify-center order-1 lg:order-2"><canvas id="ecosystemCanvas" class="rounded-xl border-4 border-gray-200"></canvas><p class="text-sm text-gray-500 mt-2">Simulation ID: <span id="app-id-display"></span></p></div></div><script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+import { getFirestore, doc, setDoc, onSnapshot, collection, query, where, addDoc, getDocs, setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+// --- GLOBAL CONSTANTS ---
+const GRID_SIZE = 100;
+const CELL_PIXEL_SIZE = 6;
+const CANVAS_SIZE = GRID_SIZE * CELL_PIXEL_SIZE;
+
+const CELL_TYPES = {
+SOIL: 'soil',
+GRASS: 'grass',
+WATER: 'water',
+ROCK: 'rock',
+ANIMAL: 'animal',
+VAPOR: 'vapor',
+};
+
+const CELL_COLORS = {
+[CELL_TYPES.SOIL]: '#7b5e57', // Brown
+[CELL_TYPES.GRASS]: '#55aa55', // Green
+[CELL_TYPES.WATER]: '#3b83bd', // Blue
+[CELL_TYPES.ROCK]: '#5e5e5e', // Dark Gray
+[CELL_TYPES.ANIMAL]: '#f2c94c', // Yellow/Gold
+[CELL_TYPES.VAPOR]: '#d0d0d0', // Light Gray (Cloud)
+};
+
+const SEASON_CONFIG = {
+Spring: { temp: 15, humidity: 70, grassBoost: 1.5, color: 'text-pink-600' },
+Summer: { temp: 30, humidity: 30, grassBoost: 0.5, color: 'text-yellow-600' },
+Autumn: { temp: 10, humidity: 60, grassBoost: 0.8, color: 'text-orange-600' },
+Winter: { temp: 0, humidity: 80, grassBoost: 0.2, color: 'text-blue-600' },
+};
+
+// --- GLOBAL STATE ---
+let world = []; // 2D array of cells
+let nextWorld = [];
+let isPaused = false;
+let animationFrameId = null;
+let lastUpdateTime = 0;
+let timeScale = 1;
+let tickDuration = 100; // ms per simulation tick (base 1x speed)
+let frameRate = 1000 / 60; // Standard 60 FPS for drawing
+
+let globalTemp = 20;
+let globalHumidity = 50;
+let currentSeason = 'Spring';
+let seasonTickCount = 0;
+let seasonMode = 'auto';
+
+let activePlacement = null; // Stores the CELL_TYPE to be placed
+
+// --- FIREBASE SETUP ---
+// Global variables MUST be used for configuration
+const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+let db = null;
+let auth = null;
+let userId = null;
+
+// --- DOM Elements ---
+const canvas = document.getElementById('ecosystemCanvas');
+const ctx = canvas.getContext('2d');
+const pausePlayButton = document.getElementById('pause-play');
+const seasonModeSelect = document.getElementById('season-mode');
+const manualSeasonControl = document.getElementById('manual-season-control');
+
+// Set canvas size
+canvas.width = CANVAS_SIZE;
+canvas.height = CANVAS_SIZE;
+
+document.getElementById('app-id-display').textContent = appId;
+
+// --- CORE CELL STRUCTURE & HELPERS ---
+
+/** Creates a new cell object */
+function createCell(type, energy = 0) {
+return {
+type: type,
+energy: type === CELL_TYPES.ANIMAL ? 100 : energy,
+age: 0,
+// Local, small variation from global environment
+localTemp: globalTemp + (Math.random() * 4 - 2),
+localHumidity: globalHumidity + (Math.random() * 4 - 2),
+};
+}
+
+/** Returns the color for a cell type, handling animal energy fade */
+function getCellColor(cell) {
+if (cell.type === CELL_TYPES.ANIMAL) {
+// Fade color based on energy (from yellow to reddish-brown when low)
+const r = 242;
+const g = Math.max(100, Math.min(205, Math.floor(100 + cell.energy * 1.55)));
+const b = Math.max(76, Math.min(156, Math.floor(76 + cell.energy * 0.8)));
+return `rgb(${r}, ${g}, ${b})`;
+}
+return CELL_COLORS[cell.type] || CELL_COLORS.SOIL;
+}
+
+/** Utility to get a cell's neighbors (including diagonals) */
+function getNeighbors(i, j) {
+const neighbors = [];
+for (let dx = -1; dx <= 1; dx++) {
+for (let dy = -1; dy <= 1; dy++) {
+if (dx === 0 && dy === 0) continue; // Skip self
+
+const ni = i + dx;
+const nj = j + dy;
+
+if (ni >= 0 && ni < GRID_SIZE && nj >= 0 && nj < GRID_SIZE) {
+neighbors.push({ i: ni, j: nj, cell: world[ni][nj] });
+}
+}
+}
+return neighbors;
+}
+
+// --- INITIALIZATION AND WORLD RESET ---
+
+/** Initializes the world grid with a default starting state */
+function initializeWorld(empty = false) {
+world = [];
+let totalGrass = 0;
+let totalWater = 0;
+let totalAnimal = 0;
+
+for (let i = 0; i < GRID_SIZE; i++) {
+world[i] = [];
+for (let j = 0; j < GRID_SIZE; j++) {
+let type = CELL_TYPES.SOIL;
+
+if (empty) {
+type = CELL_TYPES.SOIL;
+} else if (Math.random() < 0.005) {
+type = CELL_TYPES.ROCK;
+} else if (Math.random() < 0.02) {
+// Create water features
+type = CELL_TYPES.WATER;
+totalWater++;
+} else if (Math.random() < 0.05) {
+// Spread initial grass
+type = CELL_TYPES.GRASS;
+totalGrass++;
+}
+
+world[i][j] = createCell(type);
+}
+}
+
+// Add a few initial animals
+for (let k = 0; k < 5; k++) {
+const i = Math.floor(Math.random() * GRID_SIZE);
+const j = Math.floor(Math.random() * GRID_SIZE);
+if (world[i][j].type === CELL_TYPES.SOIL || world[i][j].type === CELL_TYPES.GRASS) {
+world[i][j] = createCell(CELL_TYPES.ANIMAL, 100);
+totalAnimal++;
+}
+}
+updateStats();
+}
+
+// --- SIMULATION LOGIC ---
+
+/** Converts a cell's state based on rules and neighbors */
+function updateCell(i, j) {
+const cell = world[i][j];
+const neighbors = getNeighbors(i, j);
+const nextCell = { ...cell }; // Start with current cell state
+
+// 1. Apply Global Environment Effects (Temp/Humidity)
+const season = SEASON_CONFIG[currentSeason];
+const effectiveTemp = globalTemp + season.temp / 4;
+const effectiveHumidity = globalHumidity + season.humidity / 4;
+
+nextCell.localTemp = (nextCell.localTemp * 0.95 + effectiveTemp * 0.05);
+nextCell.localHumidity = (nextCell.localHumidity * 0.95 + effectiveHumidity * 0.05);
+
+// 2. Cellular Automata Rules
+switch (cell.type) {
+case CELL_TYPES.SOIL:
+{
+// Soil can become grass
+const nearGrass = neighbors.filter(n => n.cell.type === CELL_TYPES.GRASS).length;
+const nearWater = neighbors.filter(n => n.cell.type === CELL_TYPES.WATER).length;
+
+if (nearGrass > 0 && nearWater > 0 && Math.random() < 0.02 * season.grassBoost) {
+if (effectiveTemp >= 10 && effectiveTemp <= 30 && effectiveHumidity >= 30) {
+nextCell.type = CELL_TYPES.GRASS;
+}
+}
+}
+break;
+
+case CELL_TYPES.GRASS:
+{
+nextCell.energy += 1; // Gain energy from sun
+
+// Die conditions
+if (effectiveTemp > 35 || effectiveHumidity < 15) {
+if (Math.random() < 0.2) {
+nextCell.type = CELL_TYPES.SOIL; // Dies back to soil
+}
+} else if (nextCell.energy > 50) {
+// Spread to a random soil neighbor
+const soilNeighbors = neighbors.filter(n => n.cell.type === CELL_TYPES.SOIL);
+if (soilNeighbors.length > 0 && Math.random() < 0.1 * season.grassBoost) {
+const target = soilNeighbors[Math.floor(Math.random() * soilNeighbors.length)];
+if (world[target.i][target.j].type === CELL_TYPES.SOIL) {
+// Update the *next* world grid directly for immediate spread
+nextWorld[target.i][target.j] = createCell(CELL_TYPES.GRASS, 10);
+nextCell.energy = 20; // Use energy to spread
+}
+}
+}
+}
+break;
+
+case CELL_TYPES.WATER:
+{
+// Evaporation
+if (effectiveTemp > 30 && nextCell.localTemp > 30 && effectiveHumidity < 80) {
+if (Math.random() < 0.1) {
+nextCell.type = CELL_TYPES.VAPOR;
+}
+}
+}
+break;
+
+case CELL_TYPES.VAPOR:
+{
+// Condensation/Rain
+if (effectiveTemp < 10 && Math.random() < 0.5) {
+nextCell.type = CELL_TYPES.WATER;
+} else if (Math.random() < 0.05) {
+// Wind effect: move to a random empty neighbor
+const soilNeighbors = neighbors.filter(n => n.cell.type === CELL_TYPES.SOIL);
+if (soilNeighbors.length > 0) {
+const target = soilNeighbors[Math.floor(Math.random() * soilNeighbors.length)];
+if (world[target.i][target.j].type === CELL_TYPES.SOIL) {
+nextWorld[target.i][target.j] = nextCell;
+return createCell(CELL_TYPES.SOIL); // VAPOR moves out of this cell
+}
+}
+}
+}
+break;
+
+case CELL_TYPES.ANIMAL:
+{
+nextCell.energy -= 2; // Hunger (lose energy over time)
+
+// 3. Animal Death
+if (nextCell.energy <= 0) {
+return createCell(CELL_TYPES.SOIL); // Dies, leaves soil/fertilizer
+}
+
+// 4. Animal Movement/Action
+const nearbyGrass = neighbors.filter(n => n.cell.type === CELL_TYPES.GRASS);
+const nearbyWater = neighbors.filter(n => n.cell.type === CELL_TYPES.WATER);
+const nearbyEmpty = neighbors.filter(n => n.cell.type === CELL_TYPES.SOIL);
+
+let target = null;
+let action = 'move';
+
+if (nearbyGrass.length > 0) {
+// Prioritize eating
+target = nearbyGrass[Math.floor(Math.random() * nearbyGrass.length)];
+action = 'eat';
+} else if (nearbyWater.length > 0 && nextCell.energy < 50) {
+// Drink (move to water)
+target = nearbyWater[Math.floor(Math.random() * nearbyWater.length)];
+} else if (nextCell.energy > 150 && nearbyEmpty.length > 0) {
+// Reproduce
+target = nearbyEmpty[Math.floor(Math.random() * nearbyEmpty.length)];
+action = 'reproduce';
+} else if (nearbyEmpty.length > 0) {
+// Random movement
+target = nearbyEmpty[Math.floor(Math.random() * nearbyEmpty.length)];
+}
+
+if (target) {
+// If we move/reproduce, the current cell becomes soil
+let result = createCell(CELL_TYPES.SOIL);
+
+if (action === 'eat') {
+// Eat grass: gain energy, grass tile becomes soil
+nextCell.energy = Math.min(200, nextCell.energy + 40);
+nextWorld[target.i][target.j] = createCell(CELL_TYPES.SOIL);
+}
+
+if (action === 'reproduce') {
+// Reproduce: lose energy, new animal appears in target cell
+nextCell.energy -= 80;
+nextWorld[target.i][target.j] = createCell(CELL_TYPES.ANIMAL, 50); // New animal with medium energy
+}
+
+// Move: If we are not blocked (and not just eating), move the animal to the target
+if (action !== 'eat' || (action === 'eat' && target.cell.type !== CELL_TYPES.GRASS)) {
+nextWorld[target.i][target.j] = nextCell; // Animal moves to new spot
+return result; // Current spot becomes soil
+}
+}
+}
+break;
+
+case CELL_TYPES.ROCK:
+// Rocks don't change
+break;
+}
+
+nextCell.age++;
+return nextCell;
+}
+
+/** Main simulation step */
+function stepSimulation() {
+// Check if user is authenticated before running
+if (!userId) {
+console.warn("Simulation paused. Waiting for authentication.");
+return;
+}
+
+// Global Season Cycle
+if (seasonMode === 'auto') {
+seasonTickCount++;
+if (seasonTickCount >= 400) { // Cycle every N ticks
+seasonTickCount = 0;
+const seasons = Object.keys(SEASON_CONFIG);
+const currentIndex = seasons.indexOf(currentSeason);
+currentSeason = seasons[(currentIndex + 1) % seasons.length];
+}
+}
+
+// Apply environment settings based on season (if auto) or slider (if manual)
+if (seasonMode === 'auto') {
+const config = SEASON_CONFIG[currentSeason];
+globalTemp = (globalTemp * 0.9 + config.temp * 0.1);
+globalHumidity = (globalHumidity * 0.9 + config.humidity * 0.1);
+}
+
+// Prepare the next state grid
+nextWorld = JSON.parse(JSON.stringify(world)); // Deep copy
+
+// Iterate over the entire grid
+for (let i = 0; i < GRID_SIZE; i++) {
+for (let j = 0; j < GRID_SIZE; j++) {
+// Update only if the cell hasn't been set by a neighbor's action (like movement/spreading)
+if (world[i][j].type === nextWorld[i][j].type) {
+nextWorld[i][j] = updateCell(i, j);
+}
+}
+}
+world = nextWorld; // Commit the state change
+
+updateStats();
+}
+
+/** Draws the current world state on the canvas */
+function drawWorld() {
+ctx.clearRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+
+for (let i = 0; i < GRID_SIZE; i++) {
+for (let j = 0; j < GRID_SIZE; j++) {
+const cell = world[i][j];
+const color = getCellColor(cell);
+ctx.fillStyle = color;
+ctx.fillRect(j * CELL_PIXEL_SIZE, i * CELL_PIXEL_SIZE, CELL_PIXEL_SIZE, CELL_PIXEL_SIZE);
+}
+}
+}
+
+/** Main animation loop */
+function animate(currentTime) {
+animationFrameId = requestAnimationFrame(animate);
+
+// Time difference since last frame
+const delta = currentTime - lastUpdateTime;
+
+// Only step the simulation if enough time has passed based on speed setting
+if (!isPaused && delta > (tickDuration / timeScale)) {
+stepSimulation();
+lastUpdateTime = currentTime;
+}
+
+// Always draw to maintain smooth visuals
+drawWorld();
+}
+
+// --- UI & STATS UPDATES ---
+
+/** Updates the top bar statistics */
+function updateStats() {
+let animalCount = 0;
+let grassCount = 0;
+let waterCount = 0;
+
+for (let i = 0; i < GRID_SIZE; i++) {
+for (let j = 0; j < GRID_SIZE; j++) {
+const type = world[i][j].type;
+if (type === CELL_TYPES.ANIMAL) animalCount++;
+else if (type === CELL_TYPES.GRASS) grassCount++;
+else if (type === CELL_TYPES.WATER) waterCount++;
+}
+}
+
+const seasonDisplay = document.getElementById('stat-season');
+seasonDisplay.textContent = currentSeason;
+seasonDisplay.className = `text-lg font-semibold ${SEASON_CONFIG[currentSeason].color}`;
+
+document.getElementById('stat-env').textContent = `${globalTemp.toFixed(1)}°C / ${globalHumidity.toFixed(1)}%`;
+document.getElementById('stat-population').textContent = `${animalCount} / ${grassCount}`;
+
+// Debounce save function to prevent overwhelming firestore
+if (saveTimer) clearTimeout(saveTimer);
+saveTimer = setTimeout(saveSimulation, 1000);
+}
+
+// --- FIREBASE / PERSISTENCE LOGIC ---
+let saveTimer = null;
+
+/** Gets the document reference for the simulation state */
+function getSimDocRef() {
+if (!db || !userId) return null;
+// Private data storage path: /artifacts/{appId}/users/{userId}/simulation/{docId}
+const docId = 'pixel_life_state';
+return doc(db, 'artifacts', appId, 'users', userId, 'simulation', docId);
+}
+
+/** Saves the current world state to Firestore */
+async function saveSimulation() {
+const docRef = getSimDocRef();
+if (!docRef) return;
+
+try {
+// Serialize the world state and global variables
+const state = {
+worldData: JSON.stringify(world),
+globalTemp: globalTemp,
+globalHumidity: globalHumidity,
+currentSeason: currentSeason,
+seasonTickCount: seasonTickCount,
+lastSave: new Date().toISOString(),
+};
+await setDoc(docRef, state);
+// console.log("Simulation state saved.");
+} catch (e) {
+console.error("Error saving document: ", e);
+document.getElementById('error-message').textContent = "Error saving state.";
+}
+}
+
+/** Loads state from Firestore and sets up real-time listener */
+function setupStateListener() {
+const docRef = getSimDocRef();
+if (!docRef) {
+console.error("Cannot get document reference.");
+return;
+}
+
+// Real-time listener for the simulation state
+onSnapshot(docRef, (doc) => {
+if (doc.exists()) {
+const data = doc.data();
+try {
+// Deserialize and apply state
+world = JSON.parse(data.worldData).map(row => row.map(cell => {
+// Ensure all cells have necessary properties for future logic changes
+return {
+type: cell.type,
+energy: cell.energy || 0,
+age: cell.age || 0,
+localTemp: cell.localTemp || globalTemp,
+localHumidity: cell.localHumidity || globalHumidity,
+};
+}));
+globalTemp = data.globalTemp;
+globalHumidity = data.globalHumidity;
+currentSeason = data.currentSeason;
+seasonTickCount = data.seasonTickCount;
+// console.log("Simulation state loaded/updated.");
+document.getElementById('error-message').textContent = "State loaded successfully.";
+// Immediately draw the loaded state
+drawWorld();
+updateStats();
+} catch (e) {
+console.error("Error parsing loaded data:", e);
+initializeWorld(); // Fallback to fresh start
+}
+} else {
+// Document doesn't exist, start a new simulation
+console.log("No existing simulation found. Initializing new world.");
+document.getElementById('error-message').textContent = "No state found. Starting new world.";
+initializeWorld();
+saveSimulation(); // Save the initial state
+}
+}, (error) => {
+console.error("Firestore listener error:", error);
+document.getElementById('error-message').textContent = "Real-time error.";
+});
+}
+
+// --- EVENT LISTENERS & UI LOGIC ---
+
+/** Toggles the simulation pause state */
+function togglePause() {
+isPaused = !isPaused;
+pausePlayButton.textContent = isPaused ? '▶️ Play' : '⏸️ Pause';
+pausePlayButton.classList.toggle('bg-indigo-600');
+pausePlayButton.classList.toggle('hover:bg-indigo-700');
+pausePlayButton.classList.toggle('bg-green-600');
+pausePlayButton.classList.toggle('hover:bg-green-700');
+}
+
+function handleSeasonChange() {
+seasonMode = seasonModeSelect.value;
+manualSeasonControl.classList.toggle('hidden', seasonMode === 'auto');
+}
+
+/** Handles clicking on the canvas to place elements */
+function handleCanvasClick(event) {
+if (!activePlacement) return;
+
+const rect = canvas.getBoundingClientRect();
+const x = event.clientX - rect.left;
+const y = event.clientY - rect.top;
+
+const i = Math.floor(y / CELL_PIXEL_SIZE); // row
+const j = Math.floor(x / CELL_PIXEL_SIZE); // col
+
+if (i >= 0 && i < GRID_SIZE && j >= 0 && j < GRID_SIZE) {
+// Place the selected cell type
+world[i][j] = createCell(activePlacement);
+// For water, place a 3x3 block
+if (activePlacement === CELL_TYPES.WATER) {
+for (let dx = -1; dx <= 1; dx++) {
+for (let dy = -1; dy <= 1; dy++) {
+const ni = i + dx;
+const nj = j + dy;
+if (ni >= 0 && ni < GRID_SIZE && nj >= 0 && nj < GRID_SIZE) {
+world[ni][nj] = createCell(CELL_TYPES.WATER);
+}
+}
+}
+}
+drawWorld();
+updateStats();
+// Deactivate placement mode after single click (or continuous placement could be added)
+document.getElementById(`add-${activePlacement}`).classList.remove('ring-4', 'ring-offset-2', 'ring-indigo-300');
+activePlacement = null;
+}
+}
+
+/** Initializes all event listeners */
+function initializeListeners() {
+pausePlayButton.addEventListener('click', togglePause);
+document.getElementById('reset-world').addEventListener('click', () => {
+initializeWorld();
+saveSimulation();
+});
+
+// Speed control
+document.getElementById('speed-selector').addEventListener('change', (e) => {
+timeScale = parseInt(e.target.value);
+});
+
+// Temperature slider
+const tempSlider = document.getElementById('temp-slider');
+tempSlider.addEventListener('input', (e) => {
+globalTemp = parseInt(e.target.value);
+document.getElementById('temp-display').textContent = globalTemp;
+seasonMode = 'manual';
+seasonModeSelect.value = 'manual';
+handleSeasonChange(); // Update UI
+});
+
+// Humidity slider
+const humiditySlider = document.getElementById('humidity-slider');
+humiditySlider.addEventListener('input', (e) => {
+globalHumidity = parseInt(e.target.value);
+document.getElementById('humidity-display').textContent = globalHumidity;
+seasonMode = 'manual';
+seasonModeSelect.value = 'manual';
+handleSeasonChange(); // Update UI
+});
+
+// Season Mode
+seasonModeSelect.addEventListener('change', handleSeasonChange);
+manualSeasonControl.querySelectorAll('button').forEach(btn => {
+btn.addEventListener('click', (e) => {
+currentSeason = e.target.dataset.season;
+seasonTickCount = 0; // Reset tick counter
+// Force environment to season defaults
+const config = SEASON_CONFIG[currentSeason];
+globalTemp = config.temp;
+globalHumidity = config.humidity;
+document.getElementById('temp-slider').value = globalTemp;
+document.getElementById('humidity-slider').value = globalHumidity;
+document.getElementById('temp-display').textContent = globalTemp;
+document.getElementById('humidity-display').textContent = globalHumidity;
+updateStats();
+});
+});
+
+// Add Element Buttons
+[CELL_TYPES.WATER, CELL_TYPES.GRASS, CELL_TYPES.ANIMAL, CELL_TYPES.ROCK].forEach(type => {
+const btn = document.getElementById(`add-${type}`);
+btn.addEventListener('click', () => {
+// Remove ring from all other buttons
+[CELL_TYPES.WATER, CELL_TYPES.GRASS, CELL_TYPES.ANIMAL, CELL_TYPES.ROCK].forEach(t => {
+if (t !== type) {
+document.getElementById(`add-${t}`).classList.remove('ring-4', 'ring-offset-2', 'ring-indigo-300');
+}
+});
+
+if (activePlacement === type) {
+activePlacement = null;
+btn.classList.remove('ring-4', 'ring-offset-2', 'ring-indigo-300');
+} else {
+activePlacement = type;
+btn.classList.add('ring-4', 'ring-offset-2', 'ring-indigo-300');
+}
+});
+});
+
+// Canvas Click
+canvas.addEventListener('click', handleCanvasClick);
+}
+
+// --- MAIN APPLICATION START ---
+
+/** Initializes Firebase, authenticates, and loads data */
+async function setupFirebaseAndStart() {
+try {
+// 1. Initialize Firebase
+const app = initializeApp(firebaseConfig);
+db = getFirestore(app);
+auth = getAuth(app);
+setLogLevel('Debug'); // Enable logging for debugging
+
+// 2. Authenticate User
+if (initialAuthToken) {
+await signInWithCustomToken(auth, initialAuthToken);
+} else {
+await signInAnonymously(auth);
+}
+
+// 3. Get User ID after sign-in
+onAuthStateChanged(auth, (user) => {
+if (user) {
+userId = user.uid;
+// 4. Setup state listener and load/start simulation
+setupStateListener();
+// 5. Start the animation loop once everything is ready
+if (animationFrameId === null) {
+animate(0);
+}
+} else {
+console.error("Authentication failed. Cannot load or save simulation.");
+document.getElementById('error-message').textContent = "Authentication failed.";
+}
+});
+} catch (error) {
+console.error("Firebase Initialization Error:", error);
+document.getElementById('error-message').textContent = `Setup error: ${error.message}`;
+// Fallback: If Firebase fails, still start the core simulation (without persistence)
+initializeWorld();
+if (animationFrameId === null) {
+animate(0);
+}
+}
+}
+
+// Start everything on window load
+window.onload = function () {
+initializeListeners();
+setupFirebaseAndStart();
+}
+
+</script></body></html>
