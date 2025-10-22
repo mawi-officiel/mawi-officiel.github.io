@@ -3,93 +3,107 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>كاميرا داخل الصفحة — معاينة دائرية وتحميل</title>
+<title>كاميرا الدائرة — التقاط متسلسل ودمج</title>
 <style>
-  :root{font-family: Arial, "Noto Kufi Arabic", sans-serif}
-  body{display:flex;flex-direction:column;align-items:center;gap:12px;padding:16px;background:#0f1724;color:#e6eef8}
-  .camera-wrap{position:relative;width:320px;max-width:94vw;border-radius:12px;overflow:hidden;background:#000}
-  video{width:100%;height:auto;display:block;transform:scaleX(1);} /* flip if front camera later */
-  /* الدائرة التوضيحية (نصف شفافة) */
-  .overlay{
-    pointer-events:none;
-    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  }
-  .circle{
-    width:70%;aspect-ratio:1/1;border-radius:50%;
-    box-shadow:0 0 0 9999px rgba(0,0,0,0.45),0 0 0 4px rgba(255,255,255,0.12) inset;
-    border:2px dashed rgba(255,255,255,0.15);
-  }
-  .controls{display:flex;gap:8px;flex-wrap:wrap;justify-content:center}
-  button{padding:8px 12px;border-radius:8px;border:0;background:#1e3254;color:#fff;cursor:pointer}
-  button:disabled{opacity:0.45;cursor:not-allowed}
-  .previews{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:8px}
-  .previews img{width:140px;height:auto;border-radius:8px;background:#111;padding:6px}
-  p.note{font-size:13px;color:#bcd3ff;opacity:0.9}
+  :root{--accent:#1e3254;--soft:#bcd3ff}
+  body{margin:0;font-family:system-ui, "Segoe UI", Roboto, "Noto Kufi Arabic", sans-serif;
+       background:#08101a;color:#eaf4ff;display:flex;flex-direction:column;align-items:center;gap:12px;padding:14px}
+  h1{font-size:18px;margin:6px 0}
+  .camera-wrap{position:relative;width:360px;max-width:94vw;border-radius:14px;overflow:hidden;background:#000}
+  video{width:100%;height:auto;display:block;transform:scaleX(1)}
+  .overlay{pointer-events:none;position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+  .circle-visual{width:78%;aspect-ratio:1/1;border-radius:50%;
+    box-shadow:0 0 0 9999px rgba(0,0,0,0.45),0 0 0 3px rgba(255,255,255,0.08) inset;
+    border:2px dashed rgba(255,255,255,0.12)}
+  .controls{display:flex;gap:8px;align-items:center;justify-content:center;margin-top:8px;flex-wrap:wrap}
+  button{background:var(--accent);color:#fff;border:0;padding:10px 14px;border-radius:10px;font-weight:600;cursor:pointer}
+  button:disabled{opacity:.5;cursor:not-allowed}
+  .status{font-size:13px;color:var(--soft);opacity:.95}
+  .thumbs{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:10px}
+  .thumbs img{width:86px;height:86px;object-fit:cover;border-radius:8px;background:#111;padding:4px}
+  .result-wrap{margin-top:12px;display:flex;flex-direction:column;align-items:center;gap:8px}
+  .result-wrap canvas{border-radius:12px;background:#000}
+  .small{font-size:12px;color:#bcd3ff;opacity:.9}
+  footer{margin-top:18px;font-size:12px;color:#7fa2d9}
 </style>
 </head>
 <body>
-  <h2>كاميرا الصفحة — معرض دائري + تحميل</h2>
-  <div class="camera-wrap" id="cameraWrap">
+  <h1>كاميرا الدائرة — اضغط زر واحد لالتقاط سلسلة ودمجها</h1>
+
+  <div class="camera-wrap" id="camWrap">
     <video id="video" autoplay playsinline></video>
     <div class="overlay" aria-hidden="true">
-      <div class="circle"></div>
+      <div class="circle-visual"></div>
     </div>
   </div>
 
   <div class="controls">
     <button id="btnStart">تشغيل الكاميرا</button>
-    <button id="btnCaptureRect" disabled>التقاط (مستطيل)</button>
-    <button id="btnCaptureCircle" disabled>التقاط (دائري)</button>
-    <button id="btnSwitch" disabled>تبديل الكاميرا</button>
+    <button id="btnCapture" disabled>التقاط ذكي (زر واحد)</button>
+    <button id="btnStop" disabled>إيقاف الكاميرا</button>
   </div>
 
-  <p class="note">ملاحظة: الدائرة مجرد قناع مرئي. الصورة الحقيقية محفوظة مستطيلة. سيحاول المتصفح استخدام Photo API إن وُجد.</p>
+  <div class="status" id="status">الحالة: جاهز</div>
 
-  <div class="previews" id="previews"></div>
+  <div class="thumbs" id="thumbs" aria-live="polite"></div>
+
+  <div class="result-wrap" id="resultWrap" style="display:none">
+    <div class="small">الصورة المدمجة (دائرية) — احفظها:</div>
+    <canvas id="resultCanvas"></canvas>
+    <a id="downloadLink" download="merged-circle.png"><button>تحميل الصورة</button></a>
+  </div>
+
+  <footer>نظام التقاط: يلتقط سلسلة صور (افتراضي 8) ويجمعها بصريًا.</footer>
 
 <script>
 (async () => {
   const video = document.getElementById('video');
   const btnStart = document.getElementById('btnStart');
-  const btnCaptureRect = document.getElementById('btnCaptureRect');
-  const btnCaptureCircle = document.getElementById('btnCaptureCircle');
-  const btnSwitch = document.getElementById('btnSwitch');
-  const previews = document.getElementById('previews');
+  const btnCapture = document.getElementById('btnCapture');
+  const btnStop = document.getElementById('btnStop');
+  const status = document.getElementById('status');
+  const thumbs = document.getElementById('thumbs');
+  const resultWrap = document.getElementById('resultWrap');
+  const resultCanvas = document.getElementById('resultCanvas');
+  const downloadLink = document.getElementById('downloadLink');
 
   let stream = null;
-  let currentFacing = 'environment'; // or 'user'
   let track = null;
   let imageCapture = null;
+  let deviceHasOrientation = false;
+  let lastAlpha = null;
+
+  // إعدادات التقاط
+  const CAPTURE_COUNT = 8; // عدد الصور المجمعة (يمكن تغييره)
+  const ORIENTATION_THRESHOLD_DEG = 20; // عتبة الزاوية عندما نستخدم DeviceOrientation
 
   async function startCamera() {
-    if (stream) stopCamera();
     try {
-      // نطلب قدرًا كبيرًا من الدقة كاقتراح (لكن تعتمد على الجهاز)
       stream = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: currentFacing, width: { ideal: 1920 }, height: { ideal: 1080 } },
+        video: { facingMode: { ideal: "environment" }, width: { ideal: 1920 }, height: { ideal: 1080 } },
         audio: false
       });
       video.srcObject = stream;
       track = stream.getVideoTracks()[0];
+      // حاول ImageCapture
+      try { imageCapture = new ImageCapture(track); } catch(e){ imageCapture = null; }
 
-      // حاول إنشاء ImageCapture إن وُجد
-      try {
-        imageCapture = new ImageCapture(track);
-      } catch (e) {
-        imageCapture = null;
+      btnCapture.disabled = false;
+      btnStop.disabled = false;
+      btnStart.disabled = true;
+      status.textContent = 'الكاميرا تعمل - اضغط "التقاط ذكي" وحرّك الجهاز ببطء (أو انتظر التقاط تلقائي)';
+      thumbs.innerHTML = '';
+      resultWrap.style.display = 'none';
+
+      // استمع لDeviceOrientation إن وُجد
+      if ('DeviceOrientationEvent' in window) {
+        // على بعض المتصفحات (iOS) يجب طلب permission — لكن هنا نكتفي بالاستماع العام
+        window.addEventListener('deviceorientation', onDeviceOrientation, true);
       }
-
-      btnCaptureRect.disabled = false;
-      btnCaptureCircle.disabled = false;
-      btnSwitch.disabled = true; // نفعل بعد التأكد من وجود أكثر من كاميرا
-      // تحقق من وجود كاميرات أخرى
-      const devices = await navigator.mediaDevices.enumerateDevices();
-      const videoCount = devices.filter(d => d.kind === 'videoinput').length;
-      if (videoCount > 1) btnSwitch.disabled = false;
-
     } catch (err) {
-      alert('خطأ الحصول على الكاميرا: ' + err.message);
       console.error(err);
+      alert('خطأ: لم نتمكن من الوصول للكاميرا: ' + err.message);
+      status.textContent = 'خطأ في الوصول إلى الكاميرا';
     }
   }
 
@@ -97,131 +111,285 @@
     if (stream) {
       stream.getTracks().forEach(t => t.stop());
       stream = null;
+      track = null;
       imageCapture = null;
     }
-    btnCaptureRect.disabled = true;
-    btnCaptureCircle.disabled = true;
+    btnStart.disabled = false;
+    btnCapture.disabled = true;
+    btnStop.disabled = true;
+    status.textContent = 'الكاميرا متوقفة';
+    window.removeEventListener('deviceorientation', onDeviceOrientation, true);
   }
 
-  async function captureRectangular() {
-    // إن كان ImageCapture مدعومًا، حاول takePhoto()
-    if (imageCapture && typeof imageCapture.takePhoto === 'function') {
-      try {
-        const blob = await imageCapture.takePhoto();
-        savePreviewBlob(blob, 'capture-raw.jpg');
-        return;
-      } catch (e) {
-        console.warn('takePhoto failed, falling back to canvas:', e);
-        // نستمر إلى طريقة الرسم على كانفاس
-      }
-    }
-    // fallback: draw current video frame إلى كانفاس بالحجم الفعلي المعروض
-    const canvas = document.createElement('canvas');
-    canvas.width = video.videoWidth || video.clientWidth;
-    canvas.height = video.videoHeight || video.clientHeight;
-    const ctx = canvas.getContext('2d');
-    // إذا كان الفيديو مقلوب في المحور X (front camera) يمكنك عكسه إذا أردت
-    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-    canvas.toBlob(blob => {
-      savePreviewBlob(blob, 'capture-rect.png');
-    }, 'image/png', 0.92);
-  }
-
-  async function captureCircular() {
-    // نرسم إطار الفيديو على كانفاس ثم نستخدم قناع دائري ونصدر PNG بشفاف خارج الدائرة
+  // التقاط إطار من الفيديو (fallback)
+  function captureFrameFromVideo() {
     const vw = video.videoWidth || video.clientWidth;
     const vh = video.videoHeight || video.clientHeight;
-    // نحدد قطر الدائرة ليكون الحد الأدنى من الأبعاد (نحتفظ بنسبة العرض)
-    const diameter = Math.min(vw, vh) * 0.9; // 90% داخل الإطار
-    const canvas = document.createElement('canvas');
-    canvas.width = Math.round(diameter);
-    canvas.height = Math.round(diameter);
-    const ctx = canvas.getContext('2d');
+    const c = document.createElement('canvas');
+    c.width = vw;
+    c.height = vh;
+    const ctx = c.getContext('2d');
+    ctx.drawImage(video, 0, 0, c.width, c.height);
+    return new Promise(resolve => c.toBlob(blob => resolve(blob), 'image/png', 0.92));
+  }
 
-    // نحتاج أولًا أن نحدد من أين نأخذ المربّع داخل الفيديو (مركز المستطيل)
-    // نأخذ مربعًا مركزياً بحجم diameter
-    const sx = Math.round((vw - diameter) / 2);
-    const sy = Math.round((vh - diameter) / 2);
+  // تحويل Blob إلى Image عنصر
+  function blobToImage(blob) {
+    return new Promise((res, rej) => {
+      const img = new Image();
+      img.onload = () => res(img);
+      img.onerror = rej;
+      img.src = URL.createObjectURL(blob);
+    });
+  }
 
-    // ارسم المربّع من الفيديو على الكانفاس الجديد
-    ctx.drawImage(video, sx, sy, diameter, diameter, 0, 0, diameter, diameter);
+  // مستودع للقطات الملتقطة (كل عنصر: {img, angle})
+  const captures = [];
 
-    // الآن نطبّق قناع دائري لجعل الخلفية شفافة خارج الدائرة
-    const out = document.createElement('canvas');
-    out.width = canvas.width;
-    out.height = canvas.height;
-    const oc = out.getContext('2d');
+  async function smartSequenceCapture() {
+    captures.length = 0;
+    thumbs.innerHTML = '';
+    resultWrap.style.display = 'none';
 
-    // ابدأ بقناع شفاف
-    oc.clearRect(0,0,out.width,out.height);
-    oc.save();
-    oc.beginPath();
-    oc.arc(out.width/2, out.height/2, out.width/2, 0, Math.PI*2);
-    oc.closePath();
-    oc.clip();
+    status.textContent = 'ابدأ التقاط السلسلة — حرّك الجهاز ببطء حول محوره (أو انتظر التقاط تلقائي)';
 
-    // ارسم الصورة المقطوعة داخل القناع
-    oc.drawImage(canvas, 0, 0);
+    // نحاول استخدام DeviceOrientation لالتقاط عند تغير الزاوية
+    // إذا لم يتم التفعيل خلال 800ms نلجأ إلى نمط توقيتي آلي
+    deviceHasOrientation = false;
+    lastAlpha = null;
 
-    oc.restore();
+    let orientationAvailable = false;
+    const orientPromise = new Promise(resolve => {
+      const t = setTimeout(() => resolve(false), 700);
+      function once(e) {
+        if (e.alpha == null) return;
+        orientationAvailable = true;
+        clearTimeout(t);
+        resolve(true);
+        window.removeEventListener('deviceorientation', once);
+      }
+      window.addEventListener('deviceorientation', once, { once:true });
+    });
 
-    out.toBlob(blob => {
-      savePreviewBlob(blob, 'capture-circle.png');
+    const have = await orientPromise;
+    if (have) deviceHasOrientation = true;
+
+    if (deviceHasOrientation) {
+      status.textContent = 'تقنية التوجيه موجودة — التقط عند دوران الجهاز. تجنّب اهتزاز مفاجئ.';
+      // نراقب alpha ونلتقط عند فروق >= threshold حتى نكمل CAPTURE_COUNT
+      return captureUsingOrientation();
+    } else {
+      status.textContent = 'التوجيه غير متاح — سنلتقط تلقائيًا ' + CAPTURE_COUNT + ' صور بفواصل زمنية.';
+      return captureUsingTimer();
+    }
+  }
+
+  // التقاط بتوقيت ثابت (fallback للمتصفح/كمبيوتر)
+  async function captureUsingTimer() {
+    for (let i = 0; i < CAPTURE_COUNT; i++) {
+      const angleEst = (i / CAPTURE_COUNT) * 360; // تقدير زاوية افتراضية
+      await captureOne(angleEst);
+      status.textContent = `التقاط ${i+1}/${CAPTURE_COUNT}...`;
+      await sleep(600); // تأخير بين اللقطات
+    }
+    status.textContent = 'انتهى الجمع — جارٍ الدمج...';
+    await mergeCapturesAndShow();
+  }
+
+  // التقاط بواسطة تغير الزاوية (DeviceOrientation.alpha)
+  async function captureUsingOrientation() {
+    return new Promise((resolve) => {
+      let capturedCount = 0;
+      let targetAngles = [];
+      // نحدد أهداف زوايا مشتتة متساوية
+      for (let i=0;i<CAPTURE_COUNT;i++) targetAngles.push( (i*(360/CAPTURE_COUNT)) % 360 );
+
+      // نستخدم alpha (yaw) كمقياس تقريبي
+      function onOri(e) {
+        if (e.alpha == null) return;
+        const alpha = normalizeAngle(e.alpha);
+        if (lastAlpha == null) lastAlpha = alpha;
+
+        // نبحث أي هدف قريب حسب threshold
+        for (let i=0;i<targetAngles.length;i++){
+          const targ = targetAngles[i];
+          const diff = angleDiff(alpha, targ);
+          if (Math.abs(diff) <= ORIENTATION_THRESHOLD_DEG) {
+            // التقط إذا لم نلتقط هذا الهدف بعد (نميزه بإزالته)
+            targetAngles.splice(i,1);
+            captureOne(alpha).then(() => {
+              capturedCount++;
+              status.textContent = `التقاط ${capturedCount}/${CAPTURE_COUNT} عند زاوية ${Math.round(alpha)}°`;
+              // عرض مصغر
+              if (capturedCount >= CAPTURE_COUNT) {
+                window.removeEventListener('deviceorientation', onOri);
+                status.textContent = 'انتهى الجمع — جارٍ الدمج...';
+                mergeCapturesAndShow().then(resolve);
+              }
+            });
+            break;
+          }
+        }
+        lastAlpha = alpha;
+      }
+
+      // إذا توقف التقدم بعد زمن معين نلغي
+      const timeout = setTimeout(async () => {
+        window.removeEventListener('deviceorientation', onOri);
+        status.textContent = 'انتهى الوقت أو لم تتحرك كفاية — استخدام ما تم التقاطه...';
+        await mergeCapturesAndShow();
+        resolve();
+      }, 25000); // 25s timeout
+
+      window.addEventListener('deviceorientation', onOri);
+    });
+  }
+
+  // المساعدة: التقاط صورة واحدة إما باستخدام ImageCapture أو من الفيديو
+  async function captureOne(angleEstimate = 0) {
+    try {
+      let blob = null;
+      if (imageCapture && typeof imageCapture.takePhoto === 'function') {
+        try {
+          blob = await imageCapture.takePhoto();
+        } catch (e) {
+          // فشل takePhoto -> fallback
+          blob = await captureFrameFromVideo();
+        }
+      } else {
+        blob = await captureFrameFromVideo();
+      }
+      const img = await blobToImage(blob);
+      captures.push({img, angle: angleEstimate});
+      addThumb(img);
+    } catch (err) {
+      console.error('captureOne error', err);
+    }
+  }
+
+  // دمج الصور الملتقطة وإظهار الصورة الدائرية الناتجة
+  async function mergeCapturesAndShow() {
+    if (captures.length === 0) {
+      status.textContent = 'لم تُلتقط صور.';
+      return;
+    }
+
+    // نأخذ أقل بُعد من بين أبعاد الفيديو كقطر مركزي موثوق
+    const vw = video.videoWidth || video.clientWidth;
+    const vh = video.videoHeight || video.clientHeight;
+    const baseDiameter = Math.min(vw, vh) * 0.9; // نأخذ 90% مركزي
+
+    // نختار canvas كبير للسماح بتراكب أجزاء إضافية
+    const canvasSize = Math.round(baseDiameter * 2.2); // يسمح بانتشار ودمج
+    resultCanvas.width = canvasSize;
+    resultCanvas.height = canvasSize;
+    const ctx = resultCanvas.getContext('2d');
+
+    // خلفية شفافة
+    ctx.clearRect(0,0,canvasSize,canvasSize);
+
+    const cx = canvasSize/2, cy = canvasSize/2;
+
+    // لكل صورة: نأخذ مربعًا مركزيًا بحجم diameter ثم نرسمه على المركز مع تدوير بسيط وفق الزاوية الملتقطة
+    for (let i=0;i<captures.length;i++){
+      const {img, angle} = captures[i];
+      // نحسب قطر المربّع من الصورة الأصلية (نأخذ min)
+      const srcDiameter = Math.min(img.naturalWidth, img.naturalHeight) * 0.9;
+      // نرسم في كانفاس مؤقت بحجم srcDiameter
+      const tmp = document.createElement('canvas');
+      tmp.width = tmp.height = Math.round(srcDiameter);
+      const tctx = tmp.getContext('2d');
+      // نرسم المربع المركزي من الصورة الأصلية إلى tmp
+      const sx = Math.round((img.naturalWidth - srcDiameter)/2);
+      const sy = Math.round((img.naturalHeight - srcDiameter)/2);
+      tctx.drawImage(img, sx, sy, srcDiameter, srcDiameter, 0,0, tmp.width, tmp.height);
+
+      // نرسم tmp على result مع تدوير وضعيفة شفافية لتنعيم الدمج
+      ctx.save();
+      ctx.translate(cx, cy);
+      // نستخدم الزاوية المقدّرة (بدرجات) لتدوير الصورة بحيث تغطي اتجاهات مختلفة
+      // نحول الدرجة إلى راديان ونعكسها قليلاً لتوزيع جيد
+      const rad = (angle || (i*(360/captures.length))) * Math.PI/180;
+      ctx.rotate(rad);
+      // نستخدم blend mode 'lighter' لإعطاء مزيد من الضوء حيث تتداخل الصور (اختياري)
+      ctx.globalAlpha = 0.95;
+      ctx.drawImage(tmp, -tmp.width/2, -tmp.height/2, tmp.width, tmp.height);
+      ctx.restore();
+    }
+
+    // الآن نطبّق قناع دائري نهائي للخروج بصورة دائرية
+    const final = document.createElement('canvas');
+    final.width = final.height = Math.round(baseDiameter);
+    const fctx = final.getContext('2d');
+    fctx.clearRect(0,0,final.width,final.height);
+    fctx.save();
+    fctx.beginPath();
+    fctx.arc(final.width/2, final.height/2, final.width/2, 0, Math.PI*2);
+    fctx.closePath();
+    fctx.clip();
+    // نرسم جزء مركزي من resultCanvas إلى final (نقصّ المركزي)
+    const sx = Math.round((resultCanvas.width - final.width)/2);
+    const sy = Math.round((resultCanvas.height - final.height)/2);
+    fctx.drawImage(resultCanvas, sx, sy, final.width, final.height, 0,0, final.width, final.height);
+    fctx.restore();
+
+    // عرض النتيجة
+    resultWrap.style.display = 'flex';
+    // نضع resultCanvas لعرض نسخة مكبرة (نرسم final إلى resultCanvas لعرضه)
+    resultCanvas.width = final.width;
+    resultCanvas.height = final.height;
+    const rctx = resultCanvas.getContext('2d');
+    rctx.clearRect(0,0,resultCanvas.width,resultCanvas.height);
+    rctx.drawImage(final, 0,0);
+
+    // إنشاء رابط التحميل
+    resultCanvas.toBlob(blob => {
+      const url = URL.createObjectURL(blob);
+      downloadLink.href = url;
+      // cleanup بعد مدة
+      setTimeout(()=> URL.revokeObjectURL(url), 60_000);
     }, 'image/png');
+
+    status.textContent = 'انتهى الدمج. يمكنك تحميل الصورة.';
   }
 
-  function savePreviewBlob(blob, name) {
-    const url = URL.createObjectURL(blob);
-    const img = document.createElement('img');
-    img.src = url;
-    img.alt = name;
-    // زر تحميل
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = name;
-    link.textContent = 'تحميل';
-    link.style.display = 'block';
-    link.style.textDecoration = 'none';
-    link.style.color = '#bcd3ff';
-    const container = document.createElement('div');
-    container.style.display = 'flex';
-    container.style.flexDirection = 'column';
-    container.style.alignItems = 'center';
-    container.appendChild(img);
-    container.appendChild(link);
-    // إضافة إمكانية عرض تفاصيل (حجم)
-    const info = document.createElement('div');
-    info.style.fontSize = '12px';
-    info.style.opacity = '0.85';
-    info.textContent = `${Math.round(blob.size/1024)} KB`;
-    container.appendChild(info);
-
-    previews.prepend(container);
-
-    // تخلص من URL بعد قليل (أو يمكن تركه)
-    setTimeout(()=> URL.revokeObjectURL(url), 60_000);
+  function addThumb(img) {
+    const el = document.createElement('img');
+    el.src = img.src;
+    thumbs.prepend(el);
   }
 
-  btnStart.addEventListener('click', async () => {
-    await startCamera();
-  });
+  function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
 
-  btnCaptureRect.addEventListener('click', () => {
-    captureRectangular();
-  });
+  // DeviceOrientation helpers
+  function onDeviceOrientation(e) {
+    // علامة أن الجهاز يعطينا قيم
+    if (e.alpha != null) deviceHasOrientation = true;
+  }
+  function normalizeAngle(a){
+    // a in [0,360) typically
+    return ((a % 360) + 360) % 360;
+  }
+  function angleDiff(a, b){
+    const d = normalizeAngle(a) - normalizeAngle(b);
+    if (d > 180) return d-360;
+    if (d < -180) return d+360;
+    return d;
+  }
 
-  btnCaptureCircle.addEventListener('click', () => {
-    captureCircular();
-  });
+  // الأحداث UI
+  btnStart.addEventListener('click', startCamera);
+  btnStop.addEventListener('click', stopCamera);
 
-  btnSwitch.addEventListener('click', async () => {
-    // تبديل بين الكاميرا الخلفية والأمامية
-    currentFacing = (currentFacing === 'environment') ? 'user' : 'environment';
-    await startCamera();
+  btnCapture.addEventListener('click', async () => {
+    btnCapture.disabled = true;
+    status.textContent = 'بدء التقاط السلسلة...';
+    await smartSequenceCapture();
+    btnCapture.disabled = false;
   });
 
   // تنظيف عند المغادرة
-  window.addEventListener('unload', () => stopCamera());
+  window.addEventListener('beforeunload', stopCamera);
 
 })();
 </script>
