@@ -1,0 +1,55 @@
+# -------------------------------
+# Jekyll Configuration File
+# موقعك داخل مجلد web
+# -------------------------------
+
+title: "MawiMan Official Site"
+description: "MawiMan Official Site - Ayoub Alarjani"
+url: "https://www.mawiman.com"
+baseurl: ""
+
+source: web
+destination: ../_site
+
+markdown: kramdown
+highlighter: rouge
+
+theme: minima
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .github
+  - .gitignore
+
+timezone: Africa/Casablanca
+encoding: utf-8
+future: true
+show_drafts: false
+
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+author:
+  name: "Mawi Man"
+  email: "mawi@cin-framework.com"
+  github: "cin-framework"
+  twitter: "mawiman"
+
+feed:
+  path: atom.xml
+  limit: 10
+
+defaults:
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      author: "َAyoub Alarjani"

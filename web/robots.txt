@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://mawi.morocin.com/sitemap.xml
+Host: https://mawi.morocin.com
