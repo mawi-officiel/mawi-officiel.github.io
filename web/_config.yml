@@ -1,8 +1,3 @@
-# -------------------------------
-# Jekyll Configuration File
-# موقعك داخل مجلد web
-# -------------------------------
-
 title: "MawiMan Official Site"
 description: "MawiMan Official Site - Ayoub Alarjani"
 url: "https://www.mawiman.com"
@@ -37,9 +32,9 @@ plugins:
 
 author:
   name: "Mawi Man"
-  email: "mawi@cin-framework.com"
-  github: "cin-framework"
-  twitter: "mawiman"
+  email: "ayoub@mawiman.com"
+  github: "mawi-officiel"
+  twitter: "mawi_officiel"
 
 feed:
   path: atom.xml
