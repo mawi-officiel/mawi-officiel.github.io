@@ -1,0 +1,65 @@
+[
+  {
+    "title": "الصفحة الرئيسية",
+    "description": "ابدأ من هنا لاستكشاف كل أقسام الموقع.",
+    "keywords": ["الرئيسية", "ماوي", "مطور", "موقع"],
+    "image": "/assets/icon/home_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
+    "url": "/"
+  },
+  {
+    "title": "المتجر",
+    "description": "منتجات رقمية وفيزيائية من تطوير ماوي مان.",
+    "keywords": ["المتجر", "شراء", "منتجات", "رقمية"],
+    "image": "/assets/icon/storefront_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
+    "url": "store.html"
+  },
+  {
+    "title": "البرمجيات",
+    "description": "تطبيقات وأدوات مبنية بعناية للمطورين والمستخدمين.",
+    "keywords": ["برمجيات", "تطبيقات", "أدوات", "برمجة"],
+    "image": "/assets/icon/code_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
+    "url": "software.html"
+  },
+  {
+    "title": "الخدمات",
+    "description": "خدمات تطوير وتصميم مخصصة للشركات والأفراد.",
+    "keywords": ["خدمات", "تطوير", "تصميم", "ويب"],
+    "image": "/assets/icon/handyman_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
+    "url": "services.html"
+  },
+  {
+    "title": "المشاريع",
+    "description": "مجموعة من المشاريع والأعمال المميزة.",
+    "keywords": ["مشاريع", "أعمال", "نماذج"],
+    "image": "/assets/icon/folder_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
+    "url": "projects.html"
+  },
+  {
+    "title": "الدورات",
+    "description": "تعلم البرمجة والتصميم عبر دورات عملية.",
+    "keywords": ["دورات", "تعلم", "برمجة", "تصميم"],
+    "image": "/assets/icon/school_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
+    "url": "courses.html"
+  },
+  {
+    "title": "المدونة",
+    "description": "مقالات ونصائح تقنية مباشرة من الخبرة العملية.",
+    "keywords": ["مدونة", "تقنية", "مقالات"],
+    "image": "/assets/icon/article_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
+    "url": "blog.html"
+  },
+  {
+    "title": "عني",
+    "description": "نبذة عن ماوي مان ومسيرته وخبراته.",
+    "keywords": ["عني", "سيرة", "خبرة"],
+    "image": "/assets/img/mawiman/Icon-1.jpg",
+    "url": "about_me.html"
+  },
+  {
+    "title": "اتصل بي",
+    "description": "تواصل لطلب خدمة أو تعاون.",
+    "keywords": ["اتصال", "تواصل", "رسالة"],
+    "image": "/assets/icon/call_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
+    "url": "contact_me.html"
+  }
+]
