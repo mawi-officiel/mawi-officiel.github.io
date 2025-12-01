@@ -1,64 +1,91 @@
 [
   {
     "title": "الصفحة الرئيسية",
+    "title_en": "Home",
     "description": "ابدأ من هنا لاستكشاف كل أقسام الموقع.",
+    "description_en": "Start here to explore all site sections.",
     "keywords": ["الرئيسية", "ماوي", "مطور", "موقع"],
+    "keywords_en": ["home", "mawi", "developer", "site"],
     "image": "/assets/icon/home_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
     "url": "/"
   },
   {
     "title": "المتجر",
+    "title_en": "Store",
     "description": "منتجات رقمية وفيزيائية من تطوير ماوي مان.",
+    "description_en": "Digital and physical products by Mawi Man.",
     "keywords": ["المتجر", "شراء", "منتجات", "رقمية"],
+    "keywords_en": ["store", "shop", "products", "digital"],
     "image": "/assets/icon/storefront_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
     "url": "store.html"
   },
   {
     "title": "البرمجيات",
+    "title_en": "Software",
     "description": "تطبيقات وأدوات مبنية بعناية للمطورين والمستخدمين.",
+    "description_en": "Carefully crafted apps and tools for developers and users.",
     "keywords": ["برمجيات", "تطبيقات", "أدوات", "برمجة"],
+    "keywords_en": ["software", "apps", "tools", "programming"],
     "image": "/assets/icon/code_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
     "url": "software.html"
   },
   {
     "title": "الخدمات",
+    "title_en": "Services",
     "description": "خدمات تطوير وتصميم مخصصة للشركات والأفراد.",
+    "description_en": "Custom development and design services for companies and individuals.",
     "keywords": ["خدمات", "تطوير", "تصميم", "ويب"],
+    "keywords_en": ["services", "development", "design", "web"],
     "image": "/assets/icon/handyman_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
     "url": "services.html"
   },
   {
     "title": "المشاريع",
+    "title_en": "Projects",
     "description": "مجموعة من المشاريع والأعمال المميزة.",
+    "description_en": "A selection of featured works and projects.",
     "keywords": ["مشاريع", "أعمال", "نماذج"],
+    "keywords_en": ["projects", "portfolio", "samples"],
     "image": "/assets/icon/folder_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
     "url": "projects.html"
   },
   {
     "title": "الدورات",
+    "title_en": "Courses",
     "description": "تعلم البرمجة والتصميم عبر دورات عملية.",
+    "description_en": "Learn programming and design through practical courses.",
     "keywords": ["دورات", "تعلم", "برمجة", "تصميم"],
+    "keywords_en": ["courses", "learning", "programming", "design"],
     "image": "/assets/icon/school_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
     "url": "courses.html"
   },
   {
     "title": "المدونة",
+    "title_en": "Blog",
     "description": "مقالات ونصائح تقنية مباشرة من الخبرة العملية.",
+    "description_en": "Tech articles and tips from hands-on experience.",
     "keywords": ["مدونة", "تقنية", "مقالات"],
+    "keywords_en": ["blog", "tech", "articles"],
     "image": "/assets/icon/article_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
     "url": "blog.html"
   },
   {
     "title": "عني",
+    "title_en": "About Me",
     "description": "نبذة عن ماوي مان ومسيرته وخبراته.",
+    "description_en": "About Mawi Man, background and experience.",
     "keywords": ["عني", "سيرة", "خبرة"],
+    "keywords_en": ["about", "bio", "experience"],
     "image": "/assets/img/mawiman/Icon-1.jpg",
     "url": "about_me.html"
   },
   {
     "title": "اتصل بي",
+    "title_en": "Contact Me",
     "description": "تواصل لطلب خدمة أو تعاون.",
+    "description_en": "Get in touch for services or collaboration.",
     "keywords": ["اتصال", "تواصل", "رسالة"],
+    "keywords_en": ["contact", "message", "reach out"],
     "image": "/assets/icon/call_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
     "url": "contact_me.html"
   }
