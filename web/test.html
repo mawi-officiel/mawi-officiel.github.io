@@ -1,0 +1,778 @@
+<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>تعليم الكتابة السريعة</title><style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+
+body {
+font-family: 'Roboto', sans-serif;
+background: #f5f5f5;
+min-height: 100vh;
+display: flex;
+justify-content: center;
+align-items: center;
+padding: 20px;
+}
+
+.container {
+background: white;
+border-radius: 8px;
+box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+max-width: 900px;
+width: 100%;
+padding: 40px;
+}
+
+h1 {
+color: #202124;
+text-align: center;
+margin-bottom: 30px;
+font-size: 2.2em;
+font-weight: 300;
+letter-spacing: 0.5px;
+}
+
+.main-menu {
+display: none;
+}
+
+.main-menu.active {
+display: block;
+}
+
+.menu-intro {
+text-align: center;
+margin-bottom: 40px;
+color: #5f6368;
+font-size: 1.1em;
+line-height: 1.6;
+}
+
+.menu-buttons {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+gap: 20px;
+margin-bottom: 30px;
+}
+
+.btn {
+padding: 16px 24px;
+border: none;
+border-radius: 4px;
+font-size: 1em;
+cursor: pointer;
+font-weight: 500;
+transition: all 0.2s ease;
+text-align: center;
+text-transform: none;
+}
+
+.btn-primary {
+background: #1f71b8;
+color: white;
+}
+
+.btn-primary:hover {
+background: #1765a0;
+box-shadow: 0 4px 12px rgba(31, 113, 184, 0.3);
+}
+
+.btn-secondary {
+background: #f8f9fa;
+color: #1f71b8;
+border: 1px solid #dadce0;
+}
+
+.btn-secondary:hover {
+background: #f1f3f4;
+border-color: #d2d3d4;
+}
+
+.btn-back {
+background: #f8f9fa;
+color: #1f71b8;
+border: 1px solid #dadce0;
+padding: 10px 16px;
+font-size: 0.95em;
+margin-bottom: 20px;
+}
+
+.btn-back:hover {
+background: #f1f3f4;
+}
+
+.settings {
+display: none;
+}
+
+.settings.active {
+display: block;
+}
+
+.settings-title {
+color: #202124;
+font-size: 1.8em;
+margin-bottom: 30px;
+font-weight: 400;
+}
+
+.setting-group {
+margin-bottom: 25px;
+}
+
+.setting-group label {
+display: block;
+margin-bottom: 8px;
+font-weight: 500;
+color: #202124;
+font-size: 0.95em;
+}
+
+select {
+width: 100%;
+padding: 12px 16px;
+border-radius: 4px;
+border: 1px solid #dadce0;
+font-size: 1em;
+cursor: pointer;
+background: white;
+color: #202124;
+transition: border 0.2s ease;
+}
+
+select:hover {
+border-color: #bdc1c6;
+}
+
+select:focus {
+outline: none;
+border-color: #1f71b8;
+box-shadow: 0 0 0 3px rgba(31, 113, 184, 0.1);
+}
+
+.lesson-view {
+display: none;
+}
+
+.lesson-view.active {
+display: block;
+}
+
+.lesson-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 30px;
+padding-bottom: 20px;
+border-bottom: 1px solid #e8eaed;
+}
+
+.lesson-stage {
+font-size: 0.95em;
+color: #5f6368;
+}
+
+.lesson-stage-number {
+font-size: 1.4em;
+color: #1f71b8;
+font-weight: 500;
+}
+
+.timer-display {
+display: flex;
+align-items: center;
+gap: 30px;
+}
+
+.timer-item {
+text-align: center;
+}
+
+.timer-label {
+font-size: 0.85em;
+color: #5f6368;
+margin-bottom: 4px;
+}
+
+.timer-value {
+font-size: 1.5em;
+color: #1f71b8;
+font-weight: 500;
+font-family: 'Roboto Mono', monospace;
+}
+
+.text-container {
+background: #f8f9fa;
+padding: 30px;
+border-radius: 8px;
+margin-bottom: 30px;
+line-height: 2;
+}
+
+.text-to-type {
+font-size: 1.8em;
+color: #5f6368;
+font-family: 'Roboto Mono', monospace;
+word-wrap: break-word;
+letter-spacing: 0.02em;
+}
+
+.char {
+position: relative;
+display: inline;
+margin: 0 2px;
+transition: color 0.1s ease;
+}
+
+.char.correct {
+color: #34a853;
+}
+
+.char.incorrect {
+color: #ea4335;
+background: #fce8e6;
+padding: 2px 4px;
+border-radius: 2px;
+}
+
+.char.pending {
+color: #5f6368;
+}
+
+.char.next {
+color: #1f71b8;
+font-weight: 600;
+}
+
+.input-area {
+margin-bottom: 25px;
+}
+
+.input-area input {
+width: 100%;
+padding: 16px 20px;
+font-size: 1.1em;
+border: 2px solid #dadce0;
+border-radius: 4px;
+font-family: 'Roboto Mono', monospace;
+transition: border 0.2s ease;
+background: white;
+color: #202124;
+}
+
+.input-area input:focus {
+outline: none;
+border-color: #1f71b8;
+box-shadow: 0 0 0 3px rgba(31, 113, 184, 0.1);
+}
+
+.stats-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+gap: 15px;
+margin-bottom: 25px;
+}
+
+.stat-box {
+background: #f8f9fa;
+padding: 20px;
+border-radius: 8px;
+text-align: center;
+border: 1px solid #e8eaed;
+}
+
+.stat-label {
+font-size: 0.85em;
+color: #5f6368;
+margin-bottom: 8px;
+text-transform: uppercase;
+letter-spacing: 0.5px;
+}
+
+.stat-value {
+font-size: 1.8em;
+color: #1f71b8;
+font-weight: 500;
+font-family: 'Roboto Mono', monospace;
+}
+
+.stat-value.warning {
+color: #ea4335;
+}
+
+.button-group {
+display: flex;
+gap: 12px;
+justify-content: center;
+flex-wrap: wrap;
+}
+
+.btn-small {
+padding: 12px 24px;
+font-size: 0.95em;
+}
+
+.message {
+padding: 16px 20px;
+border-radius: 4px;
+margin-bottom: 20px;
+text-align: center;
+font-weight: 500;
+}
+
+.message.success {
+background: #e6f4ea;
+color: #137333;
+border-left: 4px solid #34a853;
+}
+
+.message.error {
+background: #fce8e6;
+color: #c5221f;
+border-left: 4px solid #ea4335;
+}
+
+.message.warning {
+background: #fef7e0;
+color: #ea8600;
+border-left: 4px solid #fbbc04;
+}
+
+.results {
+display: none;
+}
+
+.results.active {
+display: block;
+}
+
+.results-header {
+text-align: center;
+margin-bottom: 40px;
+}
+
+.results-title {
+font-size: 2em;
+color: #34a853;
+margin-bottom: 10px;
+font-weight: 400;
+}
+
+.results-subtitle {
+color: #5f6368;
+font-size: 1.1em;
+}
+
+.result-item {
+padding: 20px;
+background: #f8f9fa;
+margin-bottom: 15px;
+border-radius: 8px;
+border-left: 4px solid #1f71b8;
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.result-label {
+font-weight: 500;
+color: #202124;
+font-size: 1em;
+}
+
+.result-value {
+color: #1f71b8;
+font-size: 1.4em;
+font-weight: 500;
+font-family: 'Roboto Mono', monospace;
+}
+
+.result-value.excellent {
+color: #34a853;
+}
+
+.result-value.good {
+color: #1f71b8;
+}
+
+.result-value.needs-work {
+color: #ea4335;
+}
+
+.progress-visual {
+width: 100%;
+height: 4px;
+background: #e8eaed;
+border-radius: 2px;
+margin: 20px 0;
+overflow: hidden;
+}
+
+.progress-fill {
+height: 100%;
+background: linear-gradient(90deg, #4285f4, #34a853);
+width: 0%;
+transition: width 0.3s ease;
+}
+
+.center-text {
+text-align: center;
+color: #5f6368;
+margin: 20px 0;
+}
+</style></head><body><div class="container"><h1>⌨️ تعليم الكتابة السريعة</h1><div id="mainMenu" class="main-menu active"><div class="menu-intro"><p>تعلم الكتابة السريعة والدقيقة مع أصابعك العشر</p></div><div class="menu-buttons"><button class="btn btn-primary" onclick="selectMode('typing')">🔤 الكتابة</button><button class="btn btn-primary" onclick="selectMode('programming')">💻 البرمجة</button><button class="btn btn-primary" onclick="selectMode('calculation')">🧮 الحساب</button></div></div><div id="typingSettings" class="settings"><button class="btn btn-back" onclick="backToMenu()">← رجوع</button><h2 class="settings-title">إعدادات الكتابة</h2><div class="setting-group"><label>لغة الكتابة</label><select id="typingLanguage" onchange="updateTypingContent()"><option value="ar">🇸🇦 العربية</option><option value="en">🇬🇧 الإنجليزية</option><option value="fr">🇫🇷 الفرنسية</option></select></div><div class="setting-group"><label>لغة لوحة المفاتيح</label><select id="typingKeyboard"><option value="ar">🇸🇦 العربية</option><option value="en">🇬🇧 الإنجليزية</option><option value="fr">🇫🇷 الفرنسية</option></select></div><button class="btn btn-primary btn-small" onclick="startLesson('typing')">ابدأ الدرس</button></div><div id="programmingSettings" class="settings"><button class="btn btn-back" onclick="backToMenu()">← رجوع</button><h2 class="settings-title">إعدادات البرمجة</h2><div class="setting-group"><label>لغة البرمجة</label><select id="programmingLanguage" onchange="updateProgrammingContent()"><option value="js">JavaScript</option><option value="html">HTML</option><option value="css">CSS</option><option value="php">PHP</option></select></div><div class="setting-group"><label>لغة لوحة المفاتيح</label><select id="programmingKeyboard"><option value="ar">🇸🇦 العربية</option><option value="en">🇬🇧 الإنجليزية</option><option value="fr">🇫🇷 الفرنسية</option></select></div><button class="btn btn-primary btn-small" onclick="startLesson('programming')">ابدأ الدرس</button></div><div id="calculationSettings" class="settings"><button class="btn btn-back" onclick="backToMenu()">← رجوع</button><h2 class="settings-title">إعدادات الحساب</h2><div class="setting-group"><label>لغة الحساب</label><select id="calculationLanguage"><option value="ar">🇸🇦 العربية</option><option value="fr">🇫🇷 الفرنسية</option></select></div><div class="setting-group"><label>لغة لوحة المفاتيح</label><select id="calculationKeyboard"><option value="ar">🇸🇦 العربية</option><option value="en">🇬🇧 الإنجليزية</option><option value="fr">🇫🇷 الفرنسية</option></select></div><button class="btn btn-primary btn-small" onclick="startLesson('calculation')">ابدأ الدرس</button></div><div id="lessonView" class="lesson-view"><button class="btn btn-back" onclick="backToMenu()">← رجوع</button><div class="lesson-header"><div class="lesson-stage">
+المرحلة <span class="lesson-stage-number" id="currentStage">1</span>/10
+</div><div class="timer-display"><div class="timer-item"><div class="timer-label">الوقت</div><div class="timer-value" id="timerDisplay">0:00</div></div><div class="timer-item"><div class="timer-label">السرعة</div><div class="timer-value" id="speedDisplay">0</div></div></div></div><div class="progress-visual"><div class="progress-fill" id="progressFill"></div></div><div id="message"></div><div class="text-container"><div class="text-to-type" id="textDisplay"></div></div><div class="input-area"><input type="text" id="userInput" placeholder="اكتب هنا..." onkeydown="handleKeyDown(event)" onkeyup="checkInput()"></div><div class="stats-grid"><div class="stat-box"><div class="stat-label">الدقة</div><div class="stat-value" id="accuracy">100%</div></div><div class="stat-box"><div class="stat-label">الأخطاء</div><div class="stat-value warning" id="errors">0</div></div><div class="stat-box"><div class="stat-label">الحروف</div><div class="stat-value" id="charCount">0</div></div></div><div class="button-group"><button class="btn btn-secondary btn-small" onclick="skipLesson()">تخطي</button><button class="btn btn-primary btn-small" id="nextBtn" onclick="nextLesson()" style="display: none;">التالي</button></div></div><div id="resultsView" class="results"><div class="results-header"><div class="results-title">🎉 مبروك!</div><div class="results-subtitle">لقد أكملت جميع المراحل بنجاح</div></div><div class="progress-visual"><div class="progress-fill" style="width: 100%;"></div></div><div class="result-item"><div class="result-label">إجمالي الدقة</div><div class="result-value" id="finalAccuracy">95%</div></div><div class="result-item"><div class="result-label">إجمالي الأخطاء</div><div class="result-value warning" id="finalErrors">5</div></div><div class="result-item"><div class="result-label">متوسط السرعة</div><div class="result-value" id="finalSpeed">45 ك/د</div></div><div class="result-item"><div class="result-label">الوقت الإجمالي</div><div class="result-value" id="finalTime">2:30</div></div><div class="button-group" style="margin-top: 30px;"><button class="btn btn-primary btn-small" onclick="backToMenu()">العودة للقائمة الرئيسية</button></div></div></div><script>
+let currentMode = '';
+let currentStage = 0;
+let totalErrors = 0;
+let startTime = 0;
+let timerInterval = null;
+let accuracyScores = [];
+let speedScores = [];
+let errorCounts = [];
+let isCompleted = false;
+
+const lessons = {
+typing: {
+ar: [
+"أحب تعلم الكتابة السريعة",
+"الممارسة تجعل الكاتب ماهراً",
+"سرعة الكتابة مهمة جداً",
+"لوحة المفاتيح هي أداتنا",
+"التركيز يزيد من الدقة",
+"الإصابع الذكية تكتب بسرعة",
+"مرحبا بك في دورة الكتابة",
+"هدفنا تحقيق السرعة والدقة",
+"كل يوم نتعلم شيئاً جديداً",
+"النجاح يأتي من المثابرة"
+],
+en: [
+"Touch typing is a valuable skill",
+"Practice makes perfect every time",
+"Speed and accuracy matter most",
+"Your fingers will learn positions",
+"Keep your eyes on the screen",
+"Never look at your hands now",
+"Home row keys start your journey",
+"Consistency brings great results fast",
+"Build your muscle memory today",
+"Celebrate each milestone you reach"
+],
+fr: [
+"La dactylographie tactile est essentielle",
+"La pratique rend parfait chaque jour",
+"Vitesse et précision comptent beaucoup",
+"Vos doigts apprendront les positions",
+"Gardez les yeux sur l'écran",
+"Ne regardez jamais vos mains",
+"Les touches de base commencent tout",
+"La constance apporte des résultats",
+"Construisez votre mémoire musculaire",
+"Célébrez chaque étape franchie"
+]
+},
+programming: {
+js: [
+"const x = 10; console.log(x);",
+"function hello() { return 'Hi'; }",
+"let arr = [1, 2, 3, 4, 5];",
+"if (x > 5) { console.log('Big'); }",
+"for (let i = 0; i < 10; i++) {}",
+"const obj = { name: 'John' };",
+"arr.map(n => n * 2).filter(n => n > 5);",
+"fetch('/api/data').then(r => r.json());",
+"class User { constructor(name) {} }",
+"export default MyComponent;"
+],
+html: [
+"<!DOCTYPE html>",
+"<html lang='en'></html>",
+"<meta charset='UTF-8'>",
+"<link rel='stylesheet' href='style.css?v=2025.12.02.13.03.56'>",
+"<h1>Welcome to HTML</h1>",
+"<p>This is a paragraph tag</p>",
+"<img src='image.jpg' alt='Picture'>",
+"<form method='POST' action='/submit'>",
+"<input type='text' placeholder='Enter'>",
+"<button type='submit'>Send</button>"
+],
+css: [
+"body { margin: 0; padding: 0; }",
+".container { max-width: 1200px; }",
+"#header { background: blue; }",
+"h1 { color: red; font-size: 24px; }",
+".btn { padding: 10px 20px; border: none; }",
+"@media (max-width: 768px) {}",
+"display: grid; grid-template-columns: 1fr 1fr;",
+"position: absolute; top: 10px; left: 20px;",
+"transform: rotate(45deg) scale(1.5);",
+"transition: all 0.3s ease-in-out;"
+],
+php: [
+"<?php echo 'Hello World'; ?>",
+"$name = 'John'; echo $name;",
+"$arr = array(1, 2, 3, 4, 5);",
+"if ($x > 10) { echo 'Big'; }",
+"for ($i = 0; $i < 10; $i++) {}",
+"foreach ($arr as $value) {}",
+"function greet($name) { return 'Hi'; }",
+"$conn = new PDO('mysql:host=localhost');",
+"class User { public $name = ''; }",
+"header('Location: /page.php');"
+]
+},
+calculation: {
+ar: [
+"5 + 3 = 8",
+"20 - 7 = 13",
+"6 × 4 = 24",
+"15 ÷ 3 = 5",
+"12 + 8 - 5 = 15",
+"9 × 3 + 2 = 29",
+"100 ÷ 5 + 10 = 30",
+"25 - 10 + 5 = 20",
+"7 × 8 = 56",
+"144 ÷ 12 = 12"
+],
+fr: [
+"5 + 3 = 8",
+"20 - 7 = 13",
+"6 × 4 = 24",
+"15 ÷ 3 = 5",
+"12 + 8 - 5 = 15",
+"9 × 3 + 2 = 29",
+"100 ÷ 5 + 10 = 30",
+"25 - 10 + 5 = 20",
+"7 × 8 = 56",
+"144 ÷ 12 = 12"
+]
+}
+};
+
+function selectMode(mode) {
+currentMode = mode;
+document.getElementById('mainMenu').classList.remove('active');
+document.getElementById(mode + 'Settings').classList.add('active');
+}
+
+function backToMenu() {
+if (timerInterval) clearInterval(timerInterval);
+document.getElementById('mainMenu').classList.add('active');
+document.getElementById('typingSettings').classList.remove('active');
+document.getElementById('programmingSettings').classList.remove('active');
+document.getElementById('calculationSettings').classList.remove('active');
+document.getElementById('lessonView').classList.remove('active');
+document.getElementById('resultsView').classList.remove('active');
+currentStage = 0;
+totalErrors = 0;
+accuracyScores = [];
+speedScores = [];
+errorCounts = [];
+}
+
+function updateTypingContent() {}
+function updateProgrammingContent() {}
+
+function startLesson(mode) {
+currentMode = mode;
+currentStage = 0;
+totalErrors = 0;
+accuracyScores = [];
+speedScores = [];
+errorCounts = [];
+isCompleted = false;
+
+document.getElementById(mode + 'Settings').classList.remove('active');
+document.getElementById('lessonView').classList.add('active');
+loadLesson();
+}
+
+function loadLesson() {
+if (currentStage >= 10) {
+showResults();
+return;
+}
+
+let textContent = '';
+if (currentMode === 'typing') {
+const lang = document.getElementById('typingLanguage').value;
+textContent = lessons.typing[lang][currentStage];
+} else if (currentMode === 'programming') {
+const lang = document.getElementById('programmingLanguage').value;
+textContent = lessons.programming[lang][currentStage];
+} else if (currentMode === 'calculation') {
+const lang = document.getElementById('calculationLanguage').value;
+textContent = lessons.calculation[lang][currentStage];
+}
+
+renderTextDisplay(textContent);
+document.getElementById('userInput').value = '';
+document.getElementById('userInput').focus();
+document.getElementById('currentStage').textContent = currentStage + 1;
+document.getElementById('message').innerHTML = '';
+document.getElementById('nextBtn').style.display = 'none';
+document.getElementById('accuracy').textContent = '100%';
+document.getElementById('errors').textContent = '0';
+document.getElementById('charCount').textContent = '0';
+
+isCompleted = false;
+totalErrors = 0;
+startTime = Date.now();
+
+if (timerInterval) clearInterval(timerInterval);
+timerInterval = setInterval(updateTimer, 100);
+}
+
+function renderTextDisplay(text) {
+const display = document.getElementById('textDisplay');
+display.innerHTML = '';
+for (let char of text) {
+const span = document.createElement('span');
+span.className = 'char pending';
+span.textContent = char;
+display.appendChild(span);
+}
+const firstChar = display.querySelector('.char');
+if (firstChar) firstChar.className = 'char next';
+}
+
+function handleKeyDown(event) {
+if (isCompleted) {
+event.preventDefault();
+return;
+}
+
+if (event.key === 'Backspace') {
+event.preventDefault();
+}
+}
+
+function checkInput() {
+if (isCompleted) return;
+
+const input = document.getElementById('userInput').value;
+const textDisplay = document.getElementById('textDisplay');
+const chars = textDisplay.querySelectorAll('.char');
+const targetText = Array.from(chars).map(c => c.textContent).join('');
+
+let correct = 0;
+let errors = 0;
+
+for (let i = 0; i < chars.length; i++) {
+const char = chars[i];
+if (i < input.length) {
+if (input[i] === char.textContent) {
+char.className = 'char correct';
+correct++;
+} else {
+char.className = 'char incorrect';
+errors++;
+}
+} else {
+char.className = 'char pending';
+}
+}
+
+if (input.length < chars.length) {
+chars[input.length].className = 'char next';
+}
+
+totalErrors = errors;
+const accuracy = chars.length > 0 ? Math.round((correct / chars.length) * 100) : 100;
+
+document.getElementById('accuracy').textContent = accuracy + '%';
+document.getElementById('errors').textContent = errors;
+document.getElementById('charCount').textContent = input.length;
+
+if (input === targetText && input.length > 0) {
+isCompleted = true;
+if (timerInterval) clearInterval(timerInterval);
+
+errorCounts.push(errors);
+accuracyScores.push(accuracy);
+
+const timeElapsed = (Date.now() - startTime) / 1000;
+const speed = Math.round((input.length / 5) / (timeElapsed / 60));
+speedScores.push(speed);
+document.getElementById('speedDisplay').textContent = speed;
+
+showMessage('✓ رائع! اضغط التالي للمرحلة التالية', 'success');
+document.getElementById('nextBtn').style.display = 'inline-block';
+}
+}
+
+function updateTimer() {
+if (!startTime) return;
+const elapsed = Math.floor((Date.now() - startTime) / 1000);
+const minutes = Math.floor(elapsed / 60);
+const seconds = elapsed % 60;
+document.getElementById('timerDisplay').textContent =
+minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+
+if (isCompleted) return;
+
+const input = document.getElementById('userInput').value;
+if (input.length > 0) {
+const speed = Math.round((input.length / 5) / (elapsed / 60)) || 0;
+document.getElementById('speedDisplay').textContent = speed;
+}
+}
+
+function showMessage(text, type) {
+const msgEl = document.getElementById('message');
+msgEl.innerHTML = `<div class="message ${type}">${text}</div>`;
+}
+
+function nextLesson() {
+if (!isCompleted) {
+showMessage('❌ الرجاء كتابة النص بشكل صحيح أولاً', 'error');
+return;
+}
+
+currentStage++;
+loadLesson();
+}
+
+function skipLesson() {
+if (timerInterval) clearInterval(timerInterval);
+errorCounts.push(999);
+accuracyScores.push(0);
+speedScores.push(0);
+currentStage++;
+loadLesson();
+}
+
+function showResults() {
+if (timerInterval) clearInterval(timerInterval);
+
+document.getElementById('lessonView').classList.remove('active');
+document.getElementById('resultsView').classList.add('active');
+
+const avgAccuracy = Math.round(
+accuracyScores.filter(a => a !== 0).reduce((a, b) => a + b, 0) /
+accuracyScores.filter(a => a !== 0).length
+) || 0;
+
+const totalErrorsCount = errorCounts.reduce((a, b) => a + b, 0);
+const avgSpeed = Math.round(
+speedScores.filter(s => s > 0).reduce((a, b) => a + b, 0) /
+speedScores.filter(s => s > 0).length
+) || 0;
+
+const totalTime = Math.floor((Date.now() - startTime) / 1000);
+const minutes = Math.floor(totalTime / 60);
+const seconds = totalTime % 60;
+
+let accuracyClass = 'good';
+if (avgAccuracy >= 95) accuracyClass = 'excellent';
+if (avgAccuracy < 80) accuracyClass = 'needs-work';
+
+document.getElementById('finalAccuracy').textContent = avgAccuracy + '%';
+document.getElementById('finalAccuracy').className = 'result-value ' + accuracyClass;
+document.getElementById('finalErrors').textContent = totalErrorsCount;
+document.getElementById('finalSpeed').textContent = avgSpeed + ' ك/د';
+document.getElementById('finalTime').textContent = minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+}
+</script></body></html>
