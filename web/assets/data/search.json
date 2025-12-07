@@ -88,5 +88,87 @@
     "keywords_en": ["contact", "message", "reach out"],
     "image": "/assets/icon/call_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
     "url": "contact_me.html"
+  },
+
+
+  {
+    "title": "طريقة الحصول على جميع ألعاب Steam مجانًا بأمان",
+    "title_en": "Get All Steam Games Free Safely",
+    "description": "طريقة آمنة وغير مقرصنة لإضافة أي لعبة إلى مكتبة Steam باستخدام ملفات Lua موثوقة، مع شرح خطوات واضحة لمستخدمي ويندوز.",
+    "description_en": "Safe, non-piracy method to add any Steam game using trusted Lua files. Step-by-step guide for Windows.",
+    "keywords": ["ستيم", "ألعاب مجانية", "ملفات لوا"],
+    "keywords_en": ["steam", "steamdb", "fares.top"],
+    "image": "/assets/icon/article_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
+    "url": "blog.html?id=all-games-steam-free"
+  },
+  {
+    "title": "Snack Online — منصّتك الذكية لإدارة سناك باحتراف",
+    "title_en": "Snack Online — Your Smart Platform for Professional Snack Management",
+    "description": "نظام ذكي متكامل لإدارة، تطوير وتسويق السناك بسهولة وفعالية.",
+    "description_en": "Smart, all-in-one system to manage, develop, and market your snack business with ease.",
+    "keywords": ["سيو", "تسويق", "الطلبات"],
+    "keywords_en": ["Orders", "Menu", "Marketing"],
+    "image": "/assets/icon/folder_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
+    "url": "projects.html?id=snack-online"
+  },
+  {
+    "title": "التسويق الرقمي — مدير الإعلانات",
+    "title_en": "Digital Marketing — Ads Manager",
+    "description": "إدارة شاملة لحملات إعلانات فيسبوك وإنستغرام: استراتيجية، تصميم المحتوى، استهداف دقيق، تحسين مستمر، وتقارير عائد الاستثمار. تسعير ذكي يعتمد على ميزانيتك. اطلب حملتك الآن.",
+    "description_en": "End‑to‑end management of Facebook & Instagram ad campaigns: strategy, creatives, precise targeting, continuous optimization, and ROI reporting. Smart budget‑based pricing. Request your campaign now.",
+    "keywords": ["التسويق", "الإعلانات", "مدير"],
+    "keywords_en": ["marketing", "ads", "manager"],
+    "image": "/assets/icon/handyman_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
+    "url": "services.html?id=ads-manager"
+  },
+  {
+    "title": "خريطة أدوات الذكاء الاصطناعي",
+    "title_en": "AI Map",
+    "description": "خريطة منسقة لأدوات الذكاء الاصطناعي مع بحث فوري وفلاتر وتفاصيل.",
+    "description_en": "Curated AI tools map with instant search, filters and details.",
+    "keywords": ["شات جبي تي", "أدوات", "ذكاء إصطيناعي"],
+    "keywords_en": ["ai", "tools", "chatgpt"],
+    "image": "/assets/icon/code_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
+    "url": "software.html?id=ai-map"
+  },
+  {
+    "title": "كود إنك — تشفير الأكواد (جافاسكربت/بايثون/بي إتش بي) وحمايتها",
+    "title_en": "Code Enc — Encrypt JavaScript, Python, and PHP code",
+    "description": "أداة لتشفير الأكواد إلى مُحمِّلات جاهزة لجافاسكربت، بايثون وPHP باستخدام XOR وتحويل سداسي عشري بتيفيناغ، مع دعم رفع الملفات ونسخ النتيجة وتكامل الإشعارات.",
+    "description_en": "Encrypt source code into safe loaders for JavaScript, Python, and PHP using XOR and Tifinagh hex mapping. Includes file upload, copy result, and notifications integration.",
+    "keywords": ["البرمجة", "تشفير", "كود"],
+    "keywords_en": ["code", "encryption", "programming"],
+    "image": "/assets/icon/code_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
+    "url": "software.html?id=code-enc"
+  },
+  {
+    "title": "كود ميني — تصغير وضغط الأكواد والملفات",
+    "title_en": "Code Mini — Minify & Compress Code and Files",
+    "description": "قم بتصغير وضغط الأكواد والملفات بسرعة. الصق الكود أو ارفع ملفاً، اختر اللغة، واحصل على ناتج محسّن فوراً. يدعم HTML وCSS وJavaScript وJSON وXML وغيرها.",
+    "description_en": "Minify and compress code and files quickly. Paste code or upload a file, choose a language, and get optimized output instantly. Supports HTML, CSS, JavaScript, JSON, XML, and more.",
+    "keywords": ["ضغط", "تصغير", "كود"],
+    "keywords_en": ["code", "mini", "minifier"],
+    "image": "/assets/icon/code_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
+    "url": "software.html?id=code-mini"
+  },
+  {
+    "title": "Mawi Cache Killer – أداة لتعطيل التخزين المؤقت في الصفحات",
+    "title_en": "Mawi Cache Killer – Disable Page Caching Instantly",
+    "description": "Mawi Cache Killer يقوم تلقائيًا بفرض تحميل المحتوى الجديد من الخادم عبر تعطيل الكاش بضغطة واحدة.",
+    "description_en": "Mawi Cache Killer automatically forces pages to load fresh content by disabling browser caching with one click.",
+    "keywords": ["cache killer", "disable cache", "no-cache"],
+    "keywords_en": ["cache killer", "disable cache", "no-cache"],
+    "image": "/assets/icon/code_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
+    "url": "software.html?id=mawi-cache-killer"
+  },
+  {
+    "title": "رمز QR — إنشاء وتخصيص وتحميل | ماوي مان",
+    "title_en": "QR Code — Generate, Customize & Download",
+    "description": "أنشئ رمز QR لأي رابط، خصص الألوان والتصميم، وحمّل الصورة بصيغة PNG.",
+    "description_en": "Generate QR codes from any link. Customize colors and design, and download as PNG.",
+    "keywords": ["سكان", "تخصيص QR", "رمز QR"],
+    "keywords_en": ["QR", "generate", "QR Code"],
+    "image": "/assets/icon/code_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
+    "url": "software.html?id=qr-code"
   }
 ]
