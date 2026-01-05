@@ -170,5 +170,15 @@
     "keywords_en": ["QR", "generate", "QR Code"],
     "image": "/assets/icon/code_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
     "url": "software.html?id=qr-code"
+  },
+  {
+    "title": "محول الصور — تحويل صيغ الصور بسهولة",
+    "title_en": "Convert Image — Convert Image Formats Easily",
+    "description": "حول الصور إلى أي صيغة (PNG, JPG, WEBP, BMP) بسرعة وسهولة مباشرة في متصفحك.",
+    "description_en": "Convert images to any format (PNG, JPG, WEBP, BMP) quickly and easily directly in your browser.",
+    "keywords": ["تحويل الصور", "محول صيغ", "png إلى jpg"],
+    "keywords_en": ["convert image", "image converter", "format converter"],
+    "image": "/assets/icon/image_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
+    "url": "software.html?id=convert-imag"
   }
 ]
