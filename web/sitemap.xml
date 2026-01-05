@@ -184,4 +184,60 @@
         <xhtml:link rel="alternate" hreflang="en" href="https://www.mawiman.com/software.html?id=qr-code&amp;tr=en" />
         <xhtml:link rel="alternate" hreflang="ar" href="https://www.mawiman.com/software.html?id=qr-code&amp;tr=ar" />
     </url>
+    <url>
+        <loc>https://www.mawiman.com/blog.html?id=improve-typing-speed</loc>
+        <lastmod>2026-01-05</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.mawiman.com/blog.html?id=improve-typing-speed&amp;tr=en" />
+        <xhtml:link rel="alternate" hreflang="ar" href="https://www.mawiman.com/blog.html?id=improve-typing-speed&amp;tr=ar" />
+    </url>
+    <url>
+        <loc>https://www.mawiman.com/blog.html?id=what-is-windows</loc>
+        <lastmod>2026-01-05</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.mawiman.com/blog.html?id=what-is-windows&amp;tr=en" />
+        <xhtml:link rel="alternate" hreflang="ar" href="https://www.mawiman.com/blog.html?id=what-is-windows&amp;tr=ar" />
+    </url>
+    <url>
+        <loc>https://www.mawiman.com/blog.html?id=what-is-linux</loc>
+        <lastmod>2026-01-05</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.mawiman.com/blog.html?id=what-is-linux&amp;tr=en" />
+        <xhtml:link rel="alternate" hreflang="ar" href="https://www.mawiman.com/blog.html?id=what-is-linux&amp;tr=ar" />
+    </url>
+    <url>
+        <loc>https://www.mawiman.com/blog.html?id=what-is-macos</loc>
+        <lastmod>2026-01-05</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.mawiman.com/blog.html?id=what-is-macos&amp;tr=en" />
+        <xhtml:link rel="alternate" hreflang="ar" href="https://www.mawiman.com/blog.html?id=what-is-macos&amp;tr=ar" />
+    </url>
+    <url>
+        <loc>https://www.mawiman.com/blog.html?id=what-is-chromeos</loc>
+        <lastmod>2026-01-05</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.mawiman.com/blog.html?id=what-is-chromeos&amp;tr=en" />
+        <xhtml:link rel="alternate" hreflang="ar" href="https://www.mawiman.com/blog.html?id=what-is-chromeos&amp;tr=ar" />
+    </url>
+    <url>
+        <loc>https://www.mawiman.com/blog.html?id=what-is-os</loc>
+        <lastmod>2026-01-05</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.mawiman.com/blog.html?id=what-is-os&amp;tr=en" />
+        <xhtml:link rel="alternate" hreflang="ar" href="https://www.mawiman.com/blog.html?id=what-is-os&amp;tr=ar" />
+    </url>
+    <url>
+        <loc>https://www.mawiman.com/software.html?id=convert-imag</loc>
+        <lastmod>2026-01-05</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.8</priority>
+        <xhtml:link rel="alternate" hreflang="en" href="https://www.mawiman.com/software.html?id=convert-imag&amp;tr=en" />
+        <xhtml:link rel="alternate" hreflang="ar" href="https://www.mawiman.com/software.html?id=convert-imag&amp;tr=ar" />
+    </url>
 </urlset>

