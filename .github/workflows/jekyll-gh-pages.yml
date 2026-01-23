@@ -1,4 +1,4 @@
-name: Deploy Jekyll (web directory) with GitHub Pages dependencies preinstalled
+name: Deploy Jekyll (web directory) with Pages dependencies preinstalled
 
 on:
   push:
