@@ -1,6 +1,6 @@
-title: "Mawi Official Site"
-description: "Mawi Official Site - Ayoub Alarjani"
-url: "https://mawi.li"
+title: "MawiMan Official Site"
+description: "MawiMan Official Site - Ayoub Alarjani"
+url: "https://www.mawiman.com"
 baseurl: ""
 
 source: web
@@ -32,7 +32,7 @@ plugins:
 
 author:
   name: "Mawi Man"
-  email: "ayoub@mawi.li"
+  email: "ayoub@mawiman.com"
   github: "mawi-officiel"
   twitter: "mawi_officiel"
 
