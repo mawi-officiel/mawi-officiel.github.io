@@ -10,165 +10,43 @@
     "url": "/"
   },
   {
-    "title": "المتجر",
-    "title_en": "Store",
-    "description": "منتجات رقمية وفيزيائية من تطوير ماوي مان.",
-    "description_en": "Digital and physical products by Mawi Man.",
-    "keywords": ["المتجر", "شراء", "منتجات", "رقمية"],
-    "keywords_en": ["store", "shop", "products", "digital"],
-    "image": "/assets/icon/storefront_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
-    "url": "store.html"
-  },
-  {
-    "title": "البرمجيات",
-    "title_en": "Software",
-    "description": "تطبيقات وأدوات مبنية بعناية للمطورين والمستخدمين.",
-    "description_en": "Carefully crafted apps and tools for developers and users.",
-    "keywords": ["برمجيات", "تطبيقات", "أدوات", "برمجة"],
-    "keywords_en": ["software", "apps", "tools", "programming"],
-    "image": "/assets/icon/code_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
-    "url": "software.html"
-  },
-  {
-    "title": "الخدمات",
-    "title_en": "Services",
-    "description": "خدمات تطوير وتصميم مخصصة للشركات والأفراد.",
-    "description_en": "Custom development and design services for companies and individuals.",
-    "keywords": ["خدمات", "تطوير", "تصميم", "ويب"],
-    "keywords_en": ["services", "development", "design", "web"],
-    "image": "/assets/icon/handyman_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
-    "url": "services.html"
-  },
-  {
-    "title": "المشاريع",
-    "title_en": "Projects",
-    "description": "مجموعة من المشاريع والأعمال المميزة.",
-    "description_en": "A selection of featured works and projects.",
-    "keywords": ["مشاريع", "أعمال", "نماذج"],
-    "keywords_en": ["projects", "portfolio", "samples"],
-    "image": "/assets/icon/folder_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
-    "url": "projects.html"
-  },
-  {
-    "title": "الدورات",
-    "title_en": "Courses",
-    "description": "تعلم البرمجة والتصميم عبر دورات عملية.",
-    "description_en": "Learn programming and design through practical courses.",
-    "keywords": ["دورات", "تعلم", "برمجة", "تصميم"],
-    "keywords_en": ["courses", "learning", "programming", "design"],
-    "image": "/assets/icon/school_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
-    "url": "courses.html"
-  },
-  {
-    "title": "المدونة",
-    "title_en": "Blog",
-    "description": "مقالات ونصائح تقنية مباشرة من الخبرة العملية.",
-    "description_en": "Tech articles and tips from hands-on experience.",
-    "keywords": ["مدونة", "تقنية", "مقالات"],
-    "keywords_en": ["blog", "tech", "articles"],
-    "image": "/assets/icon/article_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
-    "url": "blog.html"
-  },
-  {
-    "title": "عني",
-    "title_en": "About Me",
-    "description": "نبذة عن ماوي مان ومسيرته وخبراته.",
-    "description_en": "About Mawi Man, background and experience.",
-    "keywords": ["عني", "سيرة", "خبرة"],
-    "keywords_en": ["about", "bio", "experience"],
-    "image": "/assets/img/mawiman/Icon-1.jpg",
-    "url": "about_me.html"
-  },
-  {
-    "title": "اتصل بي",
-    "title_en": "Contact Me",
+    "title": "اتصل بنا",
+    "title_en": "Contact Us",
     "description": "تواصل لطلب خدمة أو تعاون.",
     "description_en": "Get in touch for services or collaboration.",
     "keywords": ["اتصال", "تواصل", "رسالة"],
     "keywords_en": ["contact", "message", "reach out"],
     "image": "/assets/icon/call_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
-    "url": "contact_me.html"
-  },
-
-
-  {
-    "title": "طريقة الحصول على جميع ألعاب Steam مجانًا بأمان",
-    "title_en": "Get All Steam Games Free Safely",
-    "description": "طريقة آمنة وغير مقرصنة لإضافة أي لعبة إلى مكتبة Steam باستخدام ملفات Lua موثوقة، مع شرح خطوات واضحة لمستخدمي ويندوز.",
-    "description_en": "Safe, non-piracy method to add any Steam game using trusted Lua files. Step-by-step guide for Windows.",
-    "keywords": ["ستيم", "ألعاب مجانية", "ملفات لوا"],
-    "keywords_en": ["steam", "steamdb", "fares.top"],
-    "image": "/assets/icon/article_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
-    "url": "blog.html?id=all-games-steam-free"
+    "url": "contact_us.html"
   },
   {
-    "title": "Snack Online — منصّتك الذكية لإدارة سناك باحتراف",
-    "title_en": "Snack Online — Your Smart Platform for Professional Snack Management",
-    "description": "نظام ذكي متكامل لإدارة، تطوير وتسويق السناك بسهولة وفعالية.",
-    "description_en": "Smart, all-in-one system to manage, develop, and market your snack business with ease.",
-    "keywords": ["سيو", "تسويق", "الطلبات"],
-    "keywords_en": ["Orders", "Menu", "Marketing"],
-    "image": "/assets/icon/folder_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
-    "url": "projects.html?id=snack-online"
+    "title": "أيوب العرجاني - العقل المدبر",
+    "title_en": "Ayoub Alarjani - The Mastermind",
+    "description": "الملف الشخصي لأيوب العرجاني، مؤسس ماوي مان. اكتشف القصة، المهارات، والفلسفة خلف الكود.",
+    "description_en": "The personal portfolio of Ayoub Alarjani, the founder of Mawi Man. Discover the story, skills, and philosophy behind the code.",
+    "keywords": ["أيوب", "العرجاني", "ماوي"],
+    "keywords_en": ["ayoub", "alarjani", "mawi"],
+    "image": "/assets/icon/lightbulb_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
+    "url": "ayoub.html"
   },
   {
-    "title": "التسويق الرقمي — مدير الإعلانات",
-    "title_en": "Digital Marketing — Ads Manager",
-    "description": "إدارة شاملة لحملات إعلانات فيسبوك وإنستغرام: استراتيجية، تصميم المحتوى، استهداف دقيق، تحسين مستمر، وتقارير عائد الاستثمار. تسعير ذكي يعتمد على ميزانيتك. اطلب حملتك الآن.",
-    "description_en": "End‑to‑end management of Facebook & Instagram ad campaigns: strategy, creatives, precise targeting, continuous optimization, and ROI reporting. Smart budget‑based pricing. Request your campaign now.",
-    "keywords": ["التسويق", "الإعلانات", "مدير"],
-    "keywords_en": ["marketing", "ads", "manager"],
-    "image": "/assets/icon/handyman_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
-    "url": "services.html?id=ads-manager"
+    "title": "عن ماوي مان - العلامة التجارية",
+    "title_en": "About Mawi Man - The Brand",
+    "description": "ماوي مان هو استوديو للابتكار الرقمي مكرس لبناء بنية تحتية برمجية قوية، موارد تعليمية، وحلول تصميم إبداعية.",
+    "description_en": "Mawi Man is a digital innovation studio dedicated to building robust software infrastructure, educational resources, and creative design solutions.",
+    "keywords": ["ابتكار", "تعليم تقني", "حلول برمجية"],
+    "keywords_en": ["Mawi Man brand", "digital studio", "software solutions"],
+    "image": "/assets/icon/lightbulb_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
+    "url": "about_us.html"
   },
   {
-    "title": "خريطة أدوات الذكاء الاصطناعي",
-    "title_en": "AI Map",
-    "description": "خريطة منسقة لأدوات الذكاء الاصطناعي مع بحث فوري وفلاتر وتفاصيل.",
-    "description_en": "Curated AI tools map with instant search, filters and details.",
-    "keywords": ["شات جبي تي", "أدوات", "ذكاء إصطيناعي"],
-    "keywords_en": ["ai", "tools", "chatgpt"],
-    "image": "/assets/icon/code_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
-    "url": "software.html?id=ai-map"
-  },
-  {
-    "title": "كود إنك — تشفير الأكواد (جافاسكربت/بايثون/بي إتش بي) وحمايتها",
-    "title_en": "Code Enc — Encrypt JavaScript, Python, and PHP code",
-    "description": "أداة لتشفير الأكواد إلى مُحمِّلات جاهزة لجافاسكربت، بايثون وPHP باستخدام XOR وتحويل سداسي عشري بتيفيناغ، مع دعم رفع الملفات ونسخ النتيجة وتكامل الإشعارات.",
-    "description_en": "Encrypt source code into safe loaders for JavaScript, Python, and PHP using XOR and Tifinagh hex mapping. Includes file upload, copy result, and notifications integration.",
-    "keywords": ["البرمجة", "تشفير", "كود"],
-    "keywords_en": ["code", "encryption", "programming"],
-    "image": "/assets/icon/code_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
-    "url": "software.html?id=code-enc"
-  },
-  {
-    "title": "كود ميني — تصغير وضغط الأكواد والملفات",
-    "title_en": "Code Mini — Minify & Compress Code and Files",
-    "description": "قم بتصغير وضغط الأكواد والملفات بسرعة. الصق الكود أو ارفع ملفاً، اختر اللغة، واحصل على ناتج محسّن فوراً. يدعم HTML وCSS وJavaScript وJSON وXML وغيرها.",
-    "description_en": "Minify and compress code and files quickly. Paste code or upload a file, choose a language, and get optimized output instantly. Supports HTML, CSS, JavaScript, JSON, XML, and more.",
-    "keywords": ["ضغط", "تصغير", "كود"],
-    "keywords_en": ["code", "mini", "minifier"],
-    "image": "/assets/icon/code_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
-    "url": "software.html?id=code-mini"
-  },
-  {
-    "title": "Mawi Cache Killer – أداة لتعطيل التخزين المؤقت في الصفحات",
-    "title_en": "Mawi Cache Killer – Disable Page Caching Instantly",
-    "description": "Mawi Cache Killer يقوم تلقائيًا بفرض تحميل المحتوى الجديد من الخادم عبر تعطيل الكاش بضغطة واحدة.",
-    "description_en": "Mawi Cache Killer automatically forces pages to load fresh content by disabling browser caching with one click.",
-    "keywords": ["cache killer", "disable cache", "no-cache"],
-    "keywords_en": ["cache killer", "disable cache", "no-cache"],
-    "image": "/assets/icon/code_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
-    "url": "software.html?id=mawi-cache-killer"
-  },
-  {
-    "title": "رمز QR — إنشاء وتخصيص وتحميل | ماوي مان",
-    "title_en": "QR Code — Generate, Customize & Download",
-    "description": "أنشئ رمز QR لأي رابط، خصص الألوان والتصميم، وحمّل الصورة بصيغة PNG.",
-    "description_en": "Generate QR codes from any link. Customize colors and design, and download as PNG.",
-    "keywords": ["سكان", "تخصيص QR", "رمز QR"],
-    "keywords_en": ["QR", "generate", "QR Code"],
-    "image": "/assets/icon/code_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
-    "url": "software.html?id=qr-code"
+    "title": "الأسئلة الشائعة - ماوي مان",
+    "title_en": "FAQ - Mawi Man",
+    "description": "اعثر على إجابات للأسئلة الشائعة حول خدمات ومشاريع وخبرات ماوي مان. احصل على حلول سريعة للاستفسارات الشائعة.",
+    "description_en": "Find answers to frequently asked questions about Mawi Man's services, projects, and expertise. Get quick solutions to common inquiries.",
+    "keywords": ["إجابات", "دعم", "مساعدة"],
+    "keywords_en": ["Mawi Man FAQ", "frequently asked questions", "help"],
+    "image": "/assets/icon/lightbulb_24dp_E3E3E3_FILL1_wght400_GRAD0_opsz24.svg",
+    "url": "faq.html"
   }
 ]
